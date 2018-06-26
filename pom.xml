@@ -18,9 +18,9 @@
 	<url>https://wiki.openmrs.org/x/FQ4z</url>
 
 	<scm>
-		<connection>scm:git:git@github.com:openmrs/openmrs-module-iss.git</connection>
-		<developerConnection>scm:git:git@github.com:openmrs/openmrs-module-iss.git</developerConnection>
-		<url>https://github.com/openmrs/openmrs-module-iss/</url>
+		<connection>scm:git:git@github.com:METS-Programme/openmrs-module-iss.git</connection>
+		<developerConnection>scm:git:git@github.com:METS-Programme/openmrs-module-iss.git</developerConnection>
+		<url>https://github.com/METS-Programme/openmrs-module-iss/</url>
 	</scm>
 
 	<modules>
