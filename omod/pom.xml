@@ -26,6 +26,7 @@
 			<groupId>org.openmrs.web</groupId>
 			<artifactId>openmrs-web</artifactId>
 			<classifier>tests</classifier>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
