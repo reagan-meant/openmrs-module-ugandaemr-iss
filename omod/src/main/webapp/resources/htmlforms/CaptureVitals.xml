@@ -19,7 +19,7 @@
           formAddMetadata="yes"
           formUILocation="patientDashboard.visitActions"
           formOrder="10"
-          formIcon=" icon-stethoscope"
+          formIcon="icon-stethoscope"
           formDisplayStyle="Simple" >
     <style>
         #calculated-bmi {

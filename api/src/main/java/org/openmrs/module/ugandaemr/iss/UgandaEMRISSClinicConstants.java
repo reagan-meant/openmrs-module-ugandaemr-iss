@@ -9,13 +9,7 @@
  */
 package org.openmrs.module.ugandaemr.iss;
 
-import org.springframework.stereotype.Component;
-
-/**
- * Contains module's config.
- */
-@Component("iss.UgandaEMRISSClinicConfig")
-public class UgandaEMRISSClinicConfig {
+public class UgandaEMRISSClinicConstants {
 	
-	public final static String MODULE_PRIVILEGE = "UgandaEMR ISS Clinic Privilege";
+	public final static String MODULE_ID = "ugandaemr-iss";
 }

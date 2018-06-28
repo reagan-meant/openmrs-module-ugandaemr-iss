@@ -9,6 +9,8 @@
  */
 package org.openmrs.module.ugandaemr.iss;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleFactory;
@@ -23,7 +25,7 @@ import java.util.List;
  */
 public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 	
-	//private Log log = LogFactory.getLog(this.getClass());
+	private Log log = LogFactory.getLog(this.getClass());
 	
 	/**
 	 * @see #started()
@@ -35,7 +37,7 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 			for (Initializer initializer : getInitializers()) {
 				initializer.started();
 			}
-			// log.info("Started UgandaEMR ISS Clinic Module");
+			log.info("Started UgandaEMR ISS Clinic Module");
 		}
 		catch (Exception e) {
 			Module mod = ModuleFactory.getModuleById("ugandaemr-iss");
@@ -48,12 +50,12 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 	 * @see #shutdown()
 	 */
 	public void shutdown() {
-		// log.info("Shutdown UgandaEMR ISS Clinic");
+		log.info("Shutdown UgandaEMR ISS Clinic");
 	}
 	
 	private List<Initializer> getInitializers() {
 		List<Initializer> l = new ArrayList<Initializer>();
-		l.add(new HtmlFormsInitializer());
+		l.add(new HtmlFormsInitializer(UgandaEMRISSClinicConstants.MODULE_ID));
 		return l;
 	}
 	
