@@ -26,7 +26,7 @@ UPDATE concept SET uuid = 'd5f80c29-189c-4b41-abe9-116ad93e015b' WHERE uuid = 'a
 
 UPDATE concept_answer SET concept_answer_id = concept_answer_id + 1000000 WHERE concept_id > 163139;
 UPDATE concept_answer SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
-UPDATE concept_answer SET answer_concept = concept_id + 1000000 WHERE concept_id > 163139;
+UPDATE concept_answer SET answer_concept = answer_concept + 1000000 WHERE answer_concept > 163139;
 
 UPDATE concept_description SET concept_description_id = concept_description_id + 1000000 WHERE concept_id > 163139;
 UPDATE concept_description SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
@@ -42,7 +42,7 @@ UPDATE concept_set SET concept_set_id = concept_set_id + 1000000 WHERE concept_i
 UPDATE concept_set SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
 
 UPDATE obs SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
-UPDATE obs SET value_coded = concept_id + 1000000 WHERE concept_id > 163139;
+UPDATE obs SET value_coded = value_coded + 1000000 WHERE value_coded > 163139;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

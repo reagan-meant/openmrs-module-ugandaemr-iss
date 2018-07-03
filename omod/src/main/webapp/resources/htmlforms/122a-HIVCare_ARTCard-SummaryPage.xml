@@ -1054,13 +1054,13 @@ function applyDataMask(field) {
                     </td>
                    <td>
                        <label>Do you have any household member attending the clinic?</label>
-                       <obs conceptId="163140" answerConceptIds="90003, 90004" answerLabels="Yes, No" />
+                       <obs conceptId="1163140" answerConceptIds="90003, 90004" answerLabels="Yes, No" />
                    </td>
                     <td class="checkboxGroup" colspan="2">
                          <label>Patient Category:</label>
                          <span class="enableDisable">
                         <p>
-                           <obs id="patientCategory" conceptId="163205" answerConceptIds="163141,99110" answerLabels="New to HIV Care,Transfer In">
+                           <obs id="patientCategory" conceptId="1163205" answerConceptIds="163141,99110" answerLabels="New to HIV Care,Transfer In">
                               <controls>
                                  <when value = "99110" thenDisplay="#transferInSection" />
                               </controls>
@@ -1070,7 +1070,7 @@ function applyDataMask(field) {
                             <b>Transfer in from</b>
                             <obs conceptId="99109" labelText=""/>
                           <label>If from MJAP clinic Previous clinic#:</label>
-                           <obs conceptId="163142" />
+                           <obs conceptId="1163142" />
                         </p>
                     </span>
                     </td>
@@ -1079,7 +1079,7 @@ function applyDataMask(field) {
                 <tr>
                     <td colspan="2" id="documentedHIVResult">
                         <label>Documented HIV +ve Result?:</label>
-                        <obs conceptId="163143" answerConceptIds="90003,99087,90004" answerLabels="Yes,HIV Exposed,No" />
+                        <obs conceptId="1163143" answerConceptIds="90003,99087,90004" answerLabels="Yes,HIV Exposed,No" />
                     </td>
                     <td colspan="2" id="comfirmedDate">
                         <obs conceptId="90267" labelText="Date of HIV Test:"/>
@@ -1091,7 +1091,7 @@ function applyDataMask(field) {
                 <tr>
                     <td colspan="2" id="documentedHIVResult">
                         <label>Documented HIV +ve Result?:</label>
-                        <obs conceptId="163143" answerConceptIds="90003, 90004" answerLabels="Yes, No" />
+                        <obs conceptId="1163143" answerConceptIds="90003, 90004" answerLabels="Yes, No" />
                     </td>
                     <td colspan="2" id="comfirmedDate">
                         <obs conceptId="90267" labelText="Date of HIV Test:"/>
@@ -1104,28 +1104,28 @@ function applyDataMask(field) {
 <tr>
 <td>
  <label>Occupation:</label>
-      <obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+      <obs conceptId="1163144" answerConceptIds="1107,1163145, 1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
 </td>
 
 <td>
  <label>Income Per Month:</label>
-<obs conceptId="163151" answerConceptIds="163152,163153,163154,1107" answerLabels="1 - Less than 50000,2 - 50000 - 100000, 3 - Above 100000, 4 - None"  />
+<obs conceptId="1163151" answerConceptIds="1163152,1163153,1163154,1107" answerLabels="1 - Less than 50000,2 - 50000 - 100000, 3 - Above 100000, 4 - None"  />
 </td>
 
 <td>
  <label>Education Level:</label>
-<obs conceptId="99516" answerConceptIds="1107,163155,163156,163157" answerLabels="1 - None,2 - Primary, 3 - Secondary, 4 - Tertiary"  />
+<obs conceptId="99516" answerConceptIds="1107,1163155,1163156,1163157" answerLabels="1 - None,2 - Primary, 3 - Secondary, 4 - Tertiary"  />
 </td>
 
 <td>
  <label>Religion:</label>
-<obs id="religionSection" conceptId="163158" answerConceptIds="163159,163160,5622" answerLabels="1 - Christian,2 - Muslim, 3 - Other,">
+<obs id="religionSection" conceptId="1163158" answerConceptIds="1163159,1163160,5622" answerLabels="1 - Christian,2 - Muslim, 3 - Other,">
 <controls>
   <when value="5622" thenDisplay="#religionOther" />
 </controls>
 </obs>
 <span id="religionOther">
-<obs conceptId="163161" />
+<obs conceptId="1163161" />
 </span>
 </td>
 </tr>
@@ -1262,7 +1262,7 @@ function applyDataMask(field) {
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <obs conceptId="163206" labelText="Does the child meet age appropriate development milestones?" style="radio" answerConceptIds="90003,90004" answerLabels="Yes,No"/>
+                        <obs conceptId="1163206" labelText="Does the child meet age appropriate development milestones?" style="radio" answerConceptIds="90003,90004" answerLabels="Yes,No"/>
                     </td>
                 </tr>
         <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 8">
@@ -1306,13 +1306,13 @@ function applyDataMask(field) {
                         <obs conceptId="1198" answerConceptId="886" answerLabel="BCG" />
                     </td>
                     <td >
-                        <obs conceptId="163207"/>
+                        <obs conceptId="1163207"/>
                     </td>
                     <td >
                         <obs conceptId="1198" answerConceptId="5261" answerLabel="HIb" />
                     </td>
                     <td >
-                        <obs conceptId="163208"/>
+                        <obs conceptId="1163208"/>
                     </td>
                 </tr>
                 <tr>
@@ -1320,13 +1320,13 @@ function applyDataMask(field) {
                         <obs conceptId="1198" answerConceptId="783" answerLabel="OPV" />
                     </td>
                     <td >
-                        <obs conceptId="163209"/>
+                        <obs conceptId="1163209"/>
                     </td>
                     <td >
                         <obs conceptId="1198" answerConceptId="36" answerLabel="MEASELS" />
                     </td>
                     <td >
-                        <obs conceptId="163210"/>
+                        <obs conceptId="1163210"/>
                     </td>
                 </tr>
                 <tr>
@@ -1334,13 +1334,13 @@ function applyDataMask(field) {
                         <obs conceptId="1198" answerConceptId="781" answerLabel="DPT" />
                     </td>
                     <td >
-                        <obs conceptId="163211"/>
+                        <obs conceptId="1163211"/>
                     </td>
                     <td >
                         <obs conceptId="1198" answerConceptId="5622" answerLabel="Other 1" />
                     </td>
                     <td >
-                        <obs conceptId="163213"/>
+                        <obs conceptId="1163213"/>
                     </td>
                 </tr>
                 <tr>
@@ -1348,13 +1348,13 @@ function applyDataMask(field) {
                         <obs conceptId="1198" answerConceptId="782" answerLabel="HEPB" />
                     </td>
                     <td >
-                        <obs conceptId="163212"/>
+                        <obs conceptId="1163212"/>
                     </td>
                     <td >
                         <obs conceptId="1198" answerConceptId="5622" answerLabel="Other 2" />
                     </td>
                     <td >
-                        <obs conceptId="163213"/>
+                        <obs conceptId="1163213"/>
                     </td>
                 </tr>
                 </tbody>
@@ -1422,7 +1422,43 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145, 1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+                        </td>
+
+                        <td class="FamilyMemberEnableDisable1">
+                            <obs conceptId="90253" answerConceptIds="90001,90167,90166"
+                                 answerLabels="U,N,P"/>
+                        </td>
+                        <td class="FamilyMemberEnableDisableChildren1">
+                            <obs conceptId="90270" answerConceptIds="90003,90004"
+                                 answerLabels="Y,N" onchange="return val()"/>
+                        </td>
+                        <td class="FamilyMemberEnableDisableGrandChildren1">
+                            <obs conceptId="90263" size="20"/>
+                        </td>
+                    </obsgroup>
+                </tr>
+                <tr>
+                    <obsgroup groupingConceptId="99075">
+                        <td>
+                            <obs conceptId="99073" size="20"/>
+                        </td>
+                        <td>
+                            <obs conceptId="90269"  answerConceptIds="1163167,90288,1163168,1163169,90279,1163170,1163171,90285,1163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
+                        </td>
+                        <td>
+                            <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
+                        </td>
+                        <td>
+                            <obs conceptId="99074"/>
+                            <obs conceptId="99725" answerConceptIds="1074,99726"
+                                 answerLabels="Yrs,Mths"/>
+                        </td>
+                        <td>
+                            <obs conceptId="99516"/>
+                        </td>
+                        <td>
+<obs conceptId="1163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -1458,7 +1494,7 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145, 1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -1480,7 +1516,7 @@ function applyDataMask(field) {
                             <obs conceptId="99073" size="20"/>
                         </td>
                         <td>
-                            <obs conceptId="90269"  answerConceptIds="163167,90288,163168,163169,90279,163170,163171,90285,163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
+                            <obs conceptId="90269"  answerConceptIds="1163167,90288,1163168,1163169,90279,1163170,1163171,90285,1163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
                         </td>
                         <td>
                             <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
@@ -1494,7 +1530,7 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145,1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -1516,7 +1552,7 @@ function applyDataMask(field) {
                             <obs conceptId="99073" size="20"/>
                         </td>
                         <td>
-                            <obs conceptId="90269"  answerConceptIds="163167,90288,163168,163169,90279,163170,163171,90285,163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
+                            <obs conceptId="90269"  answerConceptIds="1163167,90288,1163168,1163169,90279,1163170,1163171,90285,1163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
                         </td>
                         <td>
                             <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
@@ -1530,7 +1566,7 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145, 1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -1552,7 +1588,7 @@ function applyDataMask(field) {
                             <obs conceptId="99073" size="20"/>
                         </td>
                         <td>
-                            <obs conceptId="90269"  answerConceptIds="163167,90288,163168,163169,90279,163170,163171,90285,163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
+                            <obs conceptId="90269"  answerConceptIds="1163167,90288,1163168,1163169,90279,1163170,1163171,90285,1163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
                         </td>
                         <td>
                             <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
@@ -1566,7 +1602,7 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145,1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -1588,7 +1624,7 @@ function applyDataMask(field) {
                             <obs conceptId="99073" size="20"/>
                         </td>
                         <td>
-                            <obs conceptId="90269"  answerConceptIds="163167,90288,163168,163169,90279,163170,163171,90285,163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
+                            <obs conceptId="90269"  answerConceptIds="1163167,90288,1163168,1163169,90279,1163170,1163171,90285,1163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
                         </td>
                         <td>
                             <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
@@ -1602,7 +1638,7 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145, 1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -1624,7 +1660,7 @@ function applyDataMask(field) {
                             <obs conceptId="99073" size="20"/>
                         </td>
                         <td>
-                            <obs conceptId="90269"  answerConceptIds="163167,90288,163168,163169,90279,163170,163171,90285,163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
+                            <obs conceptId="90269"  answerConceptIds="1163167,90288,1163168,1163169,90279,1163170,1163171,90285,1163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
                         </td>
                         <td>
                             <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
@@ -1638,43 +1674,7 @@ function applyDataMask(field) {
                             <obs conceptId="99516"/>
                         </td>
                         <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
-                        </td>
-
-                        <td class="FamilyMemberEnableDisable1">
-                            <obs conceptId="90253" answerConceptIds="90001,90167,90166"
-                                 answerLabels="U,N,P"/>
-                        </td>
-                        <td class="FamilyMemberEnableDisableChildren1">
-                            <obs conceptId="90270" answerConceptIds="90003,90004"
-                                 answerLabels="Y,N" onchange="return val()"/>
-                        </td>
-                        <td class="FamilyMemberEnableDisableGrandChildren1">
-                            <obs conceptId="90263" size="20"/>
-                        </td>
-                    </obsgroup>
-                </tr>
-                <tr>
-                    <obsgroup groupingConceptId="99075">
-                        <td>
-                            <obs conceptId="99073" size="20"/>
-                        </td>
-                        <td>
-                            <obs conceptId="90269"  answerConceptIds="163167,90288,163168,163169,90279,163170,163171,90285,163172,5622" answerLabels="0-HH Head,1-Spouse,2-Biological Child,3-Other Child,4-Parent,5-Inlaw,6-Co-wife,7-Sibling,8-Other Relative,99-Other"/>
-                        </td>
-                        <td>
-                            <obs conceptId="90252" answerConceptIds="90165,90164" answerLabels="M,F"/>
-                        </td>
-                        <td>
-                            <obs conceptId="99074"/>
-                            <obs conceptId="99725" answerConceptIds="1074,99726"
-                                 answerLabels="Yrs,Mths"/>
-                        </td>
-                        <td>
-                            <obs conceptId="99516"/>
-                        </td>
-                        <td>
-<obs conceptId="163144" answerConceptIds="1107,163145, 163146,163147,163148,163149,163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
+<obs conceptId="1163144" answerConceptIds="1107,1163145,1163146,1163147,1163148,1163149,1163150,5622" answerLabels="1-None,2-Paid,3-Peasant,4-Casual,5-Housewife,6-Vender,7-Student,8-Other"/>
                         </td>
 
                         <td class="FamilyMemberEnableDisable1">
@@ -2017,10 +2017,10 @@ function applyDataMask(field) {
                             <obs conceptId="99156" labelText=""/>
                         </td>
                         <td >
-                            <obs conceptId="163260"/>
+                            <obs conceptId="1163260"/>
                         </td>
                         <td>
-                            <obs conceptId="163259" />
+                            <obs conceptId="1163259" />
                         </td>
                 </tr>
 <tr class="ARTHistoryTable">
@@ -2033,10 +2033,10 @@ function applyDataMask(field) {
                             <obs conceptId="99156" labelText=""/>
                         </td>
                         <td >
-                            <obs conceptId="163260"/>
+                            <obs conceptId="1163260"/>
                         </td>
                         <td>
-                            <obs conceptId="163259" />
+                            <obs conceptId="1163259" />
                         </td>
                 </tr>
 <tr class="ARTHistoryTable">
@@ -2049,10 +2049,10 @@ function applyDataMask(field) {
                             <obs conceptId="99156" labelText=""/>
                         </td>
                         <td >
-                            <obs conceptId="163260"/>
+                            <obs conceptId="1163260"/>
                         </td>
                         <td>
-                            <obs conceptId="163259" />
+                            <obs conceptId="1163259" />
                         </td>
                 </tr>
                 </tbody>
@@ -2143,7 +2143,7 @@ function applyDataMask(field) {
                 <tbody>
                 <tr style="background: beige;">
                     <td colspan="4">
-                        <obs id="tuberculosisTest" conceptId="163261" answerConceptIds="90003,90004" answerLabels="1-Yes,2-No" labelText="Treated for TB in the past:">
+                        <obs id="tuberculosisTest" conceptId="1163261" answerConceptIds="90003,90004" answerLabels="1-Yes,2-No" labelText="Treated for TB in the past:">
                            <controls>
                               <when value="90003" thenDisplay=".TBHistory" />
                            </controls>
@@ -2158,7 +2158,7 @@ function applyDataMask(field) {
                 </tr>
                 <tr>
                     <td>
-                        <obs conceptId="163262" answerConceptIds="90003,90004" answerLabels="1-Yes,2-No" labelText="Any one diagnosed with TB in household?" />
+                        <obs conceptId="1163262" answerConceptIds="90003,90004" answerLabels="1-Yes,2-No" labelText="Any one diagnosed with TB in household?" />
                     </td>
                 </tr>
 <tr style="border-top:2px solid #fff !important;">                    <td colspan="2">
