@@ -44,6 +44,9 @@ UPDATE concept_set SET concept_id = concept_id + 1000000 WHERE concept_id > 1631
 UPDATE obs SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
 UPDATE obs SET value_coded = value_coded + 1000000 WHERE value_coded > 163139;
 
+-- set the value of concept set 1163246 to N/A instead of coded
+UPDATE concept SET datatype_id = 4 WHERE concept_id = 1163246;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
