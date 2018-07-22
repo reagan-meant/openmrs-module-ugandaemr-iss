@@ -11,11 +11,13 @@ package org.openmrs.module.ugandaemr.iss;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.aijar.activator.HtmlFormsInitializer;
 import org.openmrs.module.aijar.activator.Initializer;
+import org.openmrs.module.dataexchange.DataImporter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,12 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 			for (Initializer initializer : getInitializers()) {
 				initializer.started();
 			}
+			// install concepts
+			log.info("Installing custom concepts for ISS customizations");
+			DataImporter dataImporter = Context.getRegisteredComponent("dataImporter", DataImporter.class);
+			
+			dataImporter.importData("metadata/ISS_Custom_Concepts.xml");
+			log.info("ISS Custom Concepts imported");
 			log.info("Started UgandaEMR ISS Clinic Module");
 		}
 		catch (Exception e) {

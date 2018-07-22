@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <!-- custom concepts for the ISS customizations the idea is to have very few concepts here as most should belong within UgandaEMR so this is really for only exceptional needs -->
+    <concept  concept_id="1163319"  retired="0"  datatype_id="3"  class_id="5"  is_set="0"  creator="1"  date_created="2018-07-22 16:02:40" uuid="3da754c2-66b9-40d7-8479-398981adecb0"/>
+
+    <concept_description  concept_description_id="1017600"  concept_id="1163319"  description="Other reason why the client is not eligible for POV"  locale="en"  creator="1"  date_created="2018-07-22 16:02:40"   uuid="b24ae9ca-c162-4014-9337-968270860a89"/>
+
+    <concept_name  concept_name_id="1136130"  concept_id="1163319"  name="OTHER REASON NOT ELIGIBLE FOR POV"  locale="en"  locale_preferred="1"  creator="1"  date_created="2018-07-22 16:02:40"  concept_name_type="FULLY_SPECIFIED"  voided="false"  uuid="fbb675d6-ee8c-4ba8-8c6a-5403cd743428"/>
+
+</dataset>

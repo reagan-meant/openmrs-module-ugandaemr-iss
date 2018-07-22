@@ -220,7 +220,6 @@
             <!-- Validation rules -->
             beforeSubmit.push(function () {
                 var isValid = true;
-                alert("Pre-submit validation");
                 <!-- clear the previous errors -->
                 setValue('sexualActive.error', '');
                 setValue('anySTIs.error', '');
@@ -229,7 +228,6 @@
                 setValue('screenForCancer.error', '');
                 setValue('tbStatus.error', '');
                 setValue('POV.error', '');
-                alert("The visit type is " + getValue('visitType.value'));
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
@@ -1002,7 +1000,14 @@
                             </obs>
                         </td>
                         <td id="povSection">
-                            <obs conceptId="1163279" answerConceptIds="90049,1163272,1163273,90040,90041,1163274,1163275,1163276,1163277,1163278,5622" answerLabels="1-Poor Adherence,2-Missed appt in last 3months,3-KS lessthan 90,4-ART toxicities,5-Pregnant,6-On ART lessthan 1year,7-non ART CD4 lessthan 500,8-Co-morbidities,9-On 2nd line therapy,10-Dropping CD4 by morethan 100,11-Others" labelText="Specify reason for denying the patient POV"/>
+                            <obs id="reasonForDenyingPOV" conceptId="1163279" answerConceptIds="90049,1163272,1163273,90040,90041,1163274,1163275,1163276,1163277,1163278,5622" answerLabels="1-Poor Adherence,2-Missed appt in last 3months,3-KS lessthan 90,4-ART toxicities,5-Pregnant,6-On ART lessthan 1year,7-non ART CD4 lessthan 500,8-Co-morbidities,9-On 2nd line therapy,10-Dropping CD4 by morethan 100,11-Others" labelText="Specify reason for denying the patient POV">
+                                <controls>
+                                    <when value="5622" thenDisplay="#otherPOVEligibility" />
+                                </controls>
+                            </obs>
+                            <span id="otherPOVEligibility">
+                                <obs conceptId="1163319" labelText="Specify:" />
+                            </span>
                         </td>
                     </tr>
                 </tbody>
