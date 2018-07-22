@@ -9,92 +9,92 @@
           formIcon="icon-medkit"
           formShowIf="(visit.active || !visit.active) &amp;&amp; patient.person.dead==false &amp;&amp; sessionLocation.uuid=='86863db4-6101-4ecf-9a86-5e716d6504e4'"
           formDisplayStyle="Standard">
-    <redirectOnSave
-            url="/coreapps/patientdashboard/patientDashboard.page?patientId={{patient.id}}&amp;encounterId={{encounter.id}}#visits"/>
     <style type="text/css">
         .EnableDisabletbstatuschild {
-        display: none;
+            display: none;
         }
 
         .error {
-        color: red;
+            color: red;
         }
 
         #w30, #w32 {
-        display:inline-block;
-        width:10px;
+            display: inline-block;
+            width: 10px;
         }
+
         #w141, #w170 {
-        width:120px;
+            width: 120px;
         }
 
         table {
-        width: 99%;
-        display: inline-block;
+            width: 99%;
+            display: inline-block;
         }
 
         table td {
-        background: #B6D6E6;
-        color: #404040;
-        vertical-align: top;
+            background: #B6D6E6;
+            color: #404040;
+            vertical-align: top;
         }
 
         form select, .form select {
-        min-width: 0px;
+            min-width: 0px;
         }
 
         form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form
         ul.select {
-        min-width: 20%;
-        background-color: #FBFBFB;
-        border: 1px solid #404040;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        padding: 0px;
+            min-width: 20%;
+            background-color: #FBFBFB;
+            border: 1px solid #404040;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 0px;
         }
 
         table th, table td {
-        border: 1px solid #BDBDBD;
-        text-align: left;
-        vertical-align: top;
-        background: #B6D6E6;
+            border: 1px solid #BDBDBD;
+            text-align: left;
+            vertical-align: top;
+            background: #B6D6E6;
         }
 
         .section {
-        margin: 20px 0px;
+            margin: 20px 0px;
         }
 
         form .lablex {
-        width: 93%;
+            width: 93%;
         }
 
         form .lablex span {
-        width: 26%;
-        float: left;
-        margin: 1px 0px;
+            width: 26%;
+            float: left;
+            margin: 1px 0px;
         }
 
         form .lablex2 span {
-        min-width: 50%;
-        float: left;
-        margin: 1px 0px;
+            min-width: 50%;
+            float: left;
+            margin: 1px 0px;
         }
 
         form .lablex3 {
         }
 
         form .lablex3 span {
-        min-width: 50%;
-        float: left;
-        margin: 1px 0px;
+            min-width: 50%;
+            float: left;
+            margin: 1px 0px;
         }
 
         input[type=radio] {
-        display:inline-block;
-        float:none !important;
+            display: inline-block;
+            float: none !important;
         }
+
         .hasInlineLabels label {
-        display:inline-block;
+            display: inline-block;
         }
 
 
@@ -103,207 +103,314 @@
     <script type="text/javascript">
         function enable_disable(field, class_name_prefix, conditions, input_type) {
 
-        var class_name = jq(field).attr("class");
+            var class_name = jq(field).attr("class");
 
-        var length = class_name.length;
+            var length = class_name.length;
 
-        var class_id = parseInt(class_name.substring(length - 1, length));
-        var childClass = "Child" + class_id;
+            var class_id = parseInt(class_name.substring(length - 1, length));
+            var childClass = "Child" + class_id;
 
-        var disable = true;
-        var requires = true;
+            var disable = true;
+            var requires = true;
 
-        var row = '[class^="' + class_name_prefix + '"][class*="' + childClass + '"]';
+            var row = '[class^="' + class_name_prefix + '"][class*="' + childClass + '"]';
 
-        var selected_value = null;
+            var selected_value = null;
 
-        if (input_type == "select") {
-        selected_value = jq(field).find(":selected").text().trim().toLowerCase();
-        }
-        else if (input_type == "hidden") {
-        selected_value = jq(field).find("input[type=hidden]").val().trim().toLowerCase();
-        }
-
-
-        if (eval(conditions)) {
-        disable = false;
-        }
+            if (input_type == "select") {
+                selected_value = jq(field).find(":selected").text().trim().toLowerCase();
+            } else if (input_type == "hidden") {
+                selected_value = jq(field).find("input[type=hidden]").val().trim().toLowerCase();
+            }
 
 
-        jq(row).each(function () {
-        var group = jq(this);
+            if (eval(conditions)) {
+                disable = false;
+            }
 
-        if (class_name.indexOf('Child') == -1) {
-        /*group.find("input").attr("value", ""); */
-        group.find("input").attr("required", requires);
-        /* group.find('select').prop("selectedIndex", 0);*/
-        group.find("input").attr("disabled", disable);
-        group.find('select').attr("disabled", disable);
 
-        if (disable) {
-        /* fade out the fields that are disabled */
-        group.find("input").fadeTo(250, 0.25);
-        group.find("select").fadeTo(250, 0.25);
-        } else {
-        /* remove the fade on the fields */
-        group.find("input").fadeTo(250, 1);
-        group.find("select").fadeTo(250, 1);
-        }
-        }
-        });
+            jq(row).each(function () {
+                var group = jq(this);
+
+                if (class_name.indexOf('Child') == -1) {
+                    /*group.find("input").attr("value", ""); */
+                    group.find("input").attr("required", requires);
+                    /* group.find('select').prop("selectedIndex", 0);*/
+                    group.find("input").attr("disabled", disable);
+                    group.find('select').attr("disabled", disable);
+
+                    if (disable) {
+                        /* fade out the fields that are disabled */
+                        group.find("input").fadeTo(250, 0.25);
+                        group.find("select").fadeTo(250, 0.25);
+                        } else {
+                        /* remove the fade on the fields */
+                        group.find("input").fadeTo(250, 1);
+                        group.find("select").fadeTo(250, 1);
+                    }
+                }
+            });
         }
 
 
         function enable_disable_district_tb_reg(selected_option) {
 
-        var class_name = jq(selected_option).attr("class");
+            var class_name = jq(selected_option).attr("class");
 
-        var length = class_name.length;
+            var length = class_name.length;
 
-        var class_id = parseInt(class_name.substring(length - 1, length))
+            var class_id = parseInt(class_name.substring(length - 1, length))
 
-        var row_id = class_id;
+            var row_id = class_id;
 
-        var disable = true;
-        var requires = false;
+            var disable = true;
+            var requires = false;
 
-        var row_1 = '[class^="DistrictTbReg"][class*="Child1"]';
+            var row_1 = '[class^="DistrictTbReg"][class*="Child1"]';
 
-        var xx = row_1;
-        var selected_value = jq(selected_option).find(":selected").text()
+            var xx = row_1;
+            var selected_value = jq(selected_option).find(":selected").text()
 
-        selected_value = selected_value.trim().toLowerCase();
+            selected_value = selected_value.trim().toLowerCase();
 
-        if (selected_value == "tb rx") {
-        disable = false;
-        requires = true;
-        }
+            if (selected_value == "tb rx") {
+                disable = false;
+                requires = true;
+            }
 
-        switch (row_id) {
-        case 1:
-        xx = row_1;
-        break;
-        }
+            switch (row_id) {
+                case 1:
+                    xx = row_1;
+                    break;
+            }
 
 
-        jq(xx).each(function () {
-        var group = jq(this);
+            jq(xx).each(function () {
+                var group = jq(this);
 
-        if (class_name.indexOf('Child') == -1) {
-        /* group.find("input").attr("value", ""); */
-        group.find("input").attr("required", requires);
-        /* group.find('select').prop("selectedIndex", 0); */
-        group.find("input").attr("disabled", disable);
-        group.find('select').attr("disabled", disable);
-        if (requires == false) {
-        group.find('.required').show();
-        }
-        else if (requires == true) {
-        group.find('.required').hide();
-        }
+                if (class_name.indexOf('Child') == -1) {
+                    /* group.find("input").attr("value", ""); */
+                    group.find("input").attr("required", requires);
+                    /* group.find('select').prop("selectedIndex", 0); */
+                    group.find("input").attr("disabled", disable);
+                    group.find('select').attr("disabled", disable);
+                    if (requires == false) {
+                        group.find('.required').show();
+                    }
+                    else if (requires == true) {
+                        group.find('.required').hide();
+                    }
 
-        if (disable) {
-        /* fade out the fields that are disabled */
-        group.find("input").fadeTo(250, 0.25);
-        group.find("select").fadeTo(250, 0.25);
-        } else {
-        /* remove the fade on the fields */
-        group.find("input").fadeTo(250, 1);
-        group.find("select").fadeTo(250, 1);
-        }
+                    if (disable) {
+                        /* fade out the fields that are disabled */
+                        group.find("input").fadeTo(250, 0.25);
+                        group.find("select").fadeTo(250, 0.25);
+                    } else {
+                        /* remove the fade on the fields */
+                        group.find("input").fadeTo(250, 1);
+                        group.find("select").fadeTo(250, 1);
+                    }
 
-        }
-        });
+                }
+            });
         }
 
 
         if (jQuery) {
+            <!-- Validation rules -->
+            beforeSubmit.push(function () {
+                var isValid = true;
+                alert("Pre-submit validation");
+                <!-- clear the previous errors -->
+                setValue('sexualActive.error', '');
+                setValue('anySTIs.error', '');
+                setValue('disclosedToPartner.error', '');
+                setValue('partnerStatus.error', '');
+                setValue('screenForCancer.error', '');
+                setValue('tbStatus.error', '');
+                setValue('POV.error', '');
+                alert("The visit type is " + getValue('visitType.value'));
+                if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
+                    <!-- validate the required fields -->
+                    if (getValue('sexualActive.value') == "") {
+                        getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
+                        isValid = false;
+                    }
+                    if (getValue('anySTIs.value') == "") {
+                        getField('anySTIs.error').html('Please select whether the patient has any symptoms of STIs').show();
+                        isValid = false;
+                    }
+                    if (getValue('disclosedToPartner.value') == "") {
+                        getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
+                        isValid = false;
+                    }
+                    if (getValue('partnerStatus.value') == "") {
+                        getField('partnerStatus.error').html('Please select the status of your partner').show();
+                        isValid = false;
+                    }
+                    if (getValue('screenForCancer.value') == "") {
+                        getField('screenForCancer.error').html('Please select whether the client has been screened for cancer').show();
+                        isValid = false;
+                    }
+                    if (getValue('tbStatus.value') == "") {
+                        getField('tbStatus.error').html("Please select whether the client's TB status").show();
+                        isValid = false;
+                    }
+                    if (getValue('POV.value') == "") {
+                        getField('POV.error').html('Please select whether the client is eligible for POV').show();
+                        isValid = false;
+                    }
 
-        <!-- Validation rules -->
-        jq(document).ready(function () {
-        if (jq.browser.msie) {
-        jq(":checkbox").click(function () {
-        jq(this).change();
-        });
-        }
+                    if (!isValid) {
+                        jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
+                    }
+                    return isValid;
+                }
+            });
 
-        jq('[class^="ARTYesNoEnableDisable"]').change(function () {
-        enable_disable(jq(this), "ARTYesNo", 'selected_value == "yes" &amp;&amp; selected_value!=""', "select");
-        });
+            jq(document).ready(function () {
+                if (jq.browser.msie) {
+                    jq(":checkbox").click(function () {
+                        jq(this).change();
+                    });
+                }
 
-        jq('[class^="ARTYesNoEnableDisable"]').each(function () {
-        enable_disable(jq(this), "ARTYesNo", 'selected_value == "yes" &amp;&amp; selected_value!=""', "select");
-        });
+                /* Validation of the ART regimen Selected */
+                jq("#90315").change(function () {
+                    var regimen_encounter_page_value = jq("#90315").find("select").find(":selected").val();
+                    var regimen_encounter_page_text = jq("#90315").find("select").find(":selected").text();
+                    var art_transfer_regimen = jq("#artTransferRegimen").html();
+                    var other_art_transfer_regimen = jq("#otherArtTransferRegimen").html();
+                    var art_start_regimen = jq("#artStartRegimen").html();
+                    var other_art_start_regimen = jq("#otherArtStartRegimen").html();
+                    var first_second_regimen = jq("#firstSecondLineRegimen").html();
+                    var other_first_second_regimen = jq("#otherFirstSecondLineRegimen").html();
+                    var third_second_regimen = jq("#thirdLineRegimen").html();
+                    var other_third_regimen = jq("#otherThirdLineRegimen").html();
+                    var patient_regimen = other_third_regimen + third_second_regimen + other_first_second_regimen + other_first_second_regimen + first_second_regimen + other_art_start_regimen + art_start_regimen + other_art_transfer_regimen + art_transfer_regimen;
 
-        jq('[class^="RegimenEnableDisable"]').change(function () {
-        enable_disable(jq(this), "Regimen", 'selected_value == "other"', "select");
-        });
+                    /* Check if  Patient has art start or tranfer regimen selected on ART Summary Page*/
+                    if (art_start_regimen == "null" &amp;&amp; art_transfer_regimen == "null") {
+                        jq().toastmessage('showNoticeToast', "Patient Doesn't have any either ART Start or Transfer regimen on ART Summary selected");
+                    }
 
-        jq('[class^="RegimenEnableDisable"]').each(function () {
-        enable_disable(jq(this), "Regimen", 'selected_value == "oher"', "select");
-        });
+                    if (!patient_regimen.includes(regimen_encounter_page_value)) {
+                        jq().toastmessage('showNoticeToast', "The regimen " + regimen_encounter_page_text + " you have selected is different from the current regimen in the Summary page. Please update the summary page with a switch/substitution to the selected regimen");
+                    }
+                });
 
-        jq('[class^="DistrictTbRegEnableDisable"]').change(function () {
-        enable_disable_district_tb_reg(jq(this));
-        });
+                jq('[class^="ARTYesNoEnableDisable"]').change(function () {
+                    enable_disable(jq(this), "ARTYesNo", 'selected_value == "yes" &amp;&amp; selected_value!=""', "select");
+                });
 
-        jq('[class^="DistrictTbRegEnableDisable"]').each(function () {
-        enable_disable_district_tb_reg(jq(this));
-        });
+                jq('[class^="ARTYesNoEnableDisable"]').each(function () {
+                    enable_disable(jq(this), "ARTYesNo", 'selected_value == "yes" &amp;&amp; selected_value!=""', "select");
+                });
 
+                jq('[class^="RegimenEnableDisable"]').change(function () {
+                    enable_disable(jq(this), "Regimen", 'selected_value == "other"', "select");
+                });
 
-        jq('[class^="AdherenceEnableDisable"]').change(function () {
-        enable_disable(jq(this), "Adherence", 'selected_value == "poor" || selected_value=="fair"', "select");
-        });
+                jq('[class^="RegimenEnableDisable"]').each(function () {
+                    enable_disable(jq(this), "Regimen", 'selected_value == "other"', "select");
+                });
 
-        jq('[class^="AdherenceEnableDisable"]').each(function () {
-        enable_disable(jq(this), "Adherence", 'selected_value == "poor" || selected_value=="fair"', "select");
-        });
+                jq('[class^="DistrictTbRegEnableDisable"]').change(function () {
+                    enable_disable_district_tb_reg(jq(this));
+                });
 
-
-        jq('[class^="ViralLoadEnableDisable"]').change(function () {
-        enable_disable(jq(this), "ViralLoad", 'selected_value != "not detected" &amp;&amp; selected_value!=""', "select");
-        });
-
-        jq('[class^="ViralLoadEnableDisable"]').each(function () {
-        enable_disable(jq(this), "ViralLoad", 'selected_value != "not detected" &amp;&amp; selected_value!=""', "select");
-        });
+                jq('[class^="DistrictTbRegEnableDisable"]').each(function () {
+                    enable_disable_district_tb_reg(jq(this));
+                });
 
 
-        jq(".enableDisable").each(function () {
-        var group = jq(this);
+                jq('[class^="AdherenceEnableDisable"]').change(function () {
+                    enable_disable(jq(this), "Adherence", 'selected_value == "poor" || selected_value=="fair"', "select");
+                });
 
-        function disableFn() {
-        group.children("#disabled").fadeTo(250, 0.25);
-        /*  group.children("#disabled").find(":checkbox").attr("checked", false); uncheck */
-        group.children("#disabled").find("input").attr("disabled", true);
-        /* disable */
-        group.children("#disabled").find("select").attr("disabled", true);
-        }
+                jq('[class^="AdherenceEnableDisable"]').each(function () {
+                    enable_disable(jq(this), "Adherence", 'selected_value == "poor" || selected_value=="fair"', "select");
+                });
 
-        function enableFn() {
-        group.children("#disabled").fadeTo(250, 1);
-        group.children("#disabled").find("input").attr("disabled", false);
-        group.children("#disabled").find("select").attr("disabled", false);
 
-        }
+                jq('[class^="ViralLoadEnableDisable"]').change(function () {
+                    enable_disable(jq(this), "ViralLoad", 'selected_value != "not detected" &amp;&amp; selected_value!=""', "select");
+                });
 
-        if (jq(this).children("#trigger").find(":checkbox:first").attr("checked") != "checked") {
-        disableFn();
-        }
+                jq('[class^="ViralLoadEnableDisable"]').each(function () {
+                    enable_disable(jq(this), "ViralLoad", 'selected_value != "not detected" &amp;&amp; selected_value!=""', "select");
+                });
 
-        jq(this).children("#trigger").find(":checkbox:first").change(function () {
-        var checked = jq(this).attr("checked");
-        if (checked == "checked") {
-        enableFn();
-        } else {
-        disableFn();
-        }
-        });
-        });
-        });
+
+                jq(".enableDisable").each(function () {
+                    var group = jq(this);
+
+                    function disableFn() {
+                        group.children("#disabled").fadeTo(250, 0.25);
+                        /* group.children("#disabled").find(":checkbox").attr("checked", false); uncheck */
+                        group.children("#disabled").find("input").attr("disabled", true);
+                        /* disable */
+                        group.children("#disabled").find("select").attr("disabled", true);
+                    }
+
+                    function enableFn() {
+                        group.children("#disabled").fadeTo(250, 1);
+                        group.children("#disabled").find("input").attr("disabled", false);
+                        group.children("#disabled").find("select").attr("disabled", false);
+
+                    }
+
+                    if (jq(this).children("#trigger").find(":checkbox:first").attr("checked") != "checked") {
+                        disableFn();
+                    }
+
+                    jq(this).children("#trigger").find(":checkbox:first").change(function () {
+                        var checked = jq(this).attr("checked");
+                        if (checked == "checked") {
+                            enableFn();
+                        } else {
+                            disableFn();
+                        }
+                    });
+                });
+            });
         }
     </script>
+
+    <!-- This section contains lookup tags that pick data from other forms-->
+
+    <lookup complexExpression="#set($art_start_regimen='null') #set($other_art_start_regimen='null') #set($art_transfer_regimen='null') #set($other_art_transfer_regimen='null')"/>
+
+    <lookup complexExpression="#set($first_second_line_regimen='null') #set($other_first_second_line_regimen='null')"/>
+
+    <lookup complexExpression="#set($third_line_regimen='null') #set($other_third_line_regimen='null')"/>
+
+    <span style="display: none" id="artStartRegimen"><lookup
+            complexExpression="#set($art_start_regimen=($fn.latestObs('99061').valueCoded))$art_start_regimen"/></span>
+
+    <span style="display: none" id="otherArtStartRegimen"><lookup
+            complexExpression="#set($other_art_start_regimen=($fn.latestObs('99268').valueText))$other_art_start_regimen"/></span>
+
+    <span style="display: none" id="artTransferRegimen"><lookup
+            complexExpression="#set($art_transfer_regimen=$fn.latestObs('99064').valueCoded)$art_transfer_regimen"/></span>
+
+    <span style="display: none" id="otherArtTransferRegimen"><lookup
+            complexExpression="#set($other_art_transfer_regimen=$fn.latestObs('99269').valueText)$other_art_transfer_regimen"/></span>
+
+    <span style="display: none" id="firstSecondLineRegimen"><lookup
+            complexExpression="#foreach($first_second_line_regimen in $fn.allObs(90315)) $first_second_line_regimen.valueCoded #end"/></span>
+
+    <span style="display: none" id="otherFirstSecondLineRegimen"><lookup
+            complexExpression="#foreach($other_first_second_line_regimen in $fn.allObs(99146)) $other_first_second_line_regimen.valueText #end"/></span>
+
+
+    <span style="display: none" id="thirdLineRegimen"><lookup
+            complexExpression="#foreach($third_line_regimen in $fn.allObs(162990)) $first_second_line_regimen.valueCoded #end"/></span>
+
+    <span style="display: none" id="otherThirdLineRegimen"><lookup
+            complexExpression="#foreach($other_third_line_regimen in $fn.allObs(162989)) $other_first_second_line_regimen.valueText #end"/></span>
+
+    <!--End of Lookup section-->
 
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
@@ -334,7 +441,7 @@
                             <obs id="br" conceptId="90069" labelText="Scheduled?" style="checkbox"/>
                         </td>
                         <td>
-                            <obs id="visitType" conceptId="163173" answerConceptIds="1163310,1163311,1163307,1163175,1163312,1163313" answerLabels="1-Facility,2-Community,3-POV,4-Nurse,5-Sick,6-Represented" labelText="Type of Visit:" required="true" />
+                            <obs id="visitType" conceptId="1163173" answerConceptIds="1163310,1163311,1163307,1163175,1163312,1163313" answerLabels="1-Facility,2-Community,3-POV,4-Nurse,5-Sick,6-Represented" labelText="Type of Visit:" required="true" />
                         </td>
                     </tr>
                 </tbody>
@@ -391,7 +498,7 @@
                         </td>
                         <includeIf velocityTest="$patient.age &gt;=14"><td>
                             <obs id="sexualActive" conceptId="99624" answerConceptIds="1065,1066"
-                                 answerLabels="Yes,No" labelText="Is Patient Sexually active" required="true">
+                                 answerLabels="Yes,No" labelText="Is Patient Sexually active">
                                 <controls>
                                     <when value="1065" thenDisplay=".fpSection" />
                                 </controls>
@@ -486,7 +593,7 @@
                     <tr>
                         <td>
                             <label>Are there any symptoms of an STI?</label>
-                            <obs id="anySTIs" conceptId="1163177" answerConceptIds="1065,1066" answerLabels="Yes,No" required="true">
+                            <obs id="anySTIs" conceptId="1163177" answerConceptIds="1065,1066" answerLabels="Yes,No">
                                 <controls>
                                     <when value="1065" thenDisplay="#stiSymptoms" />
                                 </controls>
@@ -498,9 +605,9 @@
                         </td>
                         <includeIf velocityTest="$patient.age &gt;=14"><td>
                             <label>Have you disclosed your HIV status to your spouse/sexual partner?</label>
-                            <obs id="disclosedToPartner" conceptId="1163179" answerConceptIds="90003,90004,1175" answerLabels="Yes,No,N/A" required="true"/>
+                            <obs id="disclosedToPartner" conceptId="1163179" answerConceptIds="90003,90004,1175" answerLabels="Yes,No,N/A"/>
                             <label>Partner Status:</label>
-                            <obs id="partnerStatus" conceptId="99630" answerConceptIds="703,664,90001,1175" answerLabels="Pos,Neg,Unk,N/A" required="true">
+                            <obs id="partnerStatus" conceptId="99630" answerConceptIds="703,664,90001,1175" answerLabels="Pos,Neg,Unk,N/A">
                                 <controls>
                                     <when value="703" thenDisplay="#partnerInCare" />
                                 </controls>
@@ -529,7 +636,7 @@
                         <excludeIf velocityTest="$patient.gender =='M' ">
                             <td>
                                 <label>Screen for Cancer of the cervix in the past 1 year</label>
-                                <obs id="screenForCancer" conceptId="1163183" required="true">
+                                <obs id="screenForCancer" conceptId="1163183">
                                     <controls>
                                         <when value="90003" thenDisplay="#cancerResults" />
                                     </controls>
@@ -550,9 +657,9 @@
                         </excludeIf>
                         <td>
                             <span class="DistrictTbRegEnableDisable1">
-                                <obs conceptId="90216" labelText="Tb Status"
+                                <obs id="tbStatus" conceptId="90216" labelText="Tb Status"
                                      answerConceptIds="90079,90073,90078,90071"
-                                     answerLabels="No signs,Suspect,Diagnosed with Tb,Tb Rx" required="true"/>
+                                     answerLabels="No signs,Suspect,Diagnosed with Tb,Tb Rx"/>
                             </span>
                             <span class="DistrictTbRegEnableDisableChild1">
                                 <obs id="br" conceptId="90217" labelText="TB Start Date:"/>
@@ -846,27 +953,34 @@
                                 </span>
                             </span>
                         </td>
-                        <td class="RegimenEnableDisable1 ARVSections" style="width:3%;">
-                            <excludeIf velocityTest="$patient.age &lt;15">
-                                <obs id="br" conceptId="90315" labelText="Regimen:"
-                                     answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,90002"
-                                     answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-3TC-ATV/r,1j-ABC-3TC-NVP,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,Other"/>
-                                <span class="RegimenEnableDisableChild1">
-                                    <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
-                                    <br/>
-                                </span>
-                            </excludeIf>
-                            <excludeIf velocityTest="$patient.age &gt;14">
-                                <obs id="br" conceptId="90315" labelText="Regimen:"
-                                     answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002"
-                                     answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,Other"/>
-                                <span class="RegimenEnableDisableChild1">
-                                    <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
-                                    <br/>
-                                </span>
-                            </excludeIf>
-                            <obs id="br" conceptId="99038" labelText="# Pills Dispensed:"/>
-                            <obs id="br" conceptId="99036" size="5" labelText="Days:"/>
+                        <td class="ARVSections" style="width:3%;">
+                            <span class="disableARTRegimen">
+                                <excludeIf velocityTest="$patient.age &lt;15">
+                                    <span class="RegimenEnableDisable1">
+                                        <obs id="90315" conceptId="90315" labelText="Regimen:"
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,90002"
+                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-3TC-ATV/r,1j-ABC-3TC-NVP,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,Other"/>
+                                    </span>
+                                    <span class="RegimenEnableDisableChild1">
+                                        <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
+                                        <br/>
+                                    </span>
+                                </excludeIf>
+                                <excludeIf velocityTest="$patient.age &gt;14">
+                                    <span class="RegimenEnableDisable1">
+                                        <obs id="90315" conceptId="90315" labelText="Regimen:"
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002"
+                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,Other"/>
+                                    </span>
+                                    <span class="RegimenEnableDisableChild1">
+                                        <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
+                                        <br/>
+                                    </span>
+                                </excludeIf>
+                                <obs id="br" conceptId="99038" labelText="Pill Balance:"/>
+                                <obs id="br" conceptId="99038" labelText="# Pills Dispensed:"/>
+                                <obs id="br" conceptId="99036" size="5" labelText="Days:"/>
+                            </span>
                         </td>
                     </tr>
                 </tbody>
@@ -883,7 +997,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <obs id="POV" conceptId="1163271" answerConceptIds="90003,90004" answerLabels="1-Yes,2-No" labelText="Is Patient Eligible for POV?" required="true">
+                            <obs id="POV" conceptId="1163271" answerConceptIds="90003,90004" answerLabels="1-Yes,2-No" labelText="Is Patient Eligible for POV?">
                                 <controls><when value="90004" thenDisplay="#povSection"/></controls>
                             </obs>
                         </td>
@@ -1000,62 +1114,62 @@
     </section>
     <script>
         jQuery(document).ready(function() {
-        var visitTypeValue = getValue('visitType.value');
-        if (visitTypeValue == '') {
-        jQuery('#reasonForNotComing').css('display','none');
-        jQuery("#presentingComplaints").css('display','none');
-        jQuery('#firstSection').css('display','none');
-        jQuery('#secondSection').css('display','none');
-        jQuery('#thirdSection').css('display','none');
-        jQuery('#forthSection').css('display','none');
-        jQuery('#fifthSection').css('display','none');
-        jQuery('#sixthSection').css('display','none');
-        }
+            var visitTypeValue = getValue('visitType.value');
+            if (visitTypeValue == '') {
+                jQuery('#reasonForNotComing').css('display','none');
+                jQuery("#presentingComplaints").css('display','none');
+                jQuery('#firstSection').css('display','none');
+                jQuery('#secondSection').css('display','none');
+                jQuery('#thirdSection').css('display','none');
+                jQuery('#forthSection').css('display','none');
+                jQuery('#fifthSection').css('display','none');
+                jQuery('#sixthSection').css('display','none');
+            }
 
 
-        if (visitTypeValue == 1163310 || visitTypeValue == 1163311 || visitTypeValue == 1163307) {
-        jQuery('#reasonForNotComing').css('display','none');
-        jQuery("#presentingComplaints").css('display','block');
-        jQuery('#firstSection').css('display','block');
-        jQuery('#secondSection').css('display','block');
-        jQuery('#thirdSection').css('display','block');
-        jQuery('#forthSection').css('display','block');
-        jQuery('#fifthSection').css('display','block');
-        jQuery('#sixthSection').css('display','block');
-        }
+            if (visitTypeValue == 1163310 || visitTypeValue == 1163311 || visitTypeValue == 1163307) {
+                jQuery('#reasonForNotComing').css('display','none');
+                jQuery("#presentingComplaints").css('display','block');
+                jQuery('#firstSection').css('display','block');
+                jQuery('#secondSection').css('display','block');
+                jQuery('#thirdSection').css('display','block');
+                jQuery('#forthSection').css('display','block');
+                jQuery('#fifthSection').css('display','block');
+                jQuery('#sixthSection').css('display','block');
+            }
 
-        if (visitTypeValue == 1163175) {
-        jQuery('#reasonForNotComing').css('display','none');
-        jQuery("#presentingComplaints").css('display','none');
-        jQuery('#firstSection').css('display','block');
-        jQuery('#secondSection').css('display','block');
-        jQuery('#thirdSection').css('display','block');
-        jQuery('#forthSection').css('display','block');
-        jQuery('#fifthSection').css('display','block');
-        jQuery('#sixthSection').css('display','block');
-        }
+            if (visitTypeValue == 1163175) {
+                jQuery('#reasonForNotComing').css('display','none');
+                jQuery("#presentingComplaints").css('display','none');
+                jQuery('#firstSection').css('display','block');
+                jQuery('#secondSection').css('display','block');
+                jQuery('#thirdSection').css('display','block');
+                jQuery('#forthSection').css('display','block');
+                jQuery('#fifthSection').css('display','block');
+                jQuery('#sixthSection').css('display','block');
+            }
 
-        if (visitTypeValue == 1163312) {
-        jQuery('#reasonForNotComing').css('display','none');
-        jQuery("#presentingComplaints").css('display','block');
-        jQuery('#firstSection').css('display','none');
-        jQuery('#secondSection').css('display','block');
-        jQuery('#thirdSection').css('display','block');
-        jQuery('#forthSection').css('display','block');
-        jQuery('#fifthSection').css('display','none');
-        jQuery('#sixthSection').css('display','block');
-        }
+            if (visitTypeValue == 1163312) {
+                jQuery('#reasonForNotComing').css('display','none');
+                jQuery("#presentingComplaints").css('display','block');
+                jQuery('#firstSection').css('display','none');
+                jQuery('#secondSection').css('display','block');
+                jQuery('#thirdSection').css('display','block');
+                jQuery('#forthSection').css('display','block');
+                jQuery('#fifthSection').css('display','none');
+                jQuery('#sixthSection').css('display','block');
+            }
 
-        if (visitTypeValue == 1163313) {
-        jQuery('#reasonForNotComing').css('display','block');
-        jQuery("#presentingComplaints").css('display','none');
-        jQuery('#firstSection').css('display','none');
-        jQuery('#secondSection').css('display','none');
-        jQuery('#thirdSection').css('display','block');
-        jQuery('#forthSection').css('display','block');
-        jQuery('#fifthSection').css('display','none');
-        jQuery('#sixthSection').css('display','block');
-        }
+            if (visitTypeValue == 1163313) {
+                jQuery('#reasonForNotComing').css('display','block');
+                jQuery("#presentingComplaints").css('display','none');
+                jQuery('#firstSection').css('display','none');
+                jQuery('#secondSection').css('display','none');
+                jQuery('#thirdSection').css('display','block');
+                jQuery('#forthSection').css('display','block');
+                jQuery('#fifthSection').css('display','none');
+                jQuery('#sixthSection').css('display','block');
+            }
         });
 
         jQuery(function() {
@@ -1121,24 +1235,23 @@
         });
 
         if(getValue('eligibleQn.value') == '') {
-        jQuery(".ARVSections select").prop("disabled", true);
-        jQuery(".ARVSections input").prop("disabled", true);
-        jQuery(".ARVSections input").fadeTo(250, 0.25);
+            jQuery(".ARVSections select").prop("disabled", true);
+            jQuery(".ARVSections input").prop("disabled", true);
+            jQuery(".ARVSections input").fadeTo(250, 0.25);
         }
 
         jQuery(function() {
-        getField('eligibleQn.value').change(function() {
-        if(getValue('eligibleQn.value') == '' || getValue('eligibleQn.value') == 1066 ) {
-        jQuery(".ARVSections select").prop("disabled", true);
-        jQuery(".ARVSections input").prop("disabled", true);
-        jQuery(".ARVSections input").fadeTo(250, 0.25);
-        }
-        else {
-        jQuery(".ARVSections select").prop("disabled", false);
-        jQuery(".ARVSections input").prop("disabled", false);
-        jQuery(".ARVSections input").fadeTo(250, 1);
-        }
-        });
+            getField('eligibleQn.value').change(function() {
+                if(getValue('eligibleQn.value') == '' || getValue('eligibleQn.value') == 1066 ) {
+                    jQuery(".ARVSections select").prop("disabled", true);
+                    jQuery(".ARVSections input").prop("disabled", true);
+                    jQuery(".ARVSections input").fadeTo(250, 0.25);
+                }
+                else {
+                    jQuery(".ARVSections select").prop("disabled", false);
+                    jQuery(".ARVSections input").fadeTo(250, 1);
+                }
+            });
         });
     </script>
 </htmlform>
