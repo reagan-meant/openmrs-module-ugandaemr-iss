@@ -1209,8 +1209,16 @@ function applyDataMask(field) {
                     <td>
                         <obs conceptId="99142" labelText="Name"/>
                     </td>
-                     <td>
-                        <obs conceptId="99120" labelText="Relationship"/>
+<td>
+
+<obs id="supporterSection" conceptId="99120" answerConceptIds="90280,90288,90286,90279,90284,5618,90002" labelText="Relationship">
+<controls>
+  <when value="90002" thenDisplay="#relationshipOther" />
+</controls>
+</obs>
+<span id="relationshipOther">
+<obs conceptId="1163308" />
+</span>
                     </td>
                     <td>
                         <obs conceptId="90278" labelText="Telephone" class="ugphone" id="90278"/>
@@ -1221,7 +1229,14 @@ function applyDataMask(field) {
                         <obs conceptId="99142" labelText="Name"/>
                     </td>
                      <td>
-                        <obs conceptId="99120" labelText="Relationship"/>
+<obs id="supporterSection1" conceptId="99120" answerConceptIds="90280,90288,90286,90279,90284,5618,90002" labelText="Relationship">
+<controls>
+  <when value="90002" thenDisplay="#relationshipOther1" />
+</controls>
+</obs>
+<span id="relationshipOther1">
+<obs conceptId="1163308" />
+</span>
                     </td>
                     <td>
                         <obs conceptId="90278" labelText="Telephone" class="ugphone" id="90278"/>
@@ -2172,6 +2187,241 @@ function applyDataMask(field) {
                 </tbody>
             </table>
         </section>
+        <section>
+            <h3>ART treatment interruptions - STOP or MISSED drug pick up</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <obsgroup groupingConceptId="99086">
+                                <label>
+                                    <b>Stop/Lost</b>
+                                </label>
+
+                                <div class="ARTTreatmentInterruptionEnableDisable1">
+                                    <obs conceptId="99132" answerConceptIds="1363,99133"
+                                         answerLabels="Stopped,Lost"/>
+                                </div>
+
+                                <div class="ARTTreatmentInterruptionEnableDisableChild1">
+                                    <b>Date</b>
+                                    <br/>
+                                    <obs conceptId="99084"/>
+                                    <br/>
+                                </div>
+                                <div class="ARTTreatmentInterruptionEnableDisableGrandChild1">
+                                    <b>Why</b>
+                                    <br/>
+
+                                    <obs conceptId="1252" labelText=""
+                                         answerConceptIds="90040,90046,90158,90050,90045,90051,90052,90066,99289,90002"
+                                         answerLabels="1.Toxicity/side effects,2.Treatment Failure,3. Poor Adherence, 4.Illness/hospitalization, 5.Drug out of stock, 6.Patient lacks Finances, 7. Other patient decision, 8.Patient Rx interruption intpn, 9.Excluded HIV Infection, 10.Other,"/>
+                                </div>
+                                <div class="ARTTreatmentInterruptionEnableDisableChild1">
+                                    <br/>
+                                    <b>Date if Restart/Re-activated</b>
+                                    <br/>
+                                    <obs conceptId="99085"/>
+                                </div>
+                            </obsgroup>
+                        </td>
+                        <td>
+                            <obsgroup groupingConceptId="99086">
+                                <label>
+                                    <b>Stop/Lost</b>
+                                </label>
+                                <span class="ARTTreatmentInterruptionEnableDisable2">
+                                    <obs conceptId="99132" answerConceptIds="1363,99133"
+                                         answerLabels="Stopped,  Lost"/>
+                                </span>
+
+                                <span class="ARTTreatmentInterruptionEnableDisableChild2">
+
+                                    <b>Date</b>
+                                    <br/>
+                                    <obs conceptId="99084"/>
+                                </span>
+                                <br/>
+                                <span class="ARTTreatmentInterruptionEnableDisableGrandChild2">
+                                    <b>Why</b>
+                                    <br/>
+
+                                    <obs conceptId="1252" labelText=""
+                                         answerConceptIds="90040,90046,90158,90050,90045,90051,90052,90066,99289,90002"
+                                         answerLabels="1.Toxicity/side effects,2.Treatment Failure,3. Poor Adherence, 4.Illness/hospitalization, 5.Drug out of stock, 6.Patient lacks Finances, 7. Other patient decision, 8.Patient Rx interruption intpn, 9.Excluded HIV Infection, 10.Other,"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild2">
+                                    <br/>
+                                    <b>Date if Restart/Re-activated</b>
+                                    <br/>
+                                    <obs conceptId="99085"/>
+                                </span>
+                            </obsgroup>
+                        </td>
+                        <td>
+                            <obsgroup groupingConceptId="99086">
+                                <label>
+                                    <b>Stop/Lost</b>
+                                </label>
+                                <span class="ARTTreatmentInterruptionEnableDisable3">
+                                    <obs conceptId="99132" answerConceptIds="1363,99133"
+                                         answerLabels="Stopped,  Lost"/>
+                                </span>
+
+                                <span class="ARTTreatmentInterruptionEnableDisableChild3">
+                                    <b>Date</b>
+                                    <br/>
+                                    <obs conceptId="99084"/>
+                                    <br/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableGrandChild3">
+                                    <b>Why</b>
+                                    <br/>
+                                    <obs conceptId="1252" labelText=""
+                                         answerConceptIds="90040,90046,90158,90050,90045,90051,90052,90066,99289,90002"
+                                         answerLabels="1.Toxicity/side effects,2.Treatment Failure,3. Poor Adherence, 4.Illness/hospitalization, 5.Drug out of stock, 6.Patient lacks Finances, 7. Other patient decision, 8.Patient Rx interruption intpn, 9.Excluded HIV Infection, 10.Other,"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild3">
+                                    <br/>
+                                    <b>Date if Restart/Re-activated</b>
+                                    <br/>
+                                    <obs conceptId="99085"/>
+                                </span>
+                            </obsgroup>
+                        </td>
+                        <td>
+                            <obsgroup groupingConceptId="99086">
+                                <label>
+                                    <b>Stop/Lost</b>
+                                </label>
+                                <span class="ARTTreatmentInterruptionEnableDisable4">
+                                    <obs conceptId="99132" answerConceptIds="1363,99133"
+                                         answerLabels=" Stopped,  Lost"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild4">
+                                    <b>Date</b>
+                                    <br/>
+                                    <obs conceptId="99084"/>
+                                    <br/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableGrandChild4">
+                                    <b>Why</b>
+                                    <br/>
+                                    <obs conceptId="1252" labelText=""
+                                         answerConceptIds="90040,90046,90158,90050,90045,90051,90052,90066,99289,90002"
+                                         answerLabels="1.Toxicity/side effects,2.Treatment Failure,3. Poor Adherence, 4.Illness/hospitalization, 5.Drug out of stock, 6.Patient lacks Finances, 7. Other patient decision, 8.Patient Rx interruption intpn, 9.Excluded HIV Infection, 10.Other,"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild4">
+                                    <br/>
+                                    <b>Date if Restart/Re-activated</b>
+                                    <br/>
+                                    <obs conceptId="99085"/>
+                                </span>
+                            </obsgroup>
+                        </td>
+                        <td>
+                            <obsgroup groupingConceptId="99086">
+                                <label>
+                                    <b>Stop/Lost</b>
+                                </label>
+                                <span class="ARTTreatmentInterruptionEnableDisable5">
+                                    <obs conceptId="99132" answerConceptIds="1363,99133"
+                                         answerLabels=" Stopped,  Lost"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild5">
+                                    <b>Date</b>
+                                    <br/>
+                                    <obs conceptId="99084"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableGrandChildChild5">
+                                    <br/>
+                                    <b>Why</b>
+                                    <br/>
+                                    <obs conceptId="1252" labelText=""
+                                         answerConceptIds="90040,90046,90158,90050,90045,90051,90052,90066,99289,90002"
+                                         answerLabels="1.Toxicity/side effects,2.Treatment Failure,3. Poor Adherence, 4.Illness/hospitalization, 5.Drug out of stock, 6.Patient lacks Finances, 7. Other patient decision, 8.Patient Rx interruption intpn, 9.Excluded HIV Infection, 10.Other,"/>
+                                    <br/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild5">
+                                    <b>Date if Restart/Re-activated</b>
+                                    <br/>
+                                    <obs conceptId="99085"/>
+                                </span>
+                            </obsgroup>
+                        </td>
+                        <td>
+                            <obsgroup groupingConceptId="99086">
+                                <label>
+                                    <b>Stop/Lost</b>
+                                </label>
+                                <span class="ARTTreatmentInterruptionEnableDisable6">
+                                    <obs conceptId="99132" answerConceptIds="1363,99133"
+                                         answerLabels="Stopped,  Lost"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild6">
+                                    <b>Date</b>
+                                    <br/>
+                                    <obs conceptId="99084"/>
+                                    <br/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisablGrandeChild6">
+                                    <b>Why</b>
+                                    <br/>
+                                    <obs conceptId="1252" labelText=""
+                                         answerConceptIds="90040,90046,90158,90050,90045,90051,90052,90066,99289,90002"
+                                         answerLabels="1.Toxicity/side effects,2.Treatment Failure,3. Poor Adherence, 4.Illness/hospitalization, 5.Drug out of stock, 6.Patient lacks Finances, 7. Other patient decision, 8.Patient Rx interruption intpn, 9.Excluded HIV Infection, 10.Other,"/>
+                                </span>
+                                <span class="ARTTreatmentInterruptionEnableDisableChild6">
+                                    <br/>
+                                    <b>Date if Restart/Re-activated</b>
+                                    <br/>
+                                    <obs conceptId="99085"/>
+                                </span>
+                            </obsgroup>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <table border="0" id="art-care"
+                   style="padding: 10px; margin: 5px; border: solid 1px #D2D2D2;">
+                <tbody>
+                    <tr>
+                        <td style="color: #404040; background-color: #F3F3F3">Status</td>
+                        <td style="color: #404040; background-color: #F3F3F3">Date</td>
+                        <td style="color: #404040; background-color: #F3F3F3"></td>
+                    </tr>
+                    <tr class="enableDisable">
+                        <obsgroup groupingConceptId="99166">
+                            <td id="trigger">
+                                <obs id="90306" conceptId="90306" answerConceptId="90003"
+                                     answerLabel="Transfer out:"/>
+                            </td>
+                            <td id="disabled">
+                                <obs id="99165" conceptId="99165"/>
+                            </td>
+                            <td id="disabled">
+                                <obs conceptId="90211" labelText="Where"/>
+                            </td>
+                        </obsgroup>
+                    </tr>
+                    <tr class="enableDisable">
+                        <obsgroup groupingConceptId="99167">
+                            <td id="trigger">
+                                <obs id="5240" conceptId="5240" answerConceptId="90003"
+                                     answerLabel="Lost to follow-up (drop):"/>
+                            </td>
+                            <td id="disabled">
+                                <obs id="90209" conceptId="90209"/>
+                            </td>
+                            <td></td>
+                        </obsgroup>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </div>
     <section>
         <submit/>
@@ -2184,7 +2434,7 @@ function applyDataMask(field) {
             #if( $encounter != 0 )
                 &lt;script type=&quot;text/javascript&quot;>
                         if (window.location.href.indexOf('/module/htmlformentry/htmlForm.form') == -1) {
-                            window.location.href = window.location.protocol + &quot;//&quot; + window.location.host + &quot;/&quot;+ OPENMRS_CONTEXT_PATH + &quot;/htmlformentryui/htmlform/editHtmlFormWithStandardUi.page?patientId=$encounter.patientId&amp;visitId=$encounter.visit.visitId&amp;formUuid=52653a60-8300-4c13-be4d-4b746da06fee&amp;encounterId=$encounter.encounterId&amp;returnUrl=%2F&quot; + OPENMRS_CONTEXT_PATH + &quot;%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D$encounter.patientId&quot;;
+                            window.location.href = window.location.protocol + &quot;//&quot; + window.location.host + &quot;/&quot;+ OPENMRS_CONTEXT_PATH + &quot;/htmlformentryui/htmlform/editHtmlFormWithStandardUi.page?patientId=$patient.patientId&amp;visitId=$encounter.visit.visitId&amp;formUuid=52653a60-8300-4c13-be4d-4b746da06fee&amp;encounterId=$encounter.encounterId&amp;returnUrl=%2F&quot; + OPENMRS_CONTEXT_PATH + &quot;%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3D$patient.patientId&quot;;
                         }
                 &lt;/script>
             #end"/>
