@@ -903,7 +903,12 @@
                                 </obs>
                             </span>
                             <span id="whyNotEligibleSection" class="notonARTSection">
-                                <obs conceptId="1163197" labelText="Why not Eligible:" />
+                                <obs id="whyNotEligibleForART" conceptId="1163197" labelText="Why not Eligible:" >
+                                    <when value="5622" thenDisplay="#otherReasonNotEligibleForART" />
+                                </obs>
+                            </span>
+                            <span id="otherReasonNotEligibleForART">
+                               <obs conceptId="1163203" labelText="Why not Eligible:" />
                             </span>
                         </td>
                         <td class="EnableDisableAdherenceReason checkboxGroup lablex3 ARVSections">
