@@ -18,6 +18,8 @@ import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.aijar.activator.HtmlFormsInitializer;
 import org.openmrs.module.aijar.activator.Initializer;
 import org.openmrs.module.dataexchange.DataImporter;
+import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
+import org.openmrs.module.ugandaemr.iss.api.deploy.bundle.ISSMetadataBundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,9 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 			
 			dataImporter.importData("metadata/ISS_Custom_Concepts.xml");
 			log.info("ISS Custom Concepts imported");
+			
+			MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
+			deployService.installBundle(Context.getRegisteredComponents(ISSMetadataBundle.class).get(0));
 			log.info("Started UgandaEMR ISS Clinic Module");
 		}
 		catch (Exception e) {

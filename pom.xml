@@ -36,6 +36,7 @@
 		<appuiVersion>1.8.0</appuiVersion>
 		<dataexchangeVersion>1.3.2</dataexchangeVersion>
 		<legacyuiVersion>1.3.3</legacyuiVersion>
+		<metadatadeployVersion>1.9.0</metadatadeployVersion>
 		<ugandaemrVersion>2.0.1-SNAPSHOT</ugandaemrVersion>
 		<uiframeworkVersion>3.13.0</uiframeworkVersion>
 	</properties>
@@ -81,6 +82,13 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>legacyui-omod</artifactId>
 				<version>${legacyuiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>metadatadeploy-api</artifactId>
+				<version>${metadatadeployVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 
