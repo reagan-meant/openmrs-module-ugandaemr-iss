@@ -1,0 +1,25 @@
+[
+  {
+    "id": "ugandaemr.iss.lastARTVisitSummary",
+    "instanceOf": "coreapps.template.dashboardWidget",
+    "description": "Information from the patient's last ART visit",
+    "order": 1,
+    "config": {
+      "widget": "latestobsforconceptlist",
+      "icon": "icon-user-md",
+      "label": "LAST ART VISIT SUMMARY",
+      "concepts": "dcac04cf-30ab-102d-86b0-7a5022ba4115,160288AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,dd2b0b4d-30ab-102d-86b0-7a5022ba4115,b0e53f0a-eaca-49e6-b663-d0df61601b70,7593ede6-6574-4326-a8a6-3d742e843659,dcdff274-30ab-102d-86b0-7a5022ba4115,0b214603-049e-4e57-b871-0e937ac52fd8,bcde6791-6f4e-4af3-a1a6-60cb7feb0df9"
+    },
+    "extensions": [
+      {
+        "id": "org.openmrs.module.coreapps.mostRecentVitals.clinicianDashboardFirstColumn",
+        "appId": "ugandaemr.iss.lastARTVisitSummary",
+        "extensionPointId": "patientDashboard.secondColumnFragments",
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ]
+  }
+]

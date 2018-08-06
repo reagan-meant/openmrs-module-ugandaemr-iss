@@ -1,0 +1,75 @@
+<htmlform formName="KP/PP Classification Tool"
+          formDescription="KP/PP Classification Tool"
+          formEncounterType="5b3b0533-18ee-4b34-aac4-11fdc6d67bb7"
+          formUuid="dad7fd3e-eeb0-429a-ad9c-5b52b35da043"
+          formVersion="1.0"
+          formAddMetadata="yes"
+          formUILocation="patientDashboard.visitActions"
+          formOrder="1"
+          formIcon="icon-medkit"
+          formShowIf="(visit.active || !visit.active) &amp;&amp; patient.person.dead==false &amp;&amp; sessionLocation.uuid=='86863db4-6101-4ecf-9a86-5e716d6504e4'"
+          formDisplayStyle="Standard"
+          formLabel="KP Classification Tool">
+
+    <div class="ai-page-frame">
+        <div class="headers" style="text-align: center;">
+            <h3>Key and Priority Population (KP/PP) Classification Tool</h3>
+        </div>
+        <span style="display: none;">
+            <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
+                               order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
+        </span>
+        <section>
+                <table>
+                    <thead>
+                        <th>
+                            <tr>
+                                <td colspan="3">Summary</td>
+                            </tr>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Client Registration Number: <patient field="identifier" identifierTypeId="cd17da38-a64b-4658-8d09-15f929265df0" required="true"/>
+                            </td>
+                            <td>
+                                Registration Date: <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                            </td>
+                            <td>
+                                <label><span class="required">*</span>Attending Clinician
+                                </label>
+                                <encounterProvider role="Provider" style="autocomplete"/>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+        </section>
+        <section>
+            <table>
+                <thead>
+                    <th>
+                        <tr>
+                            <td colspan="2">Client Classification</td>
+                        </tr>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>
+                            Registration Date: <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                        </td>
+                        <td>
+                            <label><span class="required">*</span>Attending Clinician
+                            </label>
+                            <encounterProvider role="Provider" style="autocomplete"/>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </section>
+    </div>
+</htmlform>
