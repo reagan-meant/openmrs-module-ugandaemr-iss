@@ -38,6 +38,12 @@
             vertical-align: top;
         }
 
+        form#htmlform div.ai-page-frame table tbody td {
+            background: #B6D6E6;
+            color: #404040;
+            padding: 0px 5px;
+        }
+
         form select, .form select {
             min-width: 0px;
         }
@@ -583,8 +589,13 @@
                 <tbody>
                     <tr>
                         <td style="width: 15%;background: #F3F3F3;padding: 20px;">STI Symptom Screening</td>
-                        <includeIf velocityTest="$patient.age &gt;=14"><td style="width: 15%;background: #F3F3F3;padding: 20px;">Disclosure Status</td></includeIf>
-                        <excludeIf velocityTest="$patient.gender =='M'"><td style="width: 15%;background: #F3F3F3;padding: 20px;">Cervical Cancer screening</td></excludeIf>
+
+                        <includeIf velocityTest="$patient.age &gt;=14">
+                            <td style="width: 15%;background: #F3F3F3;padding: 20px;">Disclosure Status</td>
+                        </includeIf>
+                        <excludeIf velocityTest="$patient.gender =='M'">
+                            <td style="width: 15%;background: #F3F3F3;padding: 20px;">Cervical Cancer screening</td>
+                        </excludeIf>
                         <td style="width: 15%;background: #F3F3F3;padding: 20px;">TB Status / TB Rx / District TB</td>
                         <td style="width: 15%;background: #F3F3F3;padding: 20px;">Potential side effects</td>
                     </tr>
@@ -598,12 +609,22 @@
                             </obs>
                             <span id="stiSymptoms">
                                 <label>If yes, symptoms:</label>
-                                <obs conceptId="1163178"/>
+                                <obs id="stiSymptomsList" conceptId="1163320" answerConceptIds="145762, 123396, 123529, 157544, 5622" answerLabels="Genital Ulcers, Abnormal Vaginal Discharge, Urethral Discharge, Lower Abdominal Pain, Other">
+                                    <controls>
+                                        <when value="5622" thenDisplay="#stiSymptomsOther" />
+                                </controls>
+                                </obs>
+                                <span id="stiSymptomsOther">
+                                    Other STI Symptoms:
+                                    <obs conceptId="1163178"/>
+                                </span>
+
                             </span>
                         </td>
                         <includeIf velocityTest="$patient.age &gt;=14"><td>
                             <label>Have you disclosed your HIV status to your spouse/sexual partner?</label>
                             <obs id="disclosedToPartner" conceptId="1163179" answerConceptIds="90003,90004,1175" answerLabels="Yes,No,N/A"/>
+
                             <label>Partner Status:</label>
                             <obs id="partnerStatus" conceptId="99630" answerConceptIds="703,664,90001,1175" answerLabels="Pos,Neg,Unk,N/A">
                                 <controls>
@@ -672,7 +693,7 @@
 
                             <br/>
                         </td>
-                        <td>
+                        <td class="lablex2">
                             <obs id="br" conceptId="90227" answerConceptId="90100" answerLabel="AB"/>
                             <obs id="br" conceptId="90227" answerConceptId="90099" answerLabel="Anaemia"/>
                             <obs id="br" conceptId="90227" answerConceptId="90095" answerLabel="BN"/>
@@ -708,7 +729,7 @@
                     </tr>
                     <tr>
 
-                        <td class="lablex">
+                        <td class="lablex2">
                             <obs id="br" conceptId="90251" answerConceptId="90132" answerLabel="Cough"/>
                             <obs id="br" conceptId="90251" answerConceptId="90133"
                                  answerLabel="DB"/>
