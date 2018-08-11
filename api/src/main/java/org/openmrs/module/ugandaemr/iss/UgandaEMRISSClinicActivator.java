@@ -17,6 +17,7 @@ import org.openmrs.module.Module;
 import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.aijar.activator.HtmlFormsInitializer;
 import org.openmrs.module.aijar.activator.Initializer;
+import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.dataexchange.DataImporter;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
 import org.openmrs.module.ugandaemr.iss.api.deploy.bundle.ISSMetadataBundle;
@@ -35,6 +36,7 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 	 * @see #started()
 	 */
 	public void started() {
+		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 		
 		try {
 			// run the initializers
@@ -51,6 +53,9 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 			MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
 			deployService.installBundle(Context.getRegisteredComponents(ISSMetadataBundle.class).get(0));
 			log.info("Started UgandaEMR ISS Clinic Module");
+			
+			// disable apps
+			appFrameworkService.disableApp("ugandaemr.lastARTVisitSummary");
 		}
 		catch (Exception e) {
 			Module mod = ModuleFactory.getModuleById("ugandaemr-iss");
