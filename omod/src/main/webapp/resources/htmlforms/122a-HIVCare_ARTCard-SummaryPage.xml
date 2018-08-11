@@ -1015,6 +1015,13 @@ function applyDataMask(field) {
            width: auto !important;
            min-width:auto !important;
         }
+
+        .lablex2 span {
+            min-width: 50%;
+            float: left;
+            margin: 1px 0px;
+        }
+
     </style>
 
     <!-- Beging of HTML Form -->
@@ -1709,14 +1716,13 @@ function applyDataMask(field) {
             </table>
         </section>
  <section>
-            <div class="row">
-                <div class="row-col2">
                     <section>
-                        <h3>Drug allergies</h3>
+
                         <table>
                             <tbody>
                             <tr>
                                 <td>
+                                    <h3>Drug allergies</h3>
                                     <obsgroup groupingConceptId="90230">
                                         <obs conceptId="142" size="30" labelText="1"/>
                                         <br/>
@@ -1725,32 +1731,38 @@ function applyDataMask(field) {
                                         <obs conceptId="142" size="30" labelText="3"/>
                                     </obsgroup>
                                 </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                </div>
-                <div class="row-col2">
-                    <section>
-                        <h3>Relevant medical conditions</h3>
-                        <table>
-                            <tbody>
-                            <tr>
                                 <td>
+                                    <h3>Relevant medical conditions</h3>
                                     <obsgroup groupingConceptId="99104">
-                                        <obs conceptId="99111" size="30" labelText="1"/>
-                                        <br/>
-                                        <obs conceptId="99111" size="30" labelText="2"/>
-                                        <br/>
-                                        <obs conceptId="99111" size="30" labelText="3"/>
+                                        <span class="lablex2">
+                                        <obs id="134337" conceptId="1628" answerConceptId="134337" answerLabel="Mental health (depression, psychosis etc)" />
+                                        <obs id="117399" conceptId="1628" answerConceptId="117399" answerLabel="Hypertension" />
+                                        <obs id="119481" conceptId="1628" answerConceptId="119481" answerLabel="Diabetes mellitus" />
+                                        <obs id="134337" conceptId="1628" answerConceptId="134337" answerLabel="Kaposi Sarcoma" />
+
+                                        <obs id="5041" conceptId="1628" answerConceptId="5041" answerLabel="Lymphoma" />
+                                        <obs id="99094" conceptId="1628" answerConceptId="99094" answerLabel="Kidney Disease" />
+                                        <obs id="139069" conceptId="1628" answerConceptId="139069" answerLabel="Heart Failure" />
+                                        <obs id="116023" conceptId="1628" answerConceptId="116023" answerLabel="Cervical Cancer" />
+                                        <obs id="146221" conceptId="1628" answerConceptId="146221" answerLabel="Prostrate Cancer" />
+                                        <obs id="116026" conceptId="1628" answerConceptId="116026" answerLabel="Breast Cancer" />
+                                        <obs id="139069" conceptId="1628" answerConceptId="139069" answerLabel="Heart Failure" />
+
+                                        <obs id="medical-conditions" conceptId="1628" answerConceptId="5622" answerLabel="Other">
+                                            <controls>
+                                                <when value="5622" thenDisplay="#otherMedicalConditions" />
+                                            </controls>
+                                        </obs>
+                                        <span id="otherMedicalConditions">
+                                             <obs conceptId="99111" size="30" labelText="Specify:"/>
+                                        </span>
+                                            </span>
                                     </obsgroup>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </section>
-                </div>
-            </div>
         </section>
 <!--
         <section class="exposed-infant">
