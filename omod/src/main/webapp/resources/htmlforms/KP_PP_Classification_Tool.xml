@@ -11,6 +11,44 @@
           formDisplayStyle="Standard"
           formLabel="KP Classification Tool">
 
+    <style type="text/css">
+
+        form#htmlform div.ai-page-frame table>tbody tr:nth-child(odd) td {
+        background: #eeeeee;
+        }
+
+        form#htmlform div.ai-page-frame table>tbody tr:nth-child(even) td {
+        background: #f9f9f9;
+        }
+
+        form#htmlform div.ai-page-frame fieldset#child-information table {
+        margin: 0 0 5px 0;
+        }
+
+        table {
+        width: 99%;
+        display: inline-block;
+        }
+
+        table td {
+        background: #B6D6E6;
+        color: #404040;
+        vertical-align: top;
+        }
+
+        .section {
+        margin: 20px 0px;
+        }
+
+        form .lablex {
+        width: 93%;
+        }
+        
+
+    </style>
+
+
+
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
             <h3>Key and Priority Population (KP/PP) Classification Tool</h3>
@@ -19,57 +57,360 @@
             <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
                                order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
         </span>
-        <section>
-                <table>
-                    <thead>
-                        <th>
-                            <tr>
-                                <td colspan="3">Summary</td>
-                            </tr>
-                        </th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Client Registration Number: <patient field="identifier" identifierTypeId="cd17da38-a64b-4658-8d09-15f929265df0" required="true"/>
-                            </td>
-                            <td>
-                                Registration Date: <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
-                            </td>
-                            <td>
-                                <label><span class="required">*</span>Attending Clinician
-                                </label>
-                                <encounterProvider role="Provider" style="autocomplete"/>
-                            </td>
-                        </tr>
-                    </tbody>
 
-                </table>
-        </section>
         <section>
-            <table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
-                    <th>
-                        <tr>
-                            <td colspan="2">Client Classification</td>
-                        </tr>
+                    <th colspan="2">
+                        Client Classification
                     </th>
                 </thead>
                 <tbody>
                     <tr>
 
                         <td>
-                            Registration Date: <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                            <p>
+                                <label>1. What was your sex at birth?</label>
+                            </p>
+
                         </td>
                         <td>
-                            <label><span class="required">*</span>Attending Clinician
-                            </label>
-                            <encounterProvider role="Provider" style="autocomplete"/>
+                            <p>
+                                <obs conceptId="90252"
+                                     answerConceptIds="90165,90164,5622,162570"
+                                     answerLabels="Male,Female,Other,Refuse to answer" style="radio" class="vertical-layout-options" />
+                            </p>
                         </td>
                     </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>2. Currently what do you consider yourself? </label>
+                            </p>
+
+                        </td>
+                        <td>
+
+                            <p>
+                                <obs id="male" conceptId="165124" answerConceptId="90165" answerLabel="Male" style="checkbox" class="vertical-layout-options"/><br/><br/>
+                                <obs id="female" conceptId="165124" answerConceptId="90164" answerLabel="Female" style="checkbox" class="vertical-layout-options"/><br/><br/>
+                                <obs id="other" conceptId="165124" answerConceptId="5622" answerLabel="Other" style="checkbox"
+                                     class="horizontal-layout-options">
+
+                                    <controls>
+                                        <when value="5622" thenDisplay="#othergender" />
+                                    </controls>
+                                </obs>
+                                <span id="othergender">
+                                    <obs conceptId="163174" labelText="Specify:" />
+                                </span>
+
+                                <obs id="refused_to_answer" conceptId="165124" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="vertical-layout-options"/>
+
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>3. Whom do you have sex with? (consideration for the nonsexually
+                                    active) </label>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                                <obs conceptId="160109"
+                                     answerConceptIds="163290,163291,163275,160573,162570"
+                                     answerLabels="Men only,Women only,Both men and women,Not sexually active,Refuse to answer" style="radio" class="vertical-layout-options" />
+                             </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>4. What is your occupation?  </label>
+                            </p>
+
+                        </td>
+                        <td>
+                                <obs id="migrant_wrker" conceptId="1542" answerConceptId="165126" answerLabel="Moves from place to place to do seasonal work" style="checkbox" class="horizontal-layout-options"/><br/> <br/>
+                                <obs id="fisherman" conceptId="1542" answerConceptId="159674" answerLabel="Works among fishing communities" style="checkbox" class="horizontal-layout-options"/><br/><br/>
+                                <obs id="truck_driver" conceptId="1542" answerConceptId="159466" answerLabel=" Earns a living as a long distance truck driver" style="checkbox" class="horizontal-layout-options" /><br/><br/>
+                                <obs id="uniformed_officers" conceptId="1542" answerConceptId="165125" answerLabel="Uniformed Officers" style="checkbox" class="horizontal-layout-options"/><br/><br/>
+                                <obs id="not_applicable" conceptId="1542" answerConceptId="1175" answerLabel="Not applicable" style="checkbox" class="horizontal-layout-options" /><br/><br/>
+                            <obs id="otherocc"  conceptId="1542" answerConceptId="5622"
+                                     answerLabel="Other" >
+                                <controls>
+                                    <when value="5622" thenDisplay="#otheroccupation" />
+                                </controls>
+                            </obs>
+                            <span id="otheroccupation">
+                                <obs conceptId="163174" labelText="Specify:" />
+                            </span>
+
+                            <obs id="refused_to_answer" conceptId="1542" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="horizontal-layout-options" /><br/>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>5. Is selling sex or exchange of sex for gifts your source of income?</label>
+                            </p>
+
+                        </td>
+                        <td>
+
+                            <p>
+                                <obs id="160579" conceptId="160579" style="radio"
+                                     answerConceptIds="1065,1066,162570"
+                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options"/>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>6. In the last 6 months, have you injected drugs to make
+                                    yourself feel high?
+                                </label>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                                <obs id="160666" conceptId="160666" style="radio"
+                                     answerConceptIds="1065,1066,162570"
+                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options"/>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>7. Are you in discordant relationship where you are HIV negative
+                                    and your partner is HIV positive?
+                                </label>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                                <obs id="6096" conceptId="6096" style="radio"
+                                     answerConceptIds="1065,1066,1067,162570"
+                                     answerLabels="Yes,No,Do not Know,Refuse to answer" class="vertical-layout-options"/>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <p>
+                                <label>8. Are you in a prison or closed settings setting Incarcerated? </label>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                                <obs id="inmate" conceptId="165130" answerConceptId="162277" answerLabel=" In mate" class="horizontal-layout-options"/><br/>
+                                <obs id="refugee" conceptId="165130" answerConceptId="165127" answerLabel="Refugee Camps" class="horizontal-layout-options"/>
+                                <obs id="remand" conceptId="165130" answerConceptId="165128" answerLabel="Remand homes" class="horizontal-layout-options" />
+                                <obs id="rehabilitation" conceptId="165130" answerConceptId="165129" answerLabel="Rehabilitation centers" class="horizontal-layout-options" />
+                                <obs id="not_applicable" conceptId="165130" answerConceptId="1175" answerLabel="Not applicable" class="horizontal-layout-options" />
+                                <obs id="refused_to_answer" conceptId="165130" answerConceptId="162570" answerLabel="Refused to answer" class="horizontal-layout-options" />
+                            </p>
+                        </td>
+                    </tr>
+
                 </tbody>
 
             </table>
         </section>
+        <section>
+            <table width="100%">
+                <thead>
+                    <th>
+                Key Population /PP Classification( Tick All that Apply)
+                    </th>
+                    <th> Classify</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            If client answers Male to Q1, Men Only or Men and Women to Q3, then classify as Man who has
+                            Sex with Men (MSM)
+                        </td>
+                        <td>
+                            <obs id="msm" conceptId="165133" answerConceptId="160578" answerLabel="MSM" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            if client identifies as a gender different from their birth sex, then classify as Transgender (TG)
+                        </td>
+                        <td>
+
+                            <obs id="tg" conceptId="165133" answerConceptId="165131" answerLabel="TG" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If clients answers Moves from place to place to do seasonal work to Q4, then classify as Migrant
+                            Worker (MW)
+                        </td>
+                        <td>
+                            <obs id="mw" conceptId="165133" answerConceptId="165126" answerLabel="MW" class="horizontal-layout-options"/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            If Client answers works among fishing communities to Q4, then classify as Fisher Folk (FF)
+                        </td>
+                        <td>
+                            <obs id="ff" conceptId="165133" answerConceptId="159674" answerLabel="FF" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If client answers earns a living as a long distance truck driver to Q4, then classify as Trucker (TKR)
+                        </td>
+                        <td>
+                            <obs id="tkr" conceptId="165133" answerConceptId="162198" answerLabel="TKR" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If client answers works with Police/Military/Prisons/ UWA as Game Warder/private security services
+                            to Q4 then classify as Uniformed Officers
+                        </td>
+                        <td>
+                            <obs id="uniformed_officers" conceptId="165133" answerConceptId="165125" answerLabel="Uniformed officers" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            If client answers Yes to Q5, then categorize as Sex Worker (SW)
+                        </td>
+                        <td>
+                            <obs id="sw" conceptId="165133" answerConceptId="160579" answerLabel="SW" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If client answers Yes to Q6, then classify as Person Who Injects Drugs (PWID)
+                        </td>
+                        <td>
+                            <obs id="PWID" conceptId="165133" answerConceptId="160666" answerLabel="PWID" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If client answers Yes to Q7, then categorize as Discordant Couple (DC)
+                        </td>
+                        <td>
+                            <obs id="dc" conceptId="165133" answerConceptId="6096" answerLabel="DC" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If client answers Female to Q1 and is aged 15-24 years classify as Young woman and adolescent
+                            girl (AGYW)
+                        </td>
+                        <td>
+                            <obs id="agyw" conceptId="165133" answerConceptId="165132" answerLabel="AGYW" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            If client answers inmate to Q8,the classify as Person in Prison (PIP)
+                        </td>
+                        <td>
+                            <obs id="PIP" conceptId="165133" answerConceptId="162277" answerLabel="PIP" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If client answers refugee camp, remand home and rehabilitation centers to Q8, then classify as
+                            Person in Closed Setting
+                        </td>
+                        <td>
+                            <obs id="closed_setting" conceptId="165133" answerConceptId="165130" answerLabel="Person in Closed Setting" class="horizontal-layout-options"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <table>
+                <thead>
+                    <th>Final Classification: (Tick dominant category)</th>
+
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>
+                        <obs  conceptId="165134" answerConceptId="160578" answerLabel="MSM" />
+
+                        <obs  conceptId="165134" answerConceptId="165131" answerLabel="TG" />
+
+                        <obs  conceptId="165134" answerConceptId="160579" answerLabel="SW" />
+
+                        <obs  conceptId="165134" answerConceptId="160666" answerLabel="PWID" />
+
+                        <obs  conceptId="165134" answerConceptId="165126" answerLabel="MW" />
+
+                        <obs  conceptId="165134" answerConceptId="165132" answerLabel="AGYW" />
+
+                        <obs  conceptId="165134" answerConceptId="6096" answerLabel="DC" />
+
+                        <obs  conceptId="165134" answerConceptId="162198" answerLabel="TKR" />
+
+                        <obs  conceptId="165134" answerConceptId="159674" answerLabel="FF" />
+
+                        <obs  conceptId="165134" answerConceptId="160578" answerLabel="Person in Prison" />
+
+                        <obs  conceptId="165134" answerConceptId="1107" answerLabel="None"  />
+                    </td>
+                </tr>
+                    <tr>
+                        <td>
+                            <span>
+                                <strong>*Some clients may belong to more than one category due to overlapping vulnerabilities and behavior</strong>
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </section>
     </div>
+    <section>
+        <submit/>
+    </section>
 </htmlform>
