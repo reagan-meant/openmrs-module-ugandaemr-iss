@@ -26,7 +26,7 @@
         }
 
         table {
-        width: 99%;
+        width: 100;
         display: inline-block;
         }
 
@@ -43,11 +43,350 @@
         form .lablex {
         width: 93%;
         }
-        
+
 
     </style>
+    <script type="text/javascript">
+        if(jQuery){
+          jQuery(document).ready(function(){
 
 
+                 jq("#msm_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#tg_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#sw_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#pwid_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#mw_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#agyw_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#dc_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#tkr_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#ff_final").find(":checkbox").attr("disabled","disabled");
+                 jq("#pip_final").find(":checkbox").attr("disabled","disabled");
+
+                 jq("#msm").find(":checkbox").attr("disabled","disabled");
+                 jq("#tg").find(":checkbox").attr("disabled","disabled");
+                 jq("#mw").find(":checkbox").attr("disabled","disabled");
+                 jq("#ff").find(":checkbox").attr("disabled","disabled");
+                 jq("#tkr").find(":checkbox").attr("disabled","disabled");
+                 jq("#uniformed_officers").find(":checkbox").attr("disabled","disabled");
+                 jq("#sw").find(":checkbox").attr("disabled","disabled");
+                 jq("#pwid").find(":checkbox").attr("disabled","disabled");
+                 jq("#dc").find(":checkbox").attr("disabled","disabled");
+                 jq("#agyw").find(":checkbox").attr("disabled","disabled");
+                 jq("#pip").find(":checkbox").attr("disabled","disabled");
+                 jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
+
+               <ifMode mode="EDIT">
+                    <!--disableContainer('#key-classification');-->
+                     enableCheckedBox("msm");
+                     enableCheckedBox("tg");
+                     enableCheckedBox("mw");
+                     enableCheckedBox("ff");
+                     enableCheckedBox("tkr");
+                     enableCheckedBox("uniformed_officers");
+                     enableCheckedBox("sw");
+                     enableCheckedBox("pwid");
+                     enableCheckedBox("dc");
+                     enableCheckedBox("agyw");
+                     enableCheckedBox("pip");
+                     enableCheckedBox("closed_setting");
+
+                    enableCheckedBox("msm_final");
+                    enableCheckedBox("tg_final");
+                    enableCheckedBox("sw_final");
+                     enableCheckedBox("pwid_final");
+                     enableCheckedBox("mw_final");
+                     enableCheckedBox("agyw_final");
+                     enableCheckedBox("dc_final");
+                     enableCheckedBox("tkr_final");
+                     enableCheckedBox("ff_final");
+                     enableCheckedBox("pip_final");
+
+                </ifMode>
+
+             if ( jq.browser.msie ) {
+                jq(":checkbox").click(function(){
+                jq(this).change();
+                });
+             }
+
+                beforeSubmit.push(function() {
+                       jq("#htmlform").validate();
+
+                             if(jq("#migrant-wrker").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#trigger").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#not-applicable").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#uniformed-officers").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#truck-driver").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#fisherman").find(":checkbox").prop('checked') !== true &amp;&amp;
+                              jq("#refused_to_answer").find(":checkbox").prop('checked') !== true ){
+
+                                getField('refused_to_answer.error').html('Required Field').show();
+                                return false;
+                            }else{
+                            setValue('refused_to_answer.error', '');
+                            }
+
+                             <!-- if the other is checked and no specification made -->
+                        if (getValue('your-gender.value')==="5622") {
+                            if (getValue('other-specify.value') === '') {
+                                getField('other-specify.error').html(' Please specify the other gender you consider yourself').show();
+                                return false;
+                            }
+                            else{
+                            <!--setValue('other-specify.error', '');-->
+                             return jq("#htmlform").valid();
+                            }
+                        }
+
+                         if (getValue('trigger.value')==="5622") {
+                            if (getValue('other-occ.value') === '') {
+                                getField('other-occ.error').html('Please specify the other occupation ').show();
+                                return false;
+                            }
+                            else{
+                            setValue('other-occ.error', '');
+                             return jq("#htmlform").valid();
+                            }
+                        }
+
+
+
+                       return jq("#htmlform").valid();
+                });
+
+                jq(".enableDisable").each(function(){
+                var group = jq(this);
+                if (jq(this).children("#trigger").find(":checkbox:first").attr("checked") != "checked") {
+                disableFn(group);
+                }
+             jq("#trigger").find(":checkbox:first").change(function(){
+             var checked = jq(this).attr("checked");
+                if(checked == "checked"){
+                    enableFn(group);
+
+                }else{
+                    disableFn(group);
+                }
+             });
+             });
+
+             jq(".triggers").each(function (){
+                checkOtherBox("male","msm");
+
+                function checkOtherBox(trigger,triggered){
+                    jq("#"+trigger).find(":checkbox:first").change(function(){
+                      var checked = jq(this).attr("checked");
+                       if(checked == "checked"){
+                         jq("#"+triggered).find(":checkbox:first").attr("checked",true);
+                       }else{
+                         jq("#"+triggered).find(":checkbox:first").attr("checked",false);
+                      }
+                    });
+                }
+             });
+
+            jq(".gender").each(function (){
+                var group = jq(this);
+                function disableFn(){
+                   group.children("#gender-other").fadeTo(250,0.33);
+                   group.children("#gender-other").find(":radio").attr("checked",false); //uncheck
+                   group.children("#gender-other").find("input[type$='text']").val("");
+                   group.children("#gender-other").find("input").attr("disabled",true);  //disable
+                    <!--group.children("#gender-other").find("input").attr("required","false");-->
+                }
+                function enableFn(){
+                  group.children("#gender-other").fadeTo(250,1);
+                  group.children("#gender-other").find("input").attr("disabled",false);
+                  <!--group.children("#gender-other").find("input").attr("required","true");-->
+                }
+                var radio_value = "undefined";
+                if(radio_value=="undefined"){
+                disableFn();
+                }
+                jq("#your-gender").change(function(){
+                radio_value = jq(this).find(":radio:checked").val();
+                if(radio_value == "5622"){
+                enableFn();
+
+                }
+                else{
+                disableFn();
+                }
+             });
+
+            jq(".triggers").change(function(){
+               var undefined = "undefined";
+               var sexAtBirth = jq("#sex-at-birth").find(":radio:checked").val();
+               var sexPartner = jq("#sex-partner").find(":radio:checked").val();
+               var sex_worker = jq("#160579").find(":radio:checked").val();
+               var drug_user = jq("#160666").find(":radio:checked").val();
+               var dc = jq("#6096").find(":radio:checked").val();
+               var setting = jq("#165130").find(":radio:checked").val();
+
+               if(sexAtBirth === "90165" &amp;&amp;  (sexPartner === "163290" || sexPartner === "163275")){
+                    jq("#msm").find(":checkbox").removeAttr("disabled");
+                    jq("#msm").find(":checkbox").attr("checked",true);
+
+               }
+               else{
+                     jq("#msm").find(":checkbox").attr("checked",false);
+                      jq("#msm").find(":checkbox").attr("disabled",true);
+               }
+
+                <!--transgender checking-->
+               var gender = jq("#your-gender").find(":radio:checked").val();
+                if(((gender === "90165"  || gender ==="5622" ) &amp;&amp; (sexAtBirth ==="90164" || sexAtBirth ==="5622")) || (gender ==="90164" &amp;&amp; sexAtBirth=== "90165" || gender ==="90165" &amp;&amp; sexAtBirth=== "90164")){
+                     jq("#tg").find(":checkbox").attr("checked",true);
+                      jq("#tg").find(":checkbox").removeAttr("disabled");
+                }
+                else{
+                     jq("#tg").find(":checkbox").attr("checked",false);
+                      jq("#tg").find(":checkbox").attr("disabled",true);
+                }
+
+                var occupation = jq("#occupation").find(":checkbox:checked").val();
+
+
+                <!--checking key population section-->
+               var migrant_wrker= jq("#migrant-wrker").find(":checkbox").prop('checked');
+               var fisherman = jq("#fisherman").find(":checkbox").prop('checked');
+               var truck_driver= jq("#truck-driver").find(":checkbox").prop('checked');
+               var uniformed = jq("#uniformed-officers").find(":checkbox").prop('checked');
+
+               checkOtherItem(migrant_wrker , "mw");
+               checkOtherItem(fisherman , "ff");
+               checkOtherItem(truck_driver , "tkr");
+               checkOtherItem(uniformed, "uniformed_officers");
+
+               checkOtherItemIfYes(sex_worker,"sw");
+               checkOtherItemIfYes(drug_user,"pwid");
+               checkOtherItemIfYes(dc,"dc");
+
+               <!--closed setting or inmate-->
+                if(setting === "162277" ){
+                jq("#pip").find(":checkbox").removeAttr('disabled');
+                   jq("#pip").find(":checkbox").attr("checked",true);
+
+                    jq("#closed_setting").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
+               }
+               else if (setting === "165127" || setting === "165128" || setting === "165129") {
+                    jq("#closed_setting").find(":checkbox").attr("checked",true);
+                     jq("#pip").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").removeAttr('disabled');
+                     jq("#pip").find(":checkbox").attr("disabled","disabled");
+               }
+               else{
+                    jq("#pip").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").attr("checked",false);
+                     jq("#closed_setting").find(":checkbox").attr("disabled","disabled");
+                     jq("#pip").find(":checkbox").attr("disabled",true);
+
+               }
+
+               var patientAge = <lookup expression="patient.age" />;
+                if(sexAtBirth === "90164" &amp;&amp; patientAge &lt; 25 &amp;&amp; patientAge &gt;=15 ){
+                jq("#agyw").find(":checkbox").removeAttr("disabled");
+                 jq("#agyw").find(":checkbox").attr("checked",true);
+
+                } else{
+                 jq("#agyw").find(":checkbox").attr("checked",false);
+                 jq("#agyw").find(":checkbox").attr("disabled","disabled");
+                }
+
+                 <!--jq("#msm_final").find(":checkbox").attr("disabled","disabled");-->
+
+                jq(".key_pop").each(function(){
+                var msm =  jq("#msm").find(":checkbox").prop('checked');
+               var tg = jq("#tg").find(":checkbox").prop('checked');
+               var mw = jq("#mw").find(":checkbox").prop('checked');
+               var ff = jq("#ff").find(":checkbox").prop('checked');
+               var tkr = jq("#tkr").find(":checkbox").prop('checked');
+               var uniformed_officers = jq("#uniformed_officers").find(":checkbox").prop('checked');
+               var sw = jq("#sw").find(":checkbox").prop('checked');
+               var pwid = jq("#pwid").find(":checkbox").prop('checked');
+               var dc = jq("#dc").find(":checkbox").prop('checked');
+               var agyw = jq("#agyw").find(":checkbox").prop('checked');
+               var pip = jq("#pip").find(":checkbox").prop('checked');
+               var closed_setting = jq("#closed_setting").find(":checkbox").prop('checked');
+
+                disableEnableCheckBoxes(msm, "msm_final");
+                disableEnableCheckBoxes(tg, "tg_final");
+                disableEnableCheckBoxes(sw, "sw_final");
+                disableEnableCheckBoxes(pwid, "pwid_final");
+                disableEnableCheckBoxes(mw, "mw_final");
+                disableEnableCheckBoxes(agyw, "agyw_final");
+                disableEnableCheckBoxes(dc, "dc_final");
+                disableEnableCheckBoxes(tkr, "tkr_final");
+                disableEnableCheckBoxes(ff, "ff_final");
+                disableEnableCheckBoxes(pip, "pip_final");
+
+                });
+
+
+
+               function checkOtherItem(trigger_field , field_to_check){
+               if(trigger_field == true){
+               jq("#"+ field_to_check).find(":checkbox").removeAttr("disabled");
+                jq("#"+ field_to_check).find(":checkbox").attr("checked",true);
+               }else{
+                jq("#"+ field_to_check).find(":checkbox").attr("disabled",true);
+                 jq("#"+ field_to_check).find(":checkbox").attr("checked",false);
+               }
+               }
+
+               function checkOtherItemIfYes(trigger_field, field_to_check){
+                if(trigger_field === "1065"){
+                 jq("#"+ field_to_check).find(":checkbox").removeAttr("disabled");
+                jq("#"+ field_to_check).find(":checkbox").attr("checked",true);
+
+               }
+               else{
+                 jq("#"+ field_to_check).find(":checkbox").attr("checked",false);
+                 jq("#"+ field_to_check).find(":checkbox").attr("disabled",true);
+               }
+               }
+
+
+             });
+            });
+        });
+        }
+
+         function disableEnableCheckBoxes(checkedValue, field_to_enable_disable){
+                if(checkedValue === true){
+                jq("#"+ field_to_enable_disable).find(":checkbox").removeAttr("disabled");
+
+               }
+               else{
+                  jq("#"+ field_to_enable_disable).find(":checkbox").attr("checked",false);
+                  jq("#"+ field_to_enable_disable).find(":checkbox").attr("disabled","disabled");
+               }
+
+               }
+               function disableFn(group){
+                group.children("#disabled").find("input").attr("required","false");
+                   group.children("#disabled").fadeTo(250,0.33);
+                   group.children("#disabled").find(":checkbox").attr("checked",false); //uncheck
+                   group.children("#disabled").find("input[type$='text']").val("");
+                   group.children("#disabled").find("input").attr("disabled",true);  //disable
+
+                }
+                function enableFn(group){
+                 <!--group.children("#disabled").find("input").attr("required","true");-->
+                  group.children("#disabled").fadeTo(250,1);
+                  group.children("#disabled").find("input").attr("disabled",false);
+
+                }
+
+                function enableCheckedBox(checkboxId){
+                     if(jq("#" + checkboxId ).find(":checkbox").prop('checked')){
+                        jq("#" + checkboxId).find(":checkbox").attr("disabled",false);
+                    }
+                }
+
+
+    </script>
 
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
@@ -65,20 +404,31 @@
                         Client Classification
                     </th>
                 </thead>
-                <tbody>
+                <tbody class="triggers">
+                    <tr>
+                        <td>
+                            Encounter Date:
+                            <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                        </td>
+                        <td>
+                            <label><span class="required">*</span>Assessed by:</label>
+                            <encounterProvider role="Provider" style="autocomplete" required="true"/>
+                        </td>
+                    </tr>
+
                     <tr>
 
                         <td>
                             <p>
-                                <label>1. What was your sex at birth?</label>
+                                <label><span class="required">*</span>1. What was your sex at birth?</label>
                             </p>
 
                         </td>
                         <td>
                             <p>
-                                <obs conceptId="90252"
+                                <obs id="sex-at-birth" conceptId="90252"
                                      answerConceptIds="90165,90164,5622,162570"
-                                     answerLabels="Male,Female,Other,Refuse to answer" style="radio" class="vertical-layout-options" />
+                                     answerLabels="Male,Female,Other,Refuse to answer" style="radio" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -92,24 +442,19 @@
 
                         </td>
                         <td>
+                                <span class="gender">
+                                    <obs style="radio" id="your-gender" conceptId="165124" answerConceptIds="90165,90164,162570,5622"
+                                      answerLabels="Male,Female,Refuse to answer,Other" class="vertical-layout-options" required="true" ><br/><br/><br/><br/><br/>
+                                     <controls>
+                                            <when value="5622" thenDisplay="#gender-other"/>
+                                        </controls>
+                                    </obs>
 
-                            <p>
-                                <obs id="male" conceptId="165124" answerConceptId="90165" answerLabel="Male" style="checkbox" class="vertical-layout-options"/><br/><br/>
-                                <obs id="female" conceptId="165124" answerConceptId="90164" answerLabel="Female" style="checkbox" class="vertical-layout-options"/><br/><br/>
-                                <obs id="other" conceptId="165124" answerConceptId="5622" answerLabel="Other" style="checkbox"
-                                     class="horizontal-layout-options">
-
-                                    <controls>
-                                        <when value="5622" thenDisplay="#othergender" />
-                                    </controls>
-                                </obs>
-                                <span id="othergender">
-                                    <obs conceptId="163174" labelText="Specify:" />
+                                <span id="gender-other">
+                                    <obs id="other-specify" conceptId="165135" labelText="Specify:" />
+                                </span>
                                 </span>
 
-                                <obs id="refused_to_answer" conceptId="165124" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="vertical-layout-options"/>
-
-                            </p>
                         </td>
                     </tr>
 
@@ -124,9 +469,9 @@
                         </td>
                         <td>
                             <p>
-                                <obs conceptId="160109"
+                                <obs id="sex-partner" conceptId="160109"
                                      answerConceptIds="163290,163291,163275,160573,162570"
-                                     answerLabels="Men only,Women only,Both men and women,Not sexually active,Refuse to answer" style="radio" class="vertical-layout-options" />
+                                     answerLabels="Men only,Women only,Both men and women,Not sexually active,Refuse to answer" style="radio" class="vertical-layout-options" required="true"/>
                              </p>
                         </td>
                     </tr>
@@ -140,23 +485,20 @@
 
                         </td>
                         <td>
-                                <obs id="migrant_wrker" conceptId="1542" answerConceptId="165126" answerLabel="Moves from place to place to do seasonal work" style="checkbox" class="horizontal-layout-options"/><br/> <br/>
-                                <obs id="fisherman" conceptId="1542" answerConceptId="159674" answerLabel="Works among fishing communities" style="checkbox" class="horizontal-layout-options"/><br/><br/>
-                                <obs id="truck_driver" conceptId="1542" answerConceptId="159466" answerLabel=" Earns a living as a long distance truck driver" style="checkbox" class="horizontal-layout-options" /><br/><br/>
-                                <obs id="uniformed_officers" conceptId="1542" answerConceptId="165125" answerLabel="Uniformed Officers" style="checkbox" class="horizontal-layout-options"/><br/><br/>
-                                <obs id="not_applicable" conceptId="1542" answerConceptId="1175" answerLabel="Not applicable" style="checkbox" class="horizontal-layout-options" /><br/><br/>
-                            <obs id="otherocc"  conceptId="1542" answerConceptId="5622"
-                                     answerLabel="Other" >
-                                <controls>
-                                    <when value="5622" thenDisplay="#otheroccupation" />
-                                </controls>
-                            </obs>
-                            <span id="otheroccupation">
-                                <obs conceptId="163174" labelText="Specify:" />
+                            <span  class="enableDisable" id="occupation">
+                            <obs id="migrant-wrker" conceptId="1542" answerConceptId="165126" answerLabel="Moves from place to place to do seasonal work" style="checkbox" class="horizontal-layout-options"/><br/> <br/>
+                            <obs id="fisherman" conceptId="1542" answerConceptId="159674" answerLabel="Works among fishing communities" style="checkbox" class="horizontal-layout-options"/><br/><br/>
+                            <obs id="truck-driver" conceptId="1542" answerConceptId="159466" answerLabel=" Earns a living as a long distance truck driver" style="checkbox" class="horizontal-layout-options" /><br/><br/>
+                            <obs id="uniformed-officers" conceptId="1542" answerConceptId="165125" answerLabel="Uniformed Officers" style="checkbox" class="horizontal-layout-options"/><br/><br/>
+                            <obs id="not-applicable" conceptId="1542" answerConceptId="1175" answerLabel="Not applicable" style="checkbox" class="horizontal-layout-options" /><br/><br/>
+                                <obs id="trigger"  conceptId="1542" answerConceptId="5622"
+                                 answerLabel="Other" />
+                            <span id="disabled">
+                                <obs id="other-occ" conceptId="165136" labelText="Specify:" />
                             </span>
 
                             <obs id="refused_to_answer" conceptId="1542" answerConceptId="162570" answerLabel="Refuse to answer" style="checkbox" class="horizontal-layout-options" /><br/>
-
+                            </span>
                         </td>
                     </tr>
 
@@ -173,7 +515,7 @@
                             <p>
                                 <obs id="160579" conceptId="160579" style="radio"
                                      answerConceptIds="1065,1066,162570"
-                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options"/>
+                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -192,7 +534,7 @@
                             <p>
                                 <obs id="160666" conceptId="160666" style="radio"
                                      answerConceptIds="1065,1066,162570"
-                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options"/>
+                                     answerLabels="Yes,No,Refuse to answer" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -211,7 +553,7 @@
                             <p>
                                 <obs id="6096" conceptId="6096" style="radio"
                                      answerConceptIds="1065,1066,1067,162570"
-                                     answerLabels="Yes,No,Do not Know,Refuse to answer" class="vertical-layout-options"/>
+                                     answerLabels="Yes,No,Do not Know,Refuse to answer" class="vertical-layout-options" required="true"/>
                             </p>
                         </td>
                     </tr>
@@ -226,12 +568,10 @@
                         </td>
                         <td>
                             <p>
-                                <obs id="inmate" conceptId="165130" answerConceptId="162277" answerLabel=" In mate" class="horizontal-layout-options"/><br/>
-                                <obs id="refugee" conceptId="165130" answerConceptId="165127" answerLabel="Refugee Camps" class="horizontal-layout-options"/>
-                                <obs id="remand" conceptId="165130" answerConceptId="165128" answerLabel="Remand homes" class="horizontal-layout-options" />
-                                <obs id="rehabilitation" conceptId="165130" answerConceptId="165129" answerLabel="Rehabilitation centers" class="horizontal-layout-options" />
-                                <obs id="not_applicable" conceptId="165130" answerConceptId="1175" answerLabel="Not applicable" class="horizontal-layout-options" />
-                                <obs id="refused_to_answer" conceptId="165130" answerConceptId="162570" answerLabel="Refused to answer" class="horizontal-layout-options" />
+                                <obs id="165130" conceptId="165130" style="radio"
+                                     answerConceptIds="162277,165127,165128,165129,1175,162570"
+                                      class="vertical-layout-options" required="true"/>
+
                             </p>
                         </td>
                     </tr>
@@ -248,7 +588,7 @@
                     </th>
                     <th> Classify</th>
                 </thead>
-                <tbody>
+                <tbody class="key_pop" id="key-classification">
                     <tr>
                         <td>
                             If client answers Male to Q1, Men Only or Men and Women to Q3, then classify as Man who has
@@ -320,7 +660,7 @@
                             If client answers Yes to Q6, then classify as Person Who Injects Drugs (PWID)
                         </td>
                         <td>
-                            <obs id="PWID" conceptId="165133" answerConceptId="160666" answerLabel="PWID" class="horizontal-layout-options"/>
+                            <obs id="pwid" conceptId="165133" answerConceptId="160666" answerLabel="PWID" class="horizontal-layout-options"/>
                         </td>
                     </tr>
 
@@ -347,7 +687,7 @@
                             If client answers inmate to Q8,the classify as Person in Prison (PIP)
                         </td>
                         <td>
-                            <obs id="PIP" conceptId="165133" answerConceptId="162277" answerLabel="PIP" class="horizontal-layout-options"/>
+                            <obs id="pip" conceptId="165133" answerConceptId="162277" answerLabel="PIP" class="horizontal-layout-options"/>
                         </td>
                     </tr>
 
@@ -370,31 +710,32 @@
                     <th>Final Classification: (Tick dominant category)</th>
 
                 </thead>
-
                 <tbody>
                 <tr>
                     <td>
-                        <obs  conceptId="165134" answerConceptId="160578" answerLabel="MSM" />
+                        <span class="final_classification">
+                        <obs id="msm_final"  conceptId="165134" answerConceptId="160578" answerLabel="MSM" />
 
-                        <obs  conceptId="165134" answerConceptId="165131" answerLabel="TG" />
+                        <obs id="tg_final" conceptId="165134" answerConceptId="165131" answerLabel="TG" />
 
-                        <obs  conceptId="165134" answerConceptId="160579" answerLabel="SW" />
+                        <obs id="sw_final" conceptId="165134" answerConceptId="160579" answerLabel="SW" />
 
-                        <obs  conceptId="165134" answerConceptId="160666" answerLabel="PWID" />
+                        <obs id="pwid_final" conceptId="165134" answerConceptId="160666" answerLabel="PWID" />
 
-                        <obs  conceptId="165134" answerConceptId="165126" answerLabel="MW" />
+                        <obs id="mw_final" conceptId="165134" answerConceptId="165126" answerLabel="MW" />
 
-                        <obs  conceptId="165134" answerConceptId="165132" answerLabel="AGYW" />
+                        <obs id="agyw_final" conceptId="165134" answerConceptId="165132" answerLabel="AGYW" />
 
-                        <obs  conceptId="165134" answerConceptId="6096" answerLabel="DC" />
+                        <obs id="dc_final" conceptId="165134" answerConceptId="6096" answerLabel="DC" />
 
-                        <obs  conceptId="165134" answerConceptId="162198" answerLabel="TKR" />
+                        <obs id="tkr_final" conceptId="165134" answerConceptId="162198" answerLabel="TKR" />
 
-                        <obs  conceptId="165134" answerConceptId="159674" answerLabel="FF" />
+                        <obs id="ff_final" conceptId="165134" answerConceptId="159674" answerLabel="FF" />
 
-                        <obs  conceptId="165134" answerConceptId="160578" answerLabel="Person in Prison" />
+                        <obs id="pip_final" conceptId="165134" answerConceptId="160578" answerLabel="Person in Prison" />
 
-                        <obs  conceptId="165134" answerConceptId="1107" answerLabel="None"  />
+                        <obs id="none" conceptId="165134" answerConceptId="1107" answerLabel="None"  />
+                            </span>
                     </td>
                 </tr>
                     <tr>
@@ -404,10 +745,9 @@
                             </span>
                         </td>
                     </tr>
-
                 </tbody>
-            </table>
 
+            </table>
         </section>
     </div>
     <section>
