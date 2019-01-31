@@ -226,15 +226,16 @@
             <!-- Validation rules -->
             beforeSubmit.push(function () {
                 var isValid = true;
-                <!-- clear the previous errors -->
-                setValue('sexualActive.error', '');
-                setValue('anySTIs.error', '');
-                setValue('disclosedToPartner.error', '');
-                setValue('partnerStatus.error', '');
-                setValue('screenForCancer.error', '');
-                setValue('tbStatus.error', '');
-                setValue('POV.error', '');
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
+                    <!-- clear the previous errors -->
+                    setValue('sexualActive.error', '');
+                    setValue('anySTIs.error', '');
+                    setValue('disclosedToPartner.error', '');
+                    setValue('partnerStatus.error', '');
+                    setValue('screenForCancer.error', '');
+                    setValue('tbStatus.error', '');
+                    setValue('POV.error', '');
+
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
                         getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
@@ -264,12 +265,11 @@
                         getField('POV.error').html('Please select whether the client is eligible for POV').show();
                         isValid = false;
                     }
-
-                    if (!isValid) {
-                        jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
-                    }
-                    return isValid;
                 }
+                if (!isValid) {
+                    jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
+                }
+                return isValid;
             });
 
             jq(document).ready(function () {
