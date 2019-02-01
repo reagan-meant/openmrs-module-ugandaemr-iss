@@ -882,8 +882,8 @@
                     <tr>
                         <td >
                             <p class="hasInlineLabels">
-                                <obs id="br" conceptId="1193" style="radio" answerConceptIds="916,90171"
-                                     answerLabels="Septrin,Dapson"/>
+                                <obs id="br" conceptId="1193" style="radio" answerConceptIds="916,90171,1107"
+                                     answerLabels="Septrin,Dapson,None"/>
                             </p>
                             <span id="SeptrinExperience">
                                 <label>Did client experience any problem since last visit?</label>
