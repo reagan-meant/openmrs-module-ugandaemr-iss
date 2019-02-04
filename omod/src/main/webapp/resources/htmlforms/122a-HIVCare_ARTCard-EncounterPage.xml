@@ -226,6 +226,7 @@
             <!-- Validation rules -->
             beforeSubmit.push(function () {
                 var isValid = true;
+                setValue('who-staging.error', '');
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
                     <!-- clear the previous errors -->
                     setValue('sexualActive.error', '');
@@ -263,6 +264,14 @@
                     }
                     if (getValue('POV.value') == "") {
                         getField('POV.error').html('Please select whether the client is eligible for POV').show();
+                        isValid = false;
+                    }
+                }
+
+                <!-- if the WHO staging status has changed from the last encounter then the reason why must be specified -->
+                if (getValue('who-staging.value') != jq('#last-who-staging').text()) {
+                    if(getValue('basis-for-who-stage-change.value') == "") {
+                        getField('basis-for-who-stage-change.error').html('Please provide the reason for the WHO stage change').show();
                         isValid = false;
                     }
                 }
@@ -801,10 +810,11 @@
                                  answerLabels="Amb,Work, Bed" labelText="" required="true"/>
                         </td>
                         <td>
-                            <obs id="br" conceptId="90203"
+                            <span id="last-who-staging" class="hidden"><lookup expression="fn.latestObs('90203').valueCoded.conceptId"/></span>
+                            <obs id="who-staging" conceptId="90203"
                                  answerConceptIds="90033,90034,90035,90036,90293,90294,90295,90296"
                                  answerLabels="1,2,3,4,T1,T2,T3,T4" labelText="" required="true"/>
-                            <obs conceptId="1163204" labelText="If changed, basis for change"/><br/>
+                            <obs id="basis-for-who-stage-change" conceptId="1163204" labelText="If changed, basis for change"/><br/>
                             <obs id="br" conceptId="5497" dateLabel="Date:" labelText="CD4:"/>
                         </td>
                         <td class="lablex2">
