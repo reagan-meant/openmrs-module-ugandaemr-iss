@@ -38,6 +38,12 @@
             vertical-align: top;
         }
 
+        form#htmlform div.ai-page-frame table tbody td {
+            background: #B6D6E6;
+            color: #404040;
+            padding: 0px 5px;
+        }
+
         form select, .form select {
             min-width: 0px;
         }
@@ -220,15 +226,17 @@
             <!-- Validation rules -->
             beforeSubmit.push(function () {
                 var isValid = true;
-                <!-- clear the previous errors -->
-                setValue('sexualActive.error', '');
-                setValue('anySTIs.error', '');
-                setValue('disclosedToPartner.error', '');
-                setValue('partnerStatus.error', '');
-                setValue('screenForCancer.error', '');
-                setValue('tbStatus.error', '');
-                setValue('POV.error', '');
+                setValue('who-staging.error', '');
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
+                    <!-- clear the previous errors -->
+                    setValue('sexualActive.error', '');
+                    setValue('anySTIs.error', '');
+                    setValue('disclosedToPartner.error', '');
+                    setValue('partnerStatus.error', '');
+                    setValue('screenForCancer.error', '');
+                    setValue('tbStatus.error', '');
+                    setValue('POV.error', '');
+
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
                         getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
@@ -258,12 +266,19 @@
                         getField('POV.error').html('Please select whether the client is eligible for POV').show();
                         isValid = false;
                     }
-
-                    if (!isValid) {
-                        jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
-                    }
-                    return isValid;
                 }
+
+                <!-- if the WHO staging status has changed from the last encounter then the reason why must be specified -->
+                if (getValue('who-staging.value') != jq('#last-who-staging').text()) {
+                    if(getValue('basis-for-who-stage-change.value') == "") {
+                        getField('basis-for-who-stage-change.error').html('Please provide the reason for the WHO stage change').show();
+                        isValid = false;
+                    }
+                }
+                if (!isValid) {
+                    jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
+                }
+                return isValid;
             });
 
             jq(document).ready(function () {
@@ -583,8 +598,13 @@
                 <tbody>
                     <tr>
                         <td style="width: 15%;background: #F3F3F3;padding: 20px;">STI Symptom Screening</td>
-                        <includeIf velocityTest="$patient.age &gt;=14"><td style="width: 15%;background: #F3F3F3;padding: 20px;">Disclosure Status</td></includeIf>
-                        <excludeIf velocityTest="$patient.gender =='M'"><td style="width: 15%;background: #F3F3F3;padding: 20px;">Cervical Cancer screening</td></excludeIf>
+
+                        <includeIf velocityTest="$patient.age &gt;=14">
+                            <td style="width: 15%;background: #F3F3F3;padding: 20px;">Disclosure Status</td>
+                        </includeIf>
+                        <excludeIf velocityTest="$patient.gender =='M'">
+                            <td style="width: 15%;background: #F3F3F3;padding: 20px;">Cervical Cancer screening</td>
+                        </excludeIf>
                         <td style="width: 15%;background: #F3F3F3;padding: 20px;">TB Status / TB Rx / District TB</td>
                         <td style="width: 15%;background: #F3F3F3;padding: 20px;">Potential side effects</td>
                     </tr>
@@ -598,12 +618,22 @@
                             </obs>
                             <span id="stiSymptoms">
                                 <label>If yes, symptoms:</label>
-                                <obs conceptId="1163178"/>
+                                <obs id="stiSymptomsList" conceptId="1163320" answerConceptIds="145762, 123396, 123529, 157544, 5622" answerLabels="Genital Ulcers, Abnormal Vaginal Discharge, Urethral Discharge, Lower Abdominal Pain, Other">
+                                    <controls>
+                                        <when value="5622" thenDisplay="#stiSymptomsOther" />
+                                </controls>
+                                </obs>
+                                <span id="stiSymptomsOther">
+                                    Other STI Symptoms:
+                                    <obs conceptId="1163178"/>
+                                </span>
+
                             </span>
                         </td>
                         <includeIf velocityTest="$patient.age &gt;=14"><td>
                             <label>Have you disclosed your HIV status to your spouse/sexual partner?</label>
                             <obs id="disclosedToPartner" conceptId="1163179" answerConceptIds="90003,90004,1175" answerLabels="Yes,No,N/A"/>
+
                             <label>Partner Status:</label>
                             <obs id="partnerStatus" conceptId="99630" answerConceptIds="703,664,90001,1175" answerLabels="Pos,Neg,Unk,N/A">
                                 <controls>
@@ -672,7 +702,7 @@
 
                             <br/>
                         </td>
-                        <td>
+                        <td class="lablex2">
                             <obs id="br" conceptId="90227" answerConceptId="90100" answerLabel="AB"/>
                             <obs id="br" conceptId="90227" answerConceptId="90099" answerLabel="Anaemia"/>
                             <obs id="br" conceptId="90227" answerConceptId="90095" answerLabel="BN"/>
@@ -708,7 +738,7 @@
                     </tr>
                     <tr>
 
-                        <td class="lablex">
+                        <td class="lablex2">
                             <obs id="br" conceptId="90251" answerConceptId="90132" answerLabel="Cough"/>
                             <obs id="br" conceptId="90251" answerConceptId="90133"
                                  answerLabel="DB"/>
@@ -780,10 +810,11 @@
                                  answerLabels="Amb,Work, Bed" labelText="" required="true"/>
                         </td>
                         <td>
-                            <obs id="br" conceptId="90203"
+                            <span id="last-who-staging" class="hidden"><lookup expression="fn.latestObs('90203').valueCoded.conceptId"/></span>
+                            <obs id="who-staging" conceptId="90203"
                                  answerConceptIds="90033,90034,90035,90036,90293,90294,90295,90296"
                                  answerLabels="1,2,3,4,T1,T2,T3,T4" labelText="" required="true"/>
-                            <obs conceptId="1163204" labelText="If changed, basis for change"/><br/>
+                            <obs id="basis-for-who-stage-change" conceptId="1163204" labelText="If changed, basis for change"/><br/>
                             <obs id="br" conceptId="5497" dateLabel="Date:" labelText="CD4:"/>
                         </td>
                         <td class="lablex2">
@@ -861,8 +892,8 @@
                     <tr>
                         <td >
                             <p class="hasInlineLabels">
-                                <obs id="br" conceptId="1193" style="radio" answerConceptIds="916,90171"
-                                     answerLabels="Septrin,Dapson"/>
+                                <obs id="br" conceptId="1193" answerConceptIds="916,90171,1107"
+                                     answerLabels="Septrin,Dapson,Not Applicable" style="radio" answerSeparator="&lt;br/>"/>
                             </p>
                             <span id="SeptrinExperience">
                                 <label>Did client experience any problem since last visit?</label>
@@ -961,8 +992,8 @@
                                 <excludeIf velocityTest="$patient.age &lt;15">
                                     <span class="RegimenEnableDisable1">
                                         <obs id="90315" conceptId="90315" labelText="Regimen:"
-                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,90002"
-                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-3TC-ATV/r,1j-ABC-3TC-NVP,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,Other"/>
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,90002,164977,164978"
+                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-3TC-ATV/r,1j-ABC-3TC-NVP,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
                                     </span>
                                     <span class="RegimenEnableDisableChild1">
                                         <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
@@ -972,8 +1003,8 @@
                                 <excludeIf velocityTest="$patient.age &gt;14">
                                     <span class="RegimenEnableDisable1">
                                         <obs id="90315" conceptId="90315" labelText="Regimen:"
-                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002"
-                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,Other"/>
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002,164977,164978"
+                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
                                     </span>
                                     <span class="RegimenEnableDisableChild1">
                                         <obs id="br" conceptId="99126" size="18" labelText="Specify"/>

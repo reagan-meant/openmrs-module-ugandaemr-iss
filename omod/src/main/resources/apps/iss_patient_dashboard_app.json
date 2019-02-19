@@ -21,5 +21,28 @@
         }
       }
     ]
+  },
+  {
+    "id": "ugandaemr.iss.medicalconditions",
+    "instanceOf": "coreapps.template.dashboardWidget",
+    "description": "Patient Medical Conditions",
+    "order": 1,
+    "config": {
+      "widget": "obsacrossencounters",
+      "icon": "icon-user-md",
+      "label": "MEDICAL CONDITIONS",
+      "concepts": "1628AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "extensions": [
+      {
+        "id": "org.openmrs.module.coreapps.mostRecentVitals.clinicianDashboardFirstColumn",
+        "appId": "ugandaemr.iss.medicalconditions",
+        "extensionPointId": "patientDashboard.secondColumnFragments",
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ]
   }
 ]
