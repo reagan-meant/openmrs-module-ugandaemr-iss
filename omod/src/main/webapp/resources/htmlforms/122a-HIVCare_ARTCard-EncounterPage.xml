@@ -236,6 +236,9 @@
                     setValue('screenForCancer.error', '');
                     setValue('tbStatus.error', '');
                     setValue('POV.error', '');
+                    setValue('septrinProbQuestion.error', '');
+                    setValue('septrinDapsoneAdherence.error', '');
+                    setValue('septrinDapsoneDaysMissed.error', '');
 
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
@@ -272,6 +275,22 @@
                 if (getValue('who-staging.value') != jq('#last-who-staging').text()) {
                     if(getValue('basis-for-who-stage-change.value') == "") {
                         getField('basis-for-who-stage-change.error').html('Please provide the reason for the WHO stage change').show();
+                        isValid = false;
+                    }
+                }
+
+                <!-- if CPT/Dapsone is not applicable then Adherence, Days missed and pill balance should not be required -->
+                if (getValue('1193.value') != 1107) {
+                    if(getValue('septrinProbQuestion.value') == "") {
+                        getField('septrinProbQuestion.error').html('Please provide any problems with CPT/Dapsone since the last visit ').show();
+                        isValid = false;
+                    }
+                    if(getValue('septrinDapsoneAdherence.value') == "") {
+                        getField('septrinDapsoneAdherence.error').html('Please enter the Adherence for Septrin/Dapsone').show();
+                        isValid = false;
+                    }
+                    if(getValue('septrinDapsoneDaysMissed.value') == "") {
+                        getField('septrinDapsoneDaysMissed.error').html('Please enter the number of days missed for Septrin/Dapsone').show();
                         isValid = false;
                     }
                 }
@@ -892,12 +911,12 @@
                     <tr>
                         <td >
                             <p class="hasInlineLabels">
-                                <obs id="br" conceptId="1193" answerConceptIds="916,90171,1107"
-                                     answerLabels="Septrin,Dapson,Not Applicable" style="radio" answerSeparator="&lt;br/>"/>
+                                <obs id="1193" conceptId="1193" answerConceptIds="916,90171,1107"
+                                     answerLabels="Septrin,Dapson,Not Applicable" style="radio" answerSeparator="&lt;br/>" required="true"/>
                             </p>
                             <span id="SeptrinExperience">
                                 <label>Did client experience any problem since last visit?</label>
-                                <obs id="septrinProbQuestion" conceptId="1163185" answerConceptIds="90003,90004,1175" answerLabels="Yes,No,N/A" required="true">
+                                <obs id="septrinProbQuestion" conceptId="1163185" answerConceptIds="90003,90004,1175" answerLabels="Yes,No,N/A">
                                     <controls>
                                         <when value="90003" thenDisplay="#septrinProblems" />
                                     </controls>
@@ -907,10 +926,10 @@
                                     <obs conceptId="1163186" answerConceptIds="512,1163187,1163188,1163189,99113" answerLabels="Skin rash,Skin Itching,Skin peeling,Patch on skin,Others" />
                                 </span>
                             </span>
-                            <obs conceptId="90220" answerConceptIds="90156,90157,90158"
-                                 answerLabels=" Good, Fair, Poor" labelText="Adherence:" required="true"/>
+                            <obs id="septrinDapsoneAdherence" conceptId="90220" answerConceptIds="90156,90157,90158"
+                                 answerLabels=" Good, Fair, Poor" labelText="Adherence:"/>
                             <br/>
-                            <label>Number of days Missed:</label><obs conceptId="1163190" answerConceptIds="1107,1163191,1163192,1163193,1163194,1163195,1163196" answerLabels="0,1,2,3,4,5,>5" required="true" />
+                            <label>Number of days Missed:</label><obs id="septrinDapsoneDaysMissed" conceptId="1163190" answerConceptIds="1107,1163191,1163192,1163193,1163194,1163195,1163196" answerLabels="0,1,2,3,4,5,>5"/>
                             <obs conceptId="1163263" labelText="Pill Balance:" />
                             <obs conceptId="99037" labelText="# Pills Dispensed:"/>
                             <obs conceptId="99033" labelText="Days:"/>

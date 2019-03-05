@@ -44,5 +44,29 @@
         }
       }
     ]
+  },
+  {
+    "id": "ugandaemr-iss.directionstoresidence",
+    "instanceOf": "coreapps.template.dashboardWidget",
+    "description": "Directions to client residence",
+    "order": 25,
+    "config": {
+      "widget": "latestobsforconceptlist",
+      "icon": "icon-question-sign",
+      "label": "DIRECTIONS TO RESIDENCE",
+      "concepts": "a79ec56e-ecdb-4c5b-80a7-04421f1e3b43",
+      "maxResults": "1"
+    },
+    "extensions": [
+      {
+        "id": "org.openmrs.module.coreapps.mostRecentVitals.clinicianDashboardFirstColumn",
+        "appId": "ugandaemr-iss.directionstoresidence",
+        "extensionPointId": "patientDashboard.firstColumnFragments",
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ]
   }
 ]

@@ -52,15 +52,16 @@ public class UgandaEMRISSClinicActivator extends BaseModuleActivator {
 			
 			MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
 			deployService.installBundle(Context.getRegisteredComponents(ISSMetadataBundle.class).get(0));
-			log.info("Started UgandaEMR ISS Clinic Module");
 			
 			log.info("Starting to enable and disable apps");
 			// disable apps
 			appFrameworkService.disableApp("ugandaemr.lastARTVisitSummary");
+			appFrameworkService.disableApp("ugandaemr.directionstoresidence");
 			
 			// enable the most recent vitals
 			appFrameworkService.enableApp("coreapps.mostRecentVitals");
 			log.info("Completed enabling and disabling apps");
+			log.info("Started UgandaEMR ISS Clinic Module");
 			
 		}
 		catch (Exception e) {
