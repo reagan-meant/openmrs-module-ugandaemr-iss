@@ -7,7 +7,7 @@ This distro is not readily available in public repositories so needs to be insta
 
 1. Create your own fork of the repository https://github.com/METS-Programme/openmrs-module-ugandaemr-iss
 2. Clone the repository locally and run `mvn clean install`
-3. Setup a server following the instructions at https://metsprogram.gitbooks.io/ugandaemr-technical-guide/content/setup-dev-environment.html#setting-up-a-server-using-the-sdk defining the distro `-Ddistro=org.openmrs.module:ugandaemr-iss:1.1.1`, the version to be used is the one defined in the pom.xml
+3. Setup a server following the instructions at https://metsprogram.gitbooks.io/ugandaemr-technical-guide/content/setup-dev-environment.html#setting-up-a-server-using-the-sdk defining the distro `-Ddistro=org.openmrs.module:ugandaemr-iss:version`, the version to be used is the one defined in the pom.xml for example 1.1.1 
 
 ## Concepts 
 
