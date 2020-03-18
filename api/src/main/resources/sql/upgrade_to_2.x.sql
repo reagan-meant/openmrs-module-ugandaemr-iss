@@ -12,7 +12,7 @@
 
 /* Increase the concept IDs by 1000000 for custom concepts created by ISS */
 UPDATE concept SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
-/* duplicate uuid for concepts */
+/* Move duplicate uuid for concepts */
 UPDATE concept SET uuid = 'b1fc0acf-f67c-4b6d-976b-c388876ce373' WHERE uuid = '38aa1dc0-1aaa-4bdd-b26f-28f960dfb16c';
 UPDATE concept SET uuid = '84ebcd3d-9cb1-4e1c-8f7d-dc35df83277f' WHERE uuid = '811ff634-8d81-454f-9b9d-2850345796d6';
 UPDATE concept SET uuid = '3d435939-093a-4447-845f-e082d481d687' WHERE uuid = '95121db8-6c2a-48e0-b281-cf2dc8229dd1';
@@ -41,7 +41,9 @@ UPDATE concept_numeric SET concept_id = concept_id + 1000000 WHERE concept_id > 
 UPDATE concept_set SET concept_set_id = concept_set_id + 1000000 WHERE concept_id > 163139;
 UPDATE concept_set SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
 
+/* move the concept obs */
 UPDATE obs SET concept_id = concept_id + 1000000 WHERE concept_id > 163139;
+/* Move the coded obs */
 UPDATE obs SET value_coded = value_coded + 1000000 WHERE value_coded > 163139;
 
 -- set the value of concept set 1163246 to N/A instead of coded
