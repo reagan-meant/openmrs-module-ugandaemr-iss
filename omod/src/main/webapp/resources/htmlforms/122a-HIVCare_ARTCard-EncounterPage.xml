@@ -1100,6 +1100,8 @@
                                  answerLabel="LFT"/>
                             <obs conceptId="1271" answerConceptId="1163309"
                                  answerLabel="RFT"/>
+                            <obs conceptId="1271" answerConceptId="1032"
+                                 answerLabel="TPHA"/>
                             <span class="enableDisable">
                                 <span id="trigger">
                                     <obs conceptId="1271" answerConceptId="90002"
