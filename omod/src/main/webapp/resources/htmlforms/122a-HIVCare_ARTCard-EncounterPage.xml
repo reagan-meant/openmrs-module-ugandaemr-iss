@@ -239,6 +239,8 @@
                     setValue('septrinProbQuestion.error', '');
                     setValue('septrinDapsoneAdherence.error', '');
                     setValue('septrinDapsoneDaysMissed.error', '');
+                    setValue('appointmentDate.error', '');
+
 
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
@@ -294,10 +296,36 @@
                         isValid = false;
                     }
                 }
+               <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
+               <!-- formatting date String from YYYY-MM-DD to DD-MM-YYYY to pass in the Url-->             
+               var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val();
+               var splitDate = selectedDate.split("-");
+               var formattedDate = splitDate[2] + "/" + splitDate[1] + "/" + splitDate[0] ; 
+               var URL = '/openmrs/ws/rest/v1/ugandaemr/appointmentcount?nextAppointmentDate=' + formattedDate.replace(/['"]+/g, '') + '&amp;encounterType=8d5b2be0-c2cc-11de-8d13-0010c6dffd0f';
+
+               var numberOfAppointmentsOnSelectedDate = jq.ajax({
+                     type: 'GET',
+                     dataType: 'json',                   
+                     url: URL,
+                     async:false,
+                     success: function(response){
+                         if(response.appointmentcount &gt;= jq("#numberOfPatients").html()){
+                            getField('appointmentDate.error').html('Please enter another date because the selected date has reached a max limit').show();                       
+                            isValid = false;
+                         }
+                     },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                           console.log(textStatus, errorThrown)
+                        }  
+              });
+
                 if (!isValid) {
-                    jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
+                    jq().toastmessage('showErrorToast', "  There are errors during the validation of the data on the form. Please correct them and submit again");
                 }
+
                 return isValid;
+
+                
             });
 
             jq(document).ready(function () {
@@ -436,6 +464,7 @@
     <span style="display: none" id="otherThirdLineRegimen"><lookup
             complexExpression="#foreach($other_third_line_regimen in $fn.allObs(162989)) $other_first_second_line_regimen.valueText #end"/></span>
 
+    <span style="display: none" id="numberOfPatients"><lookup expression="fn.globalProperty('ugandaemr.maximumPatientsPerDay')"/></span>
     <!--End of Lookup section-->
 
     <div class="ai-page-frame">
@@ -1124,7 +1153,7 @@
                             <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
                             <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
                             <excludeIf velocityTest="$patient.person.dead == true">
-                                <obs conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
+                                <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
                             </excludeIf>
                         </td>
                         <td class="lablex2">
