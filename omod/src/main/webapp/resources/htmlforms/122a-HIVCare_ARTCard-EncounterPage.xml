@@ -352,6 +352,16 @@
             });
 
             jq(document).ready(function () {
+
+                /* Prompt if client is on TB Rx or completed it */
+                const lastTBStatusValue = jq("#lastTBStatus").html().split('#');
+                var lastTBStatus = lastTBStatusValue[1];
+                 if(lastTBStatus == 90071){
+                        jq().toastmessage('showNoticeToast',"Patient is on TB Treatment");
+                    }else if(lastTBStatus == 99421){
+                        jq().toastmessage('showNoticeToast',"Patient has completed TB Treatment");
+                }
+                                
                 /* Validation of the ART regimen Selected */
                 jq("#90315").change(function () {
                     var regimen_encounter_page_value = jq("#90315").find("select").find(":selected").val();
@@ -488,6 +498,7 @@
             complexExpression="#foreach($other_third_line_regimen in $fn.allObs(162989)) $other_first_second_line_regimen.valueText #end"/></span>
 
     <span style="display: none" id="numberOfPatients"><lookup expression="fn.globalProperty('ugandaemr.maximumPatientsPerDay')"/></span>
+    <span style="display: none" id="lastTBStatus"><lookup expression="fn.latestObs('90216').valueCoded"/></span>
     <!--End of Lookup section-->
 
     <div class="ai-page-frame">
@@ -984,6 +995,8 @@
                         <td>
                             <obs conceptId="99604" labelText="# Pills Dispensed:"/>
                             <obs conceptId="99605" labelText="Days:"/>
+                            <obs conceptId="90215" labelText="INH Start Date"/>
+                            <obs conceptId="165793" labelText="INH End Date"/>
                         </td>
                         <td>
                             <obs id="eligibleQn" conceptId="99415" answerConceptIds="1065,1066" answerLabels="Yes,No" labelText="On ART:" required="true" >
