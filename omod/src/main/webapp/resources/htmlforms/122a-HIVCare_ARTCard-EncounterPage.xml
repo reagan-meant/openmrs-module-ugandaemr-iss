@@ -294,6 +294,28 @@
                         isValid = false;
                     }
                 }
+                <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
+               <!-- formatting date String from YYYY-MM-DD to DD-MM-YYYY to pass in the Url-->             
+               var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val(); 
+               var splitDate = selectedDate.split("-");
+               var formattedDate = splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0] ; 
+               var URL = '/openmrs/ws/rest/v1/aijar/publicHoliday/' + formattedDate ;
+               var isPublicHoliday = jq.ajax({
+                     type: 'GET',
+                     dataType: 'json',                   
+                     url: URL,
+                     async:false,
+                     success: function(response){
+                         if(response.isPublicHoliday){
+                          getField('appointmentDate.error').html('Please enter another date because the selected date is a public holiday of ' + response.description).show();                       
+                            isValid = false;
+                         }
+                     },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                           console.log(textStatus, errorThrown)
+                        }  
+              });
+
                 if (!isValid) {
                     jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
                 }
@@ -1124,7 +1146,7 @@
                             <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
                             <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
                             <excludeIf velocityTest="$patient.person.dead == true">
-                                <obs conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
+                                <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
                             </excludeIf>
                         </td>
                         <td class="lablex2">
