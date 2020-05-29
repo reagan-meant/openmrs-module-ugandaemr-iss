@@ -41,7 +41,7 @@
 		<ugandaemrVersion>3.0.1</ugandaemrVersion>
 		<ugandaemrPocVersion>1.0.4</ugandaemrPocVersion>
 		<uiframeworkVersion>3.13.0</uiframeworkVersion>
-		<attachmentVersion>2.2.0</attachmentVersion>
+		<attachmentVersion>2.3.0-SNAPSHOT</attachmentVersion>
 	</properties>
 
 	<dependencyManagement>
