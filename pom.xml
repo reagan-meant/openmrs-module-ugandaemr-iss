@@ -115,6 +115,13 @@
 				<version>${attachmentVersion}</version>
 				<scope>provided</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>attachments-omod</artifactId>
+				<version>${attachmentVersion}</version>
+				<scope>provided</scope>
+			</dependency>
 			<!-- end custom module -->
 		</dependencies>
 	</dependencyManagement>
