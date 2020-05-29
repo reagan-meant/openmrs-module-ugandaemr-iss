@@ -299,10 +299,9 @@
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val(); 
                var splitDate = selectedDate.split("-");
                var formattedDate = splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0] ; 
-               var URL = '/openmrs/ws/rest/v1/aijar/publicHoliday/' + formattedDate ;
+               var URL = OPENMRS_CONTEXT_PATH + '/ugandaemr/publicHoliday/' + formattedDate ;
                var isPublicHoliday = jq.ajax({
-                     type: 'GET',
-                     dataType: 'json',                   
+                     type: 'GET',                  
                      url: URL,
                      async:false,
                      success: function(response){
