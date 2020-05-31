@@ -297,11 +297,11 @@
                     }
                 }
                <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
-               <!-- formatting date String from YYYY-MM-DD to DD-MM-YYYY to pass in the Url-->             
+               <!-- formatting date String from YYYY-MM-DD to DD/MM/YYYY to pass in the Url-->             
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val();
-               var splitDate = selectedDate.split("-");
-               var formattedDate = splitDate[2] + "/" + splitDate[1] + "/" + splitDate[0] ; 
-               var URL = '/openmrs/ws/rest/v1/ugandaemr/appointmentcount?nextAppointmentDate=' + formattedDate.replace(/['"]+/g, '') + '&amp;encounterType=8d5b2be0-c2cc-11de-8d13-0010c6dffd0f';
+
+               var formattedDate = changeFieldDateToJavascriptDate(selectedDate);
+               var URL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/appointmentcount?nextAppointmentDate=' + formattedDate.replace(/['"]+/g, '') + '&amp;encounterType=8d5b2be0-c2cc-11de-8d13-0010c6dffd0f';
 
                var numberOfAppointmentsOnSelectedDate = jq.ajax({
                      type: 'GET',
