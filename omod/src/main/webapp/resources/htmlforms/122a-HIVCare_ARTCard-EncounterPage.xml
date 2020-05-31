@@ -294,7 +294,7 @@
                         isValid = false;
                     }
                 }
-                <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
+                                <!--Not to book on a public holiday-->
                <!-- formatting date String from YYYY-MM-DD to DD-MM-YYYY to pass in the Url-->             
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val(); 
                var splitDate = selectedDate.split("-");
