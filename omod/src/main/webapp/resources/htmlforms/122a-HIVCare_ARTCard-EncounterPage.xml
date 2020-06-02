@@ -295,11 +295,8 @@
                     }
                 }
                                 <!--Not to book on a public holiday-->
-               <!-- formatting date String from YYYY-MM-DD to DD-MM-YYYY to pass in the Url-->             
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val(); 
-
-                var formattedDate = changeFieldDateToJavascriptDate(selectedDate);
-
+               var formattedDate = changeFieldDateToJavascriptDate(selectedDate);
                var URL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/publicHoliday/?date=' + formattedDate ;
                
                var isPublicHoliday = jq.ajax({
@@ -307,9 +304,9 @@
                      url: URL,
                      async:false,
                      success: function(response){
-                         if(response.name){
-                          getField('appointmentDate.error').html('Please enter another date because the selected date is a public holiday of ' + response.name).show();                       
-                            isValid = false;
+                         if(response.results.length){
+                            getField('appointmentDate.error').html('Please enter another date because the selected date is a public holiday of ' + response.results[0].name).show();                            isValid = false;
+                            isValid = false;  
                          }
                      },
                     error: function(jqXHR, textStatus, errorThrown) {
