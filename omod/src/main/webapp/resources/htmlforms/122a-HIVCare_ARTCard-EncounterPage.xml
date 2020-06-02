@@ -305,7 +305,7 @@
                      async:false,
                      success: function(response){
                          if(response.results.length){
-                            getField('appointmentDate.error').html('Please enter another date because the selected date is a public holiday of ' + response.results[0].name).show();                            isValid = false;
+                            getField('appointmentDate.error').html('Please enter another date because the selected date is a public holiday of ' + response.results[0].name).show();
                             isValid = false;  
                          }
                      },
