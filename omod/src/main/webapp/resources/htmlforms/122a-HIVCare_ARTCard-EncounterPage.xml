@@ -315,7 +315,7 @@
                          }
                      },
                     error: function(jqXHR, textStatus, errorThrown) {
-                           getField('appointmentDate.error').html('Unable to determine the number of already booked patients on this date');
+                           getField('appointmentDate.error').html('Unable to determine the number of already booked patients on this date').show();
                            isValid = false;
                         }  
               });
