@@ -111,16 +111,9 @@
 
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>attachments-api</artifactId>
+				<artifactId>attachments</artifactId>
 				<version>${attachmentVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>attachments-omod</artifactId>
-				<version>${attachmentVersion}</version>
-				<scope>provided</scope>
+				<type>jar</type>
 			</dependency>
 			<!-- end custom module -->
 		</dependencies>
