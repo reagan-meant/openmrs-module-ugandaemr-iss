@@ -302,15 +302,16 @@
 
                var formattedDate = changeFieldDateToJavascriptDate(selectedDate);
                var URL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/appointmentcount?nextAppointmentDate=' + formattedDate.replace(/['"]+/g, '') + '&amp;encounterType=8d5b2be0-c2cc-11de-8d13-0010c6dffd0f';
-
+                
+               var maxNumberOfBooked =  jq("#numberOfPatients").html();
                var numberOfAppointmentsOnSelectedDate = jq.ajax({
                      type: 'GET',
                      dataType: 'json',                   
                      url: URL,
                      async:false,
                      success: function(response){
-                         if(response.appointmentcount &gt;= jq("#numberOfPatients").html()){
-                            getField('appointmentDate.error').html('Please enter another date because the selected date has reached a max limit').show();                       
+                         if(response.appointmentcount &gt;= maxNumberOfBooked){
+                            getField('appointmentDate.error').html('The patient cannot be scheduled on ' + formattedDate + ' because there are already ' + maxNumberOfBooked + ' booked').show();                       
                             isValid = false;
                          }
                      },
