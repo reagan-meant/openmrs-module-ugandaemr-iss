@@ -233,7 +233,9 @@
                     setValue('anySTIs.error', '');
                     setValue('disclosedToPartner.error', '');
                     setValue('partnerStatus.error', '');
+                    if(jq('#screenForCancer').length > 0){
                     setValue('screenForCancer.error', '');
+                    }
                     setValue('tbStatus.error', '');
                     setValue('POV.error', '');
                     setValue('septrinProbQuestion.error', '');
@@ -257,9 +259,11 @@
                         getField('partnerStatus.error').html('Please select the status of your partner').show();
                         isValid = false;
                     }
-                    if (getValue('screenForCancer.value') == "") {
-                        getField('screenForCancer.error').html('Please select whether the client has been screened for cancer').show();
-                        isValid = false;
+                    if(jq('#screenForCancer').length > 0){
+                        if (getValue('screenForCancer.value') == "") {
+                            getField('screenForCancer.error').html('Please select whether the client has been screened for cancer').show();
+                            isValid = false;
+                        }
                     }
                     if (getValue('tbStatus.value') == "") {
                         getField('tbStatus.error').html("Please select whether the client's TB status").show();
