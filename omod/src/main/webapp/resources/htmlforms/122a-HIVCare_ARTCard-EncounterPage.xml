@@ -1100,8 +1100,12 @@
                                  answerLabel="LFT"/>
                             <obs conceptId="1271" answerConceptId="1163309"
                                  answerLabel="RFT"/>
-                            <obs conceptId="1271" answerConceptId="1032"
+                            <obs conceptId="1271" answerConceptId="1031"
                                  answerLabel="TPHA"/>
+                            <obs conceptId="1271" answerConceptId="165849"
+                                 answerLabel="RBS"/>
+                            <obs conceptId="1271" answerConceptId="161509"
+                                 answerLabel="HCG"/>
                             <span class="enableDisable">
                                 <span id="trigger">
                                     <obs conceptId="1271" answerConceptId="90002"
