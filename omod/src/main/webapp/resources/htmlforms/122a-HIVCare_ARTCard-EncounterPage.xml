@@ -1084,7 +1084,7 @@
                             </obs>
                         </td>
                         <td id="povSection">
-                            <obs id="reasonForDenyingPOV" conceptId="1163279" answerConceptIds="90049,1163272,1163273,90040,90041,1163274,1163275,1163276,1163277,1163278,5622" answerLabels="1-Poor Adherence,2-Missed appt in last 3months,3-KS lessthan 90,4-ART toxicities,5-Pregnant,6-On ART lessthan 1year,7-non ART CD4 lessthan 500,8-Co-morbidities,9-On 2nd line therapy,10-Dropping CD4 by morethan 100,11-Others" labelText="Specify reason for denying the patient POV">
+                            <obs id="reasonForDenyingPOV" conceptId="1163279" answerConceptIds="90049,1163272,1163273,90040,90041,1163274,1163275,1163276,1163277,1163278,165051,90280,163164,163159,5622" answerLabels="1-Poor Adherence,2-Missed appt in last 3months,3-KS lessthan 90,4-ART toxicities,5-Pregnant,6-On ART lessthan 1year,7-non ART CD4 lessthan 500,8-Co-morbidities,9-On 2nd line therapy,10-Dropping CD4 by morethan 100,11-Lactating,12-Child,13-On 3rd Line Regimen,14-Non suppressed,15-Others" labelText="Specify reason for denying the patient POV">
                                 <controls>
                                     <when value="5622" thenDisplay="#otherPOVEligibility" />
                                 </controls>
