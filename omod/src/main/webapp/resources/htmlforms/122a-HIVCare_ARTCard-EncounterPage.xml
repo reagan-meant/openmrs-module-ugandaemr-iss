@@ -325,7 +325,7 @@
                         }  
               });
                  <!--Not to book on a public holiday-->
-               var publicHolidayURL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/publicHoliday/?date=' + formattedDate ;
+               var publicHolidayURL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/publicHoliday?date=' + formattedDate ;
                
                var isPublicHoliday = jq.ajax({
                      type: 'GET',                  
