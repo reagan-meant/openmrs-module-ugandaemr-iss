@@ -354,9 +354,8 @@
             jq(document).ready(function () {
 
                 /* Prompt if client is on TB Rx or completed it */
-                const lastTBStatusValue = jq("#lastTBStatus").html().split('#');
-                var lastTBStatus = lastTBStatusValue[1];
-                 if(lastTBStatus == 90071){
+                const lastTBStatus = jq("#lastTBStatus").html();
+                if(lastTBStatus == 90071){
                         jq().toastmessage('showNoticeToast',"Patient is on TB Treatment");
                     }else if(lastTBStatus == 99421){
                         jq().toastmessage('showNoticeToast',"Patient has completed TB Treatment");
@@ -498,7 +497,7 @@
             complexExpression="#foreach($other_third_line_regimen in $fn.allObs(162989)) $other_first_second_line_regimen.valueText #end"/></span>
 
     <span style="display: none" id="numberOfPatients"><lookup expression="fn.globalProperty('ugandaemr.maximumPatientsPerDay')"/></span>
-    <span style="display: none" id="lastTBStatus"><lookup expression="fn.latestObs('90216').valueCoded"/></span>
+    <span style="display: none" id="lastTBStatus"><lookup expression="fn.latestObs('90216').valueCoded.conceptId"/></span>
     <!--End of Lookup section-->
 
     <div class="ai-page-frame">
@@ -762,8 +761,8 @@
                         <td>
                             <span class="DistrictTbRegEnableDisable1">
                                 <obs id="tbStatus" conceptId="90216" labelText="Tb Status"
-                                     answerConceptIds="90079,90073,90078,90071"
-                                     answerLabels="No signs,Suspect,Diagnosed with Tb,Tb Rx"/>
+                                     answerConceptIds="90079,90073,90078,90071,99421"
+                                     answerLabels="No signs,Suspect,Diagnosed with Tb,Tb Rx,Tb Rx Completed"/>
                             </span>
                             <span class="DistrictTbRegEnableDisableChild1">
                                 <obs id="br" conceptId="90217" labelText="TB Start Date:"/>
