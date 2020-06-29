@@ -324,7 +324,24 @@
                            isValid = false;
                         }  
               });
-
+                 <!--Not to book on a public holiday-->
+               var publicHolidayURL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/publicHoliday?date=' + formattedDate ;
+               
+               var isPublicHoliday = jq.ajax({
+                     type: 'GET',                  
+                     url: publicHolidayURL,
+                     async:false,
+                     success: function(response){
+                         if(response.results.length){
+                            getField('appointmentDate.error').html('Please enter another date because ' + formattedDate + ' is a public holiday of ' + response.results[0].name).show();
+                            isValid = false;  
+                         }
+                     },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                          getField('appointmentDate.error').html('Unable to determine if ' + formattedDate + ' is a public Holiday').show(); 
+                            isValid = false;                      
+                        }  
+              });
                 if (!isValid) {
                     jq().toastmessage('showErrorToast', "  There are errors during the validation of the data on the form. Please correct them and submit again");
                 }
