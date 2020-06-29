@@ -1126,35 +1126,70 @@
                         <td class="lablex2">
                             <b>Tests ordered:</b>
                             <br/>
-                            <obs conceptId="1271" answerConceptId="1019"
-                                 answerLabel="CBC"/>
-                            <obs conceptId="1271" answerConceptId="99152"
-                                 answerLabel="RPR"/>
-                            <obs conceptId="1271" answerConceptId="12"
-                                 answerLabel="CXR"/>
-                            <obs conceptId="1271" answerConceptId="21"
-                                 answerLabel="Hgb"/>
-                            <obs conceptId="1271" answerConceptId="657"
-                                 answerLabel="Cd4"/>
-                            <obs conceptId="1271" answerConceptId="856"
-                                 answerLabel="VL"/>
-                            <obs conceptId="1271" answerConceptId="307"
-                                 answerLabel="Sputums"/>
-                            <obs conceptId="1271" answerConceptId="99149"
-                                 answerLabel="Infant Ab/PCR"/>
-                            <obs conceptId="1271" answerConceptId="953"
-                                 answerLabel="LFT"/>
-                            <obs conceptId="1271" answerConceptId="1163309"
-                                 answerLabel="RFT"/>
-                            <span class="enableDisable">
-                                <span id="trigger">
-                                    <obs conceptId="1271" answerConceptId="90002"
-                                         answerLabel="Other specify:"/>
-                                </span>
-                                <span id="disabled">
-                                    <obs conceptId="99114" size="16" labelText=""/>
-                                </span>
-                            </span>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="1019" answerLabel="CBC" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="99152" answerLabel="RPR" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="12" answerLabel="CXR" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="21" answerLabel="Hgb" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="657" answerLabel="Cd4" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="856" answerLabel="VL" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="307" answerLabel="Sputums" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="99149" answerLabel="Infant Ab/PCR" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="953" answerLabel="LFT" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="1163309" answerLabel="RFT" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="1031" answerLabel="TPHA" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="165849" answerLabel="RBS" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="161509" answerLabel="HCG" />
+                                        </td>
+                                        <td>
+                                            <span class="enableDisable">
+                                                <span id="trigger">
+                                                    <obs conceptId="1271" answerConceptId="90002" answerLabel="Other specify:" />
+                                                </span>
+                                                <span id="disabled">
+                                                    <obs conceptId="99114" size="16" labelText="" />
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </td>
                         <td class="lablex2">
                             <b>Other Actions</b>
