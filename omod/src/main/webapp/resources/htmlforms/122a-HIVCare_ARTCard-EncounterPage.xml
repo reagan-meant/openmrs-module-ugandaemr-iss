@@ -233,12 +233,16 @@
                     setValue('anySTIs.error', '');
                     setValue('disclosedToPartner.error', '');
                     setValue('partnerStatus.error', '');
+                    if(jq('#screenForCancer').length > 0){
                     setValue('screenForCancer.error', '');
+                    }
                     setValue('tbStatus.error', '');
                     setValue('POV.error', '');
                     setValue('septrinProbQuestion.error', '');
                     setValue('septrinDapsoneAdherence.error', '');
                     setValue('septrinDapsoneDaysMissed.error', '');
+                    setValue('appointmentDate.error', '');
+
 
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
@@ -257,9 +261,11 @@
                         getField('partnerStatus.error').html('Please select the status of your partner').show();
                         isValid = false;
                     }
-                    if (getValue('screenForCancer.value') == "") {
-                        getField('screenForCancer.error').html('Please select whether the client has been screened for cancer').show();
-                        isValid = false;
+                    if(jq('#screenForCancer').length > 0){
+                        if (getValue('screenForCancer.value') == "") {
+                            getField('screenForCancer.error').html('Please select whether the client has been screened for cancer').show();
+                            isValid = false;
+                        }
                     }
                     if (getValue('tbStatus.value') == "") {
                         getField('tbStatus.error').html("Please select whether the client's TB status").show();
@@ -294,19 +300,92 @@
                         isValid = false;
                     }
                 }
+               <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
+               <!-- formatting date String from YYYY-MM-DD to DD/MM/YYYY to pass in the Url-->             
+               var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val();
+
+               var formattedDate = changeFieldDateToJavascriptDate(selectedDate);
+               var URL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/appointmentcount?nextAppointmentDate=' + formattedDate.replace(/['"]+/g, '') + '&amp;encounterType=8d5b2be0-c2cc-11de-8d13-0010c6dffd0f';
+                
+               var maxNumberOfBooked =  jq("#numberOfPatients").html();
+               var numberOfAppointmentsOnSelectedDate = jq.ajax({
+                     type: 'GET',
+                     dataType: 'json',                   
+                     url: URL,
+                     async:false,
+                     success: function(response){
+                         if(response.appointmentcount &gt;= maxNumberOfBooked){
+                            getField('appointmentDate.error').html('The patient cannot be scheduled on ' + formattedDate + ' because there are already ' + maxNumberOfBooked + ' booked').show();                       
+                            isValid = false;
+                         }
+                     },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                           getField('appointmentDate.error').html('Unable to determine the number of already booked patients on ' + formattedDate + ' due to ' + textStatus ).show();
+                           isValid = false;
+                        }  
+              });
+                 <!--Not to book on a public holiday-->
+               var publicHolidayURL = window.location.origin + '/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/ugandaemr/publicHoliday?date=' + formattedDate ;
+               
+               var isPublicHoliday = jq.ajax({
+                     type: 'GET',                  
+                     url: publicHolidayURL,
+                     async:false,
+                     success: function(response){
+                         if(response.results.length){
+                            getField('appointmentDate.error').html('Please enter another date because ' + formattedDate + ' is a public holiday of ' + response.results[0].name).show();
+                            isValid = false;  
+                         }
+                     },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                          getField('appointmentDate.error').html('Unable to determine if ' + formattedDate + ' is a public Holiday').show(); 
+                            isValid = false;                      
+                        }  
+              });
                 if (!isValid) {
-                    jq().toastmessage('showErrorToast', "  There are errors during the valdation of the data on the form. Please correct them and submit again");
+                    jq().toastmessage('showErrorToast', "  There are errors during the validation of the data on the form. Please correct them and submit again");
                 }
+
                 return isValid;
+
+                
             });
 
             jq(document).ready(function () {
-                if (jq.browser.msie) {
-                    jq(":checkbox").click(function () {
-                        jq(this).change();
-                    });
+
+                /* Prompt if client is on TB Rx or completed it */
+                const lastTBStatus = jq("#lastTBStatus").html();
+                if(lastTBStatus == 90071){
+                        jq().toastmessage('showNoticeToast',"Patient is on TB Treatment");
+                    }else if(lastTBStatus == 99421){
+                        jq().toastmessage('showNoticeToast',"Patient has completed TB Treatment");
+                }
+                                
+                /* Prompt for malnutrition using Muac and BMI */
+                var age = jq("#age").html();
+                function BMI(ht,wt){
+                   var htInMetres = ht/100;
+                 return  wt/(htInMetres * htInMetres);
                 }
 
+                if(age &lt; 5){
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 11.5)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 14)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                } else if(age &lt; 10 ){
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 13.5)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 13.5)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                } else if(age &lt; 18 ){
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 16.5)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 18)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                } else {
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 19)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 18.5)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                }
+               
                 /* Validation of the ART regimen Selected */
                 jq("#90315").change(function () {
                     var regimen_encounter_page_value = jq("#90315").find("select").find(":selected").val();
@@ -379,26 +458,26 @@
 
                     function disableFn() {
                         group.children("#disabled").fadeTo(250, 0.25);
-                        /* group.children("#disabled").find(":checkbox").attr("checked", false); uncheck */
-                        group.children("#disabled").find("input").attr("disabled", true);
+                        /* group.children("#disabled").find(":checkbox").prop("checked", false); uncheck */
+                        group.children("#disabled").find("input").prop("disabled", true);
                         /* disable */
-                        group.children("#disabled").find("select").attr("disabled", true);
+                        group.children("#disabled").find("select").prop("disabled", true);
                     }
 
                     function enableFn() {
                         group.children("#disabled").fadeTo(250, 1);
-                        group.children("#disabled").find("input").attr("disabled", false);
-                        group.children("#disabled").find("select").attr("disabled", false);
+                        group.children("#disabled").find("input").prop("disabled", false);
+                        group.children("#disabled").find("select").prop("disabled", false);
 
                     }
 
-                    if (jq(this).children("#trigger").find(":checkbox:first").attr("checked") != "checked") {
+                    if (jq(this).children("#trigger").find(":checkbox:first").prop("checked") != "checked") {
                         disableFn();
                     }
 
                     jq(this).children("#trigger").find(":checkbox:first").change(function () {
-                        var checked = jq(this).attr("checked");
-                        if (checked == "checked") {
+                        var checked = jq(this).prop("checked");
+                        if (checked == true) {
                             enableFn();
                         } else {
                             disableFn();
@@ -441,7 +520,14 @@
 
     <span style="display: none" id="otherThirdLineRegimen"><lookup
             complexExpression="#foreach($other_third_line_regimen in $fn.allObs(162989)) $other_first_second_line_regimen.valueText #end"/></span>
+    
+    <span style="display: none" id="lastMuac"><lookup expression="fn.earliestObs('CIEL:1343').valueNumeric"/></span>
+    <span style="display: none" id="lastWeight"><lookup expression="fn.earliestObs('CIEL:5089').valueNumeric"/></span>
+    <span style="display: none" id="lastHeight"><lookup expression="fn.earliestObs('CIEL:5090').valueNumeric"/></span>
+    <span style="display: none" id="age"><lookup expression="patient.age"/></span>
 
+    <span style="display: none" id="numberOfPatients"><lookup expression="fn.globalProperty('ugandaemr.maximumPatientsPerDay')"/></span>
+    <span style="display: none" id="lastTBStatus"><lookup expression="fn.latestObs('90216').valueCoded.conceptId"/></span>
     <!--End of Lookup section-->
 
     <div class="ai-page-frame">
@@ -540,7 +626,7 @@
                                     <obs conceptId="90041" style="checkbox" answerConceptIds="1065,1066"
                                          answerLabels="Yes,No" labelText="Pregnant"/>
                                 </span>
-                                <span class="ARTYesNoEnableDisable2 fpSection">
+                                <span class="ARTYesNoEnableDisable2">
                                     <obs conceptId="1163317" style="checkbox" answerConceptIds="1065,1066"
                                          answerLabels="Yes,No" labelText="Lactating"/>
                                 </span>
@@ -705,8 +791,8 @@
                         <td>
                             <span class="DistrictTbRegEnableDisable1">
                                 <obs id="tbStatus" conceptId="90216" labelText="Tb Status"
-                                     answerConceptIds="90079,90073,90078,90071"
-                                     answerLabels="No signs,Suspect,Diagnosed with Tb,Tb Rx"/>
+                                     answerConceptIds="90079,90073,90078,90071,99421"
+                                     answerLabels="No signs,Suspect,Diagnosed with Tb,Tb Rx,Tb Rx Completed"/>
                             </span>
                             <span class="DistrictTbRegEnableDisableChild1">
                                 <obs id="br" conceptId="90217" labelText="TB Start Date:"/>
@@ -938,6 +1024,8 @@
                         <td>
                             <obs conceptId="99604" labelText="# Pills Dispensed:"/>
                             <obs conceptId="99605" labelText="Days:"/>
+                            <obs conceptId="90215" labelText="INH Start Date"/>
+                            <obs conceptId="165793" labelText="INH End Date"/>
                         </td>
                         <td>
                             <obs id="eligibleQn" conceptId="99415" answerConceptIds="1065,1066" answerLabels="Yes,No" labelText="On ART:" required="true" >
@@ -1055,7 +1143,7 @@
                             </obs>
                         </td>
                         <td id="povSection">
-                            <obs id="reasonForDenyingPOV" conceptId="1163279" answerConceptIds="90049,1163272,1163273,90040,90041,1163274,1163275,1163276,1163277,1163278,5622" answerLabels="1-Poor Adherence,2-Missed appt in last 3months,3-KS lessthan 90,4-ART toxicities,5-Pregnant,6-On ART lessthan 1year,7-non ART CD4 lessthan 500,8-Co-morbidities,9-On 2nd line therapy,10-Dropping CD4 by morethan 100,11-Others" labelText="Specify reason for denying the patient POV">
+                            <obs id="reasonForDenyingPOV" conceptId="1163279" answerConceptIds="90049,1163272,1163273,90040,90041,1163274,1163275,1163276,1163277,1163278,165051,90280,163164,163159,5622" answerLabels="1-Poor Adherence,2-Missed appt in last 3months,3-KS lessthan 90,4-ART toxicities,5-Pregnant,6-On ART lessthan 1year,7-non ART CD4 lessthan 500,8-Co-morbidities,9-On 2nd line therapy,10-Dropping CD4 by morethan 100,11-Lactating,12-Child,13-On 3rd Line Regimen,14-Non suppressed,15-Others" labelText="Specify reason for denying the patient POV">
                                 <controls>
                                     <when value="5622" thenDisplay="#otherPOVEligibility" />
                                 </controls>
@@ -1080,35 +1168,70 @@
                         <td class="lablex2">
                             <b>Tests ordered:</b>
                             <br/>
-                            <obs conceptId="1271" answerConceptId="1019"
-                                 answerLabel="CBC"/>
-                            <obs conceptId="1271" answerConceptId="99152"
-                                 answerLabel="RPR"/>
-                            <obs conceptId="1271" answerConceptId="12"
-                                 answerLabel="CXR"/>
-                            <obs conceptId="1271" answerConceptId="21"
-                                 answerLabel="Hgb"/>
-                            <obs conceptId="1271" answerConceptId="657"
-                                 answerLabel="Cd4"/>
-                            <obs conceptId="1271" answerConceptId="856"
-                                 answerLabel="VL"/>
-                            <obs conceptId="1271" answerConceptId="307"
-                                 answerLabel="Sputums"/>
-                            <obs conceptId="1271" answerConceptId="99149"
-                                 answerLabel="Infant Ab/PCR"/>
-                            <obs conceptId="1271" answerConceptId="953"
-                                 answerLabel="LFT"/>
-                            <obs conceptId="1271" answerConceptId="1163309"
-                                 answerLabel="RFT"/>
-                            <span class="enableDisable">
-                                <span id="trigger">
-                                    <obs conceptId="1271" answerConceptId="90002"
-                                         answerLabel="Other specify:"/>
-                                </span>
-                                <span id="disabled">
-                                    <obs conceptId="99114" size="16" labelText=""/>
-                                </span>
-                            </span>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="1019" answerLabel="CBC" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="99152" answerLabel="RPR" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="12" answerLabel="CXR" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="21" answerLabel="Hgb" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="657" answerLabel="Cd4" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="856" answerLabel="VL" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="307" answerLabel="Sputums" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="99149" answerLabel="Infant Ab/PCR" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="953" answerLabel="LFT" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="1163309" answerLabel="RFT" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="1031" answerLabel="TPHA" />
+                                        </td>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="165849" answerLabel="RBS" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <obs conceptId="1271" answerConceptId="161509" answerLabel="HCG" />
+                                        </td>
+                                        <td>
+                                            <span class="enableDisable">
+                                                <span id="trigger">
+                                                    <obs conceptId="1271" answerConceptId="90002" answerLabel="Other specify:" />
+                                                </span>
+                                                <span id="disabled">
+                                                    <obs conceptId="99114" size="16" labelText="" />
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </td>
                         <td class="lablex2">
                             <b>Other Actions</b>
@@ -1130,7 +1253,7 @@
                             <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
                             <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
                             <excludeIf velocityTest="$patient.person.dead == true">
-                                <obs conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
+                                <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
                             </excludeIf>
                         </td>
                         <td class="lablex2">

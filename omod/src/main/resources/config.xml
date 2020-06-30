@@ -35,6 +35,9 @@
 		<require_module version="${ugandaemrVersion}">
 			org.openmrs.module.aijar
 		</require_module>
+		<require_module version="${attachmentVersion}">
+			org.openmrs.module.attachments
+		</require_module>
 	</require_modules>
 	
 	<!-- Internationalization -->
@@ -54,4 +57,3 @@
 	<!-- /Internationalization -->
 	
 </module>
-
