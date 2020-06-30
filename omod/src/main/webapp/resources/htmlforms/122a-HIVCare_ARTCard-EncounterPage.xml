@@ -361,6 +361,31 @@
                         jq().toastmessage('showNoticeToast',"Patient has completed TB Treatment");
                 }
                                 
+                /* Prompt for malnutrition using Muac and BMI */
+                var age = jq("#age").html();
+                function BMI(ht,wt){
+                   var htInMetres = ht/100;
+                 return  wt/(htInMetres * htInMetres);
+                }
+
+                if(age &lt; 5){
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 11.5)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 14)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                } else if(age &lt; 10 ){
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 13.5)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 13.5)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                } else if(age &lt; 18 ){
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 16.5)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 18)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                } else {
+                    if(( (jq("#lastMuac").html() &gt; 0) &amp;&amp; (jq("#lastMuac").html() &lt; 19)) || ( (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &gt; 0)  &amp;&amp; (BMI(jq("#lastHeight").html(),jq("#lastWeight").html()) &lt; 18.5)) ){
+                        jq().toastmessage('showNoticeToast',"Patient has malnutrition");
+                   }
+                }
+               
                 /* Validation of the ART regimen Selected */
                 jq("#90315").change(function () {
                     var regimen_encounter_page_value = jq("#90315").find("select").find(":selected").val();
@@ -495,6 +520,11 @@
 
     <span style="display: none" id="otherThirdLineRegimen"><lookup
             complexExpression="#foreach($other_third_line_regimen in $fn.allObs(162989)) $other_first_second_line_regimen.valueText #end"/></span>
+    
+    <span style="display: none" id="lastMuac"><lookup expression="fn.earliestObs('CIEL:1343').valueNumeric"/></span>
+    <span style="display: none" id="lastWeight"><lookup expression="fn.earliestObs('CIEL:5089').valueNumeric"/></span>
+    <span style="display: none" id="lastHeight"><lookup expression="fn.earliestObs('CIEL:5090').valueNumeric"/></span>
+    <span style="display: none" id="age"><lookup expression="patient.age"/></span>
 
     <span style="display: none" id="numberOfPatients"><lookup expression="fn.globalProperty('ugandaemr.maximumPatientsPerDay')"/></span>
     <span style="display: none" id="lastTBStatus"><lookup expression="fn.latestObs('90216').valueCoded.conceptId"/></span>
