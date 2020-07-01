@@ -1,6 +1,13 @@
 # Changelog for UgandaEMR ISS Implementation
 All notable changes to this project will be documented in this file.
 
+
+## [1.2.1] - July 1, 2020
+### Added 
+- Laboratory forms: 095-Daily-Activity-Register-Viral-Load-Cd4-Count and LAB-Molecular that were deleted from UgandaEMR 
+### Changed 
+- Follow-up form: Fixed prompts for TB status and WHO clinical staging changes from previous encounter 
+
 ## [1.2.0] - June 30, 2020
 ### Added
 - Ability to set the maximum number of appointments for a day
