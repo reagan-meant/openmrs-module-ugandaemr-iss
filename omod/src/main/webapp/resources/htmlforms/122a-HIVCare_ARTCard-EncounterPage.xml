@@ -241,8 +241,9 @@
                     setValue('septrinProbQuestion.error', '');
                     setValue('septrinDapsoneAdherence.error', '');
                     setValue('septrinDapsoneDaysMissed.error', '');
-                    setValue('appointmentDate.error', '');
-
+                    if(jq("#transfer").find(":checkbox:first").prop("checked") == false){
+                        setValue('appointmentDate.error', '');
+                    }
 
                     <!-- validate the required fields -->
                     if (getValue('sexualActive.value') == "") {
@@ -300,6 +301,9 @@
                         isValid = false;
                     }
                 }
+
+<!--                 Not to evaluate if patient is transferred out -->                
+              if(jq("#transfer").find(":checkbox:first").prop("checked") == false){
                <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
                <!-- formatting date String from YYYY-MM-DD to DD/MM/YYYY to pass in the Url-->             
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val();
@@ -342,6 +346,7 @@
                             isValid = false;                      
                         }  
               });
+            }
                 if (!isValid) {
                     jq().toastmessage('showErrorToast', "  There are errors during the validation of the data on the form. Please correct them and submit again");
                 }
@@ -515,6 +520,7 @@
                         jq("#review").find("input").prop("disabled", true); 
                         jq("#review").find("select").prop("disabled", true); 
                         jq("#review").find("textarea").prop("disabled", true); 
+                        setValue('appointmentDate.error', '');
 
                     } else{
                         jq("#review").fadeTo(250, 1);
