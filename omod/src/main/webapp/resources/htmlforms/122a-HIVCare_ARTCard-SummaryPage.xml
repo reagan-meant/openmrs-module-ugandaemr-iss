@@ -995,8 +995,6 @@ function applyDataMask(field) {
        }
 
         .row {
-            width: 100%;
-            float: left;
             display: inline-flex;
             clear: both;
         }
