@@ -229,12 +229,18 @@
                 setValue('who-staging.error', '');
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
                     <!-- clear the previous errors -->
-                    setValue('sexualActive.error', '');
+                    if(jq('#sexualActive').length > 0){
+                        setValue('sexualActive.error', '');
+                    }
                     setValue('anySTIs.error', '');
-                    setValue('disclosedToPartner.error', '');
-                    setValue('partnerStatus.error', '');
+                    if(jq('#disclosedToPartner').length > 0){
+                        setValue('disclosedToPartner.error', '');
+                    }
+                    if(jq('#partnerStatus').length > 0){
+                        setValue('partnerStatus.error', '');
+                    }
                     if(jq('#screenForCancer').length > 0){
-                    setValue('screenForCancer.error', '');
+                        setValue('screenForCancer.error', '');
                     }
                     setValue('tbStatus.error', '');
                     setValue('POV.error', '');
@@ -245,21 +251,27 @@
 
 
                     <!-- validate the required fields -->
-                    if (getValue('sexualActive.value') == "") {
-                        getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
-                        isValid = false;
+                    if(jq('#sexualActive').length > 0){
+                        if (getValue('sexualActive.value') == "") {
+                            getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
+                            isValid = false;
+                        }
                     }
                     if (getValue('anySTIs.value') == "") {
                         getField('anySTIs.error').html('Please select whether the patient has any symptoms of STIs').show();
                         isValid = false;
                     }
-                    if (getValue('disclosedToPartner.value') == "") {
-                        getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
-                        isValid = false;
+                    if(jq('#disclosedToPartner').length > 0){
+                        if (getValue('disclosedToPartner.value') == "") {
+                            getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
+                            isValid = false;
+                        }
                     }
-                    if (getValue('partnerStatus.value') == "") {
-                        getField('partnerStatus.error').html('Please select the status of your partner').show();
-                        isValid = false;
+                    if(jq('#partnerStatus').length > 0){
+                        if (getValue('partnerStatus.value') == "") {
+                            getField('partnerStatus.error').html('Please select the status of your partner').show();
+                            isValid = false;
+                        }
                     }
                     if(jq('#screenForCancer').length > 0){
                         if (getValue('screenForCancer.value') == "") {
