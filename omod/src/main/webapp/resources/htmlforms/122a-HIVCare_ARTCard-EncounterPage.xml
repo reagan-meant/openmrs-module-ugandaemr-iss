@@ -229,12 +229,18 @@
                 setValue('who-staging.error', '');
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
                     <!-- clear the previous errors -->
-                    setValue('sexualActive.error', '');
+                    if(jq('#sexualActive').length > 0){
+                        setValue('sexualActive.error', '');
+                    }
                     setValue('anySTIs.error', '');
-                    setValue('disclosedToPartner.error', '');
-                    setValue('partnerStatus.error', '');
+                    if(jq('#disclosedToPartner').length > 0){
+                        setValue('disclosedToPartner.error', '');
+                    }
+                    if(jq('#partnerStatus').length > 0){
+                        setValue('partnerStatus.error', '');
+                    }
                     if(jq('#screenForCancer').length > 0){
-                    setValue('screenForCancer.error', '');
+                        setValue('screenForCancer.error', '');
                     }
                     setValue('tbStatus.error', '');
                     setValue('POV.error', '');
@@ -245,21 +251,27 @@
 
 
                     <!-- validate the required fields -->
-                    if (getValue('sexualActive.value') == "") {
-                        getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
-                        isValid = false;
+                    if(jq('#sexualActive').length > 0){
+                        if (getValue('sexualActive.value') == "") {
+                            getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
+                            isValid = false;
+                        }
                     }
                     if (getValue('anySTIs.value') == "") {
                         getField('anySTIs.error').html('Please select whether the patient has any symptoms of STIs').show();
                         isValid = false;
                     }
-                    if (getValue('disclosedToPartner.value') == "") {
-                        getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
-                        isValid = false;
+                    if(jq('#disclosedToPartner').length > 0){
+                        if (getValue('disclosedToPartner.value') == "") {
+                            getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
+                            isValid = false;
+                        }
                     }
-                    if (getValue('partnerStatus.value') == "") {
-                        getField('partnerStatus.error').html('Please select the status of your partner').show();
-                        isValid = false;
+                    if(jq('#partnerStatus').length > 0){
+                        if (getValue('partnerStatus.value') == "") {
+                            getField('partnerStatus.error').html('Please select the status of your partner').show();
+                            isValid = false;
+                        }
                     }
                     if(jq('#screenForCancer').length > 0){
                         if (getValue('screenForCancer.value') == "") {
@@ -1132,8 +1144,8 @@
                                 <excludeIf velocityTest="$patient.age &gt;14">
                                     <span class="RegimenEnableDisable1">
                                         <obs id="90315" conceptId="90315" labelText="Regimen:"
-                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002,164977,164978"
-                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002,164977,99887,164978"
+                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,TDF/3TC/DTG,ABC/3TC/DTG,2f-TDF-3TC-ATV/r,Other"/>
                                     </span>
                                     <span class="RegimenEnableDisableChild1">
                                         <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
