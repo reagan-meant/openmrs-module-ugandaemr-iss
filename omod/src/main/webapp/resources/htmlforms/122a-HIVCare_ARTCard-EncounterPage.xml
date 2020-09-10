@@ -247,8 +247,9 @@
                     setValue('septrinProbQuestion.error', '');
                     setValue('septrinDapsoneAdherence.error', '');
                     setValue('septrinDapsoneDaysMissed.error', '');
-                    setValue('appointmentDate.error', '');
-
+                    if(jq("#transfer").find(":checkbox:first").prop("checked") == false){
+                        setValue('appointmentDate.error', '');
+                    }
 
                     <!-- validate the required fields -->
                     if(jq('#sexualActive').length > 0){
@@ -312,6 +313,9 @@
                         isValid = false;
                     }
                 }
+
+<!--                 Not to evaluate if patient is transferred out -->                
+              if(jq("#transfer").find(":checkbox:first").prop("checked") == false){
                <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
                <!-- formatting date String from YYYY-MM-DD to DD/MM/YYYY to pass in the Url-->             
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val();
@@ -354,6 +358,7 @@
                             isValid = false;                      
                         }  
               });
+            }
                 if (!isValid) {
                     jq().toastmessage('showErrorToast', "  There are errors during the validation of the data on the form. Please correct them and submit again");
                 }
@@ -516,6 +521,28 @@
                         }
                     });
                 });
+
+                <!-- Toogle showing Review when patient has been referred Out -->
+                jq("#transfer").change(function() {
+                    if(jq("#transfer").find(":checkbox:first").prop("checked") == true){
+                        jq("#review").fadeTo(250, 0.25);
+                        jq("#review").find(":checkbox").prop("checked", false);
+                        jq("#review").find("input").val(""); 
+                        jq("#review").find("textarea").val(""); 
+                        jq("#review").find("input").prop("disabled", true); 
+                        jq("#review").find("select").prop("disabled", true); 
+                        jq("#review").find("textarea").prop("disabled", true); 
+                        setValue('appointmentDate.error', '');
+
+                    } else{
+                        jq("#review").fadeTo(250, 1);
+                        jq("#review").find("input").prop("disabled", false); 
+                        jq("#review").find("select").prop("disabled", false); 
+                        jq("#review").find("textarea").prop("disabled", false); 
+
+                    }
+                });
+
             });
         }
     </script>
@@ -1272,25 +1299,27 @@
                         <td class="lablex2">
                             <b>Other Actions</b>
                             <br/>
-                            <obs conceptId="90306" answerConceptId="90003"
+                            <obs id="transfer" conceptId="90306" answerConceptId="90003"
                                  answerLabel="Transferred out"/>
                             <obs conceptId="90211" labelText="To:"/>
-                            <obs conceptId="1163264" answerConceptId="90003"
-                                 answerLabel="Requested Counselling"/>
-                            <obs conceptId="1163268" answerConceptId="90003"
-                                 answerLabel="Treated current OIs"/>
-                            <obs conceptId="1358" answerConceptId="1362"
-                                 answerLabel="Started on ART"/>
-                            <obs conceptId="1163265" answerConceptId="90003"
-                                 answerLabel="Initiate POV"/>
-                            <obs conceptId="1163266" allowFutureDates="true" labelText="POV date:"/>
-                            <obs conceptId="1163267" answerConceptId="90003"
-                                 answerLabel="Re-Evaluate on next visit"/>
-                            <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
-                            <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
-                            <excludeIf velocityTest="$patient.person.dead == true">
-                                <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
-                            </excludeIf>
+                            <span id="review">
+                                <obs conceptId="1163264" answerConceptId="90003"
+                                    answerLabel="Requested Counselling"/>
+                                <obs conceptId="1163268" answerConceptId="90003"
+                                    answerLabel="Treated current OIs"/>
+                                <obs conceptId="1358" answerConceptId="1362"
+                                    answerLabel="Started on ART"/>
+                                <obs conceptId="1163265" answerConceptId="90003"
+                                    answerLabel="Initiate POV"/>
+                                <obs conceptId="1163266" allowFutureDates="true" labelText="POV date:"/>
+                                <obs conceptId="1163267" answerConceptId="90003"
+                                    answerLabel="Re-Evaluate on next visit"/>
+                                <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
+                                <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
+                                <excludeIf velocityTest="$patient.person.dead == true">
+                                    <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
+                                </excludeIf>
+                            </span>
                         </td>
                         <td class="lablex2">
                             <b>Referred for</b>
