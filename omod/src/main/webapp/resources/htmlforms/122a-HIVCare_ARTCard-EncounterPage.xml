@@ -1133,8 +1133,8 @@
                                 <excludeIf velocityTest="$patient.age &lt;15">
                                     <span class="RegimenEnableDisable1">
                                         <obs id="90315" conceptId="90315" labelText="Regimen:"
-                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,90002,164977,164978"
-                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-3TC-ATV/r,1j-ABC-3TC-NVP,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,164977,164978,90002"
+                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-ABC-LPV/r,2j-AZT-3TC-ATV/r,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
                                     </span>
                                     <span class="RegimenEnableDisableChild1">
                                         <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
