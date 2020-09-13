@@ -1391,11 +1391,11 @@
 
             var TBprophylaxisValue = jQuery("#TBprophylaxis option:selected").val();
             if (TBprophylaxisValue == 'INH') {
-                jQuery('#INH').css('display','block');
-                jQuery("#3HP").css('display','none');
+                jQuery('#INH').removeClass("hidden");
+                jQuery("#3HP").addClass("hidden");
                 }else{
-                    jQuery('#INH').css('display','none');
-                    jQuery("#3HP").css('display','block');
+                    jQuery('#INH').addClass("hidden");
+                    jQuery("#3HP").removeClass("hidden");
                 }
         });
 
@@ -1464,11 +1464,11 @@
         jQuery('#TBprophylaxis').on('change', function () {
             var TBprophylaxisValue = jQuery("#TBprophylaxis option:selected").val();
             if (TBprophylaxisValue == 'INH') {
-            jQuery('#INH').css('display','block');
-            jQuery("#3HP").css('display','none');
+            jQuery('#INH').removeClass("hidden");
+            jQuery("#3HP").addClass("hidden");
             }else{
-                jQuery('#INH').css('display','none');
-                jQuery("#3HP").css('display','block');
+                jQuery('#INH').addClass("hidden");
+                jQuery("#3HP").removeClass("hidden");
             }
        });
 
