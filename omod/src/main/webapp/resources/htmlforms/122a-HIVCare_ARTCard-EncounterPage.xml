@@ -1085,10 +1085,23 @@
                         </td>
 
                         <td>
+                            <select name="TB prophylaxis" id="TBprophylaxis">
+                                <option value="INH">INH</option>
+                                <option value="3HP">3HP</option>
+                            </select>
+                            <span id="INH">
                             <obs conceptId="99604" labelText="# Pills Dispensed:"/>
                             <obs conceptId="99605" labelText="Days:"/>
                             <obs conceptId="90215" labelText="INH Start Date"/>
                             <obs conceptId="165793" labelText="INH End Date" allowFutureDates="true"/>
+                            </span>
+                            <span id="3HP">
+                                <obs conceptId="165885" labelText="# Pills Dispensed:"/>
+                                <obs conceptId="165886" labelText="Days:"/>
+                                <obs conceptId="165878" labelText="3HP Start Date"/>
+                                <obs conceptId="165879" labelText="3HP End Date" allowFutureDates="true"/>
+                            </span>
+                            <obs conceptId="165880" labelText="Pyridoxine # Pills Dispensed:"/>
                         </td>
                         <td>
                             <obs id="eligibleQn" conceptId="99415" answerConceptIds="1065,1066" answerLabels="Yes,No" labelText="On ART:" required="true" >
@@ -1418,6 +1431,15 @@
                 jQuery('#fifthSection').css('display','none');
                 jQuery('#sixthSection').css('display','block');
             }
+
+            var TBprophylaxisValue = jQuery("#TBprophylaxis option:selected").val();
+            if (TBprophylaxisValue == 'INH') {
+                jQuery('#INH').removeClass("hidden");
+                jQuery("#3HP").addClass("hidden");
+                }else{
+                    jQuery('#INH').addClass("hidden");
+                    jQuery("#3HP").removeClass("hidden");
+                }
         });
 
         jQuery(function() {
@@ -1481,6 +1503,17 @@
 
         });
         });
+
+        jQuery('#TBprophylaxis').on('change', function () {
+            var TBprophylaxisValue = jQuery("#TBprophylaxis option:selected").val();
+            if (TBprophylaxisValue == 'INH') {
+            jQuery('#INH').removeClass("hidden");
+            jQuery("#3HP").addClass("hidden");
+            }else{
+                jQuery('#INH').addClass("hidden");
+                jQuery("#3HP").removeClass("hidden");
+            }
+       });
 
         if(getValue('eligibleQn.value') == '') {
             jQuery(".ARVSections select").prop("disabled", true);
