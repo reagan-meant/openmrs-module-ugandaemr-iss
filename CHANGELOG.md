@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 - Add ART regimen TDF-3TC-ATV/r to patients below 15years 
 - Corrected matching of ART Regimen names and concepts on the ART Encounter form
 - Enabled LNMP and EDD only when mother is pregnant
-- Disable Revisit review notes when patient istransferred out
+- Disable Revisit review notes when patient is transferred out
 
 ## [1.2.1] - July 1, 2020
 ### Added 
