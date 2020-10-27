@@ -28,9 +28,10 @@
     "description": "Patient Medical Conditions",
     "order": 1,
     "config": {
-      "widget": "obsacrossencounters",
+      "widget": "latestobsforconceptlist",
       "icon": "icon-user-md",
       "label": "MEDICAL CONDITIONS",
+      "nLatestObs": 10,
       "concepts": "1628AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     },
     "extensions": [

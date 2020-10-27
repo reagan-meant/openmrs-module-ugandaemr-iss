@@ -229,37 +229,50 @@
                 setValue('who-staging.error', '');
                 if (getValue('visitType.value') == 1163310 || getValue('visitType.value') == 1163311) {
                     <!-- clear the previous errors -->
-                    setValue('sexualActive.error', '');
+                    if(jq('#sexualActive').length > 0){
+                        setValue('sexualActive.error', '');
+                    }
                     setValue('anySTIs.error', '');
-                    setValue('disclosedToPartner.error', '');
-                    setValue('partnerStatus.error', '');
+                    if(jq('#disclosedToPartner').length > 0){
+                        setValue('disclosedToPartner.error', '');
+                    }
+                    if(jq('#partnerStatus').length > 0){
+                        setValue('partnerStatus.error', '');
+                    }
                     if(jq('#screenForCancer').length > 0){
-                    setValue('screenForCancer.error', '');
+                        setValue('screenForCancer.error', '');
                     }
                     setValue('tbStatus.error', '');
                     setValue('POV.error', '');
                     setValue('septrinProbQuestion.error', '');
                     setValue('septrinDapsoneAdherence.error', '');
                     setValue('septrinDapsoneDaysMissed.error', '');
-                    setValue('appointmentDate.error', '');
-
+                    if(jq("#transfer").find(":checkbox:first").prop("checked") == false){
+                        setValue('appointmentDate.error', '');
+                    }
 
                     <!-- validate the required fields -->
-                    if (getValue('sexualActive.value') == "") {
-                        getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
-                        isValid = false;
+                    if(jq('#sexualActive').length > 0){
+                        if (getValue('sexualActive.value') == "") {
+                            getField('sexualActive.error').html('Please select whether the patient is sexually active or not').show();
+                            isValid = false;
+                        }
                     }
                     if (getValue('anySTIs.value') == "") {
                         getField('anySTIs.error').html('Please select whether the patient has any symptoms of STIs').show();
                         isValid = false;
                     }
-                    if (getValue('disclosedToPartner.value') == "") {
-                        getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
-                        isValid = false;
+                    if(jq('#disclosedToPartner').length > 0){
+                        if (getValue('disclosedToPartner.value') == "") {
+                            getField('disclosedToPartner.error').html('Please select whether the patient has disclosed their status to their partner').show();
+                            isValid = false;
+                        }
                     }
-                    if (getValue('partnerStatus.value') == "") {
-                        getField('partnerStatus.error').html('Please select the status of your partner').show();
-                        isValid = false;
+                    if(jq('#partnerStatus').length > 0){
+                        if (getValue('partnerStatus.value') == "") {
+                            getField('partnerStatus.error').html('Please select the status of your partner').show();
+                            isValid = false;
+                        }
                     }
                     if(jq('#screenForCancer').length > 0){
                         if (getValue('screenForCancer.value') == "") {
@@ -300,6 +313,9 @@
                         isValid = false;
                     }
                 }
+
+<!--                 Not to evaluate if patient is transferred out -->                
+              if(jq("#transfer").find(":checkbox:first").prop("checked") == false){
                <!--Not to exceed number of booking for a specific return date. Default is 100 clients-->
                <!-- formatting date String from YYYY-MM-DD to DD/MM/YYYY to pass in the Url-->             
                var selectedDate = jq('#appointmentDate').find("input[type=hidden]").val();
@@ -342,6 +358,7 @@
                             isValid = false;                      
                         }  
               });
+            }
                 if (!isValid) {
                     jq().toastmessage('showErrorToast', "  There are errors during the validation of the data on the form. Please correct them and submit again");
                 }
@@ -504,6 +521,28 @@
                         }
                     });
                 });
+
+                <!-- Toogle showing Review when patient has been referred Out -->
+                jq("#transfer").change(function() {
+                    if(jq("#transfer").find(":checkbox:first").prop("checked") == true){
+                        jq("#review").fadeTo(250, 0.25);
+                        jq("#review").find(":checkbox").prop("checked", false);
+                        jq("#review").find("input").val(""); 
+                        jq("#review").find("textarea").val(""); 
+                        jq("#review").find("input").prop("disabled", true); 
+                        jq("#review").find("select").prop("disabled", true); 
+                        jq("#review").find("textarea").prop("disabled", true); 
+                        setValue('appointmentDate.error', '');
+
+                    } else{
+                        jq("#review").fadeTo(250, 1);
+                        jq("#review").find("input").prop("disabled", false); 
+                        jq("#review").find("select").prop("disabled", false); 
+                        jq("#review").find("textarea").prop("disabled", false); 
+
+                    }
+                });
+
             });
         }
     </script>
@@ -644,11 +683,13 @@
                                 </controls>
                             </obs>
                             <excludeIf velocityTest="$patient.gender =='M' || $patient.age &lt; 9">
-                                <span class="ARTYesNoEnableDisable2 fpSection">
-                                    <obs conceptId="90041" style="checkbox" answerConceptIds="1065,1066"
-                                         answerLabels="Yes,No" labelText="Pregnant"/>
-                                </span>
                                 <span class="ARTYesNoEnableDisable2">
+                                    <span class="fpSection">
+                                        <obs conceptId="90041" style="checkbox" answerConceptIds="1065,1066"
+                                            answerLabels="Yes,No" labelText="Pregnant"/>
+                                    </span>
+                                </span>
+                                <span class="">
                                     <obs conceptId="1163317" style="checkbox" answerConceptIds="1065,1066"
                                          answerLabels="Yes,No" labelText="Lactating"/>
                                 </span>
@@ -658,7 +699,7 @@
                                     <obs conceptId="99325" labelText="LNMP:" />
                                     <br/>
                                 </span>
-                                <span class="ARTYesNoEnableDisable3 fpSection">
+                                <span class="ARTYesNoEnableDisableChild2 fpSection">
                                     <obs conceptId="90012" labelText="eMTCT Connected:" answerConceptIds="90003,90004"
                                          answerLabels="Yes,No"/>
                                     <obs conceptId="90027" labelText="Ever taken NVP or AZT during Pregnancy" />
@@ -1044,10 +1085,23 @@
                         </td>
 
                         <td>
+                            <select name="TB prophylaxis" id="TBprophylaxis">
+                                <option value="INH">INH</option>
+                                <option value="3HP">3HP</option>
+                            </select>
+                            <span id="INH">
                             <obs conceptId="99604" labelText="# Pills Dispensed:"/>
                             <obs conceptId="99605" labelText="Days:"/>
                             <obs conceptId="90215" labelText="INH Start Date"/>
                             <obs conceptId="165793" labelText="INH End Date" allowFutureDates="true"/>
+                            </span>
+                            <span id="3HP">
+                                <obs conceptId="165885" labelText="# Pills Dispensed:"/>
+                                <obs conceptId="165886" labelText="Days:"/>
+                                <obs conceptId="165878" labelText="3HP Start Date"/>
+                                <obs conceptId="165879" labelText="3HP End Date" allowFutureDates="true"/>
+                            </span>
+                            <obs conceptId="165880" labelText="Pyridoxine # Pills Dispensed:"/>
                         </td>
                         <td>
                             <obs id="eligibleQn" conceptId="99415" answerConceptIds="1065,1066" answerLabels="Yes,No" labelText="On ART:" required="true" >
@@ -1121,8 +1175,8 @@
                                 <excludeIf velocityTest="$patient.age &lt;15">
                                     <span class="RegimenEnableDisable1">
                                         <obs id="90315" conceptId="90315" labelText="Regimen:"
-                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,90002,164977,164978"
-                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-3TC-ATV/r,1j-ABC-3TC-NVP,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,99887,164977,164978,90002"
+                                         answerLabels="1c-AZT-3TC-NVP,1d-AZT-3TC-EFV,1e-TDF-3TC-NVP,1f-TDF-3TC-EFV,2b-TDF-3TC-LPV/r,2e-AZT-3TC-LPV/r,2c-AZT-ABC-LPV/r,2j-AZT-3TC-ATV/r,1i-ABC-3TC-EFV,2h-ABC-3TC-ATV/r,2g-ABC-3TC-LPV/r,2f-TDF-3TC-ATV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
                                     </span>
                                     <span class="RegimenEnableDisableChild1">
                                         <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
@@ -1132,8 +1186,8 @@
                                 <excludeIf velocityTest="$patient.age &gt;14">
                                     <span class="RegimenEnableDisable1">
                                         <obs id="90315" conceptId="90315" labelText="Regimen:"
-                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002,164977,164978"
-                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,TDF/3TC/DTG,ABC/3TC/DTG,Other"/>
+                                         answerConceptIds="99005,99006,99039,99040,99044,99046,99284,99286,99885,99888,163017,90002,164977,99887,164978"
+                                         answerLabels="4c-AZT-3TC-NVP,4d-AZT-3TC-EFV,4j-TDF-3TC-NVP,4i-TDF-3TC-EFV,5b-TDF-3TC-LPV/r,4h-AZT-3TC-LPV/r,5l-AZT-3TC-ATV/r,5j-ABC-3TC-NVP,5i-ABC-3TC-EFV,5m-ABC-3TC-ATV/r,5k-ABC-3TC-LPV/r,TDF/3TC/DTG,ABC/3TC/DTG,2f-TDF-3TC-ATV/r,Other"/>
                                     </span>
                                     <span class="RegimenEnableDisableChild1">
                                         <obs id="br" conceptId="99126" size="18" labelText="Specify"/>
@@ -1258,25 +1312,27 @@
                         <td class="lablex2">
                             <b>Other Actions</b>
                             <br/>
-                            <obs conceptId="90306" answerConceptId="90003"
+                            <obs id="transfer" conceptId="90306" answerConceptId="90003"
                                  answerLabel="Transferred out"/>
                             <obs conceptId="90211" labelText="To:"/>
-                            <obs conceptId="1163264" answerConceptId="90003"
-                                 answerLabel="Requested Counselling"/>
-                            <obs conceptId="1163268" answerConceptId="90003"
-                                 answerLabel="Treated current OIs"/>
-                            <obs conceptId="1358" answerConceptId="1362"
-                                 answerLabel="Started on ART"/>
-                            <obs conceptId="1163265" answerConceptId="90003"
-                                 answerLabel="Initiate POV"/>
-                            <obs conceptId="1163266" allowFutureDates="true" labelText="POV date:"/>
-                            <obs conceptId="1163267" answerConceptId="90003"
-                                 answerLabel="Re-Evaluate on next visit"/>
-                            <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
-                            <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
-                            <excludeIf velocityTest="$patient.person.dead == true">
-                                <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
-                            </excludeIf>
+                            <span id="review">
+                                <obs conceptId="1163264" answerConceptId="90003"
+                                    answerLabel="Requested Counselling"/>
+                                <obs conceptId="1163268" answerConceptId="90003"
+                                    answerLabel="Treated current OIs"/>
+                                <obs conceptId="1358" answerConceptId="1362"
+                                    answerLabel="Started on ART"/>
+                                <obs conceptId="1163265" answerConceptId="90003"
+                                    answerLabel="Initiate POV"/>
+                                <obs conceptId="1163266" allowFutureDates="true" labelText="POV date:"/>
+                                <obs conceptId="1163267" answerConceptId="90003"
+                                    answerLabel="Re-Evaluate on next visit"/>
+                                <obs size="30" conceptId="1163269" labelText="Issues to Re-Evaluate on next visit"/>
+                                <obs cols="30" rows="3" conceptId="1163270" labelText="Significant Positive findings on examination"/>
+                                <excludeIf velocityTest="$patient.person.dead == true">
+                                    <obs id="appointmentDate" conceptId="5096" required="false" allowFutureDates="true" labelText="Re-evaluation date:" />
+                                </excludeIf>
+                            </span>
                         </td>
                         <td class="lablex2">
                             <b>Referred for</b>
@@ -1375,6 +1431,15 @@
                 jQuery('#fifthSection').css('display','none');
                 jQuery('#sixthSection').css('display','block');
             }
+
+            var TBprophylaxisValue = jQuery("#TBprophylaxis option:selected").val();
+            if (TBprophylaxisValue == 'INH') {
+                jQuery('#INH').removeClass("hidden");
+                jQuery("#3HP").addClass("hidden");
+                }else{
+                    jQuery('#INH').addClass("hidden");
+                    jQuery("#3HP").removeClass("hidden");
+                }
         });
 
         jQuery(function() {
@@ -1438,6 +1503,17 @@
 
         });
         });
+
+        jQuery('#TBprophylaxis').on('change', function () {
+            var TBprophylaxisValue = jQuery("#TBprophylaxis option:selected").val();
+            if (TBprophylaxisValue == 'INH') {
+            jQuery('#INH').removeClass("hidden");
+            jQuery("#3HP").addClass("hidden");
+            }else{
+                jQuery('#INH').addClass("hidden");
+                jQuery("#3HP").removeClass("hidden");
+            }
+       });
 
         if(getValue('eligibleQn.value') == '') {
             jQuery(".ARVSections select").prop("disabled", true);
